@@ -19,9 +19,9 @@ using LookupEngine.Abstractions.Decomposition;
 
 namespace RevitLookup.Core.Decomposition.Descriptors;
 
-public sealed class UiElementDescriptor : Descriptor, IDescriptorResolver
+public sealed class UiElementDescriptor(UIElement uiElement) : DependencyObjectDescriptor(uiElement)
 {
-    public Func<IVariant>? Resolve(string target, ParameterInfo[] parameters)
+    public override Func<IVariant>? Resolve(string target, ParameterInfo[] parameters)
     {
         return target switch
         {
@@ -37,5 +37,9 @@ public sealed class UiElementDescriptor : Descriptor, IDescriptorResolver
         {
             return Variants.Empty<LocalValueEnumerator>();
         }
+    }
+    
+    public override void RegisterExtensions(IExtensionManager manager)
+    {
     }
 }

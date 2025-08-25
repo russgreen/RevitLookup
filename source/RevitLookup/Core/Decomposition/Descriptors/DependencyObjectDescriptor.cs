@@ -14,14 +14,15 @@
 
 using System.Reflection;
 using System.Windows;
+using System.Windows.Media;
 using LookupEngine.Abstractions.Configuration;
 using LookupEngine.Abstractions.Decomposition;
 
 namespace RevitLookup.Core.Decomposition.Descriptors;
 
-public sealed class DependencyObjectDescriptor : Descriptor, IDescriptorResolver
+public class DependencyObjectDescriptor(DependencyObject dependencyObject) : Descriptor, IDescriptorResolver, IDescriptorExtension
 {
-    public Func<IVariant>? Resolve(string target, ParameterInfo[] parameters)
+    public virtual Func<IVariant>? Resolve(string target, ParameterInfo[] parameters)
     {
         return target switch
         {
@@ -32,6 +33,52 @@ public sealed class DependencyObjectDescriptor : Descriptor, IDescriptorResolver
         IVariant ResolveGetLocalValueEnumerator()
         {
             return Variants.Empty<LocalValueEnumerator?>();
+        }
+    }
+
+    public virtual void RegisterExtensions(IExtensionManager manager)
+    {
+        manager.Register("GetVisualParent", RegisterGetVisualParent);
+        manager.Register("GetVisualChild", RegisterGetVisualChild);
+        manager.Register("GetVisualChildrenCount", RegisterGetVisualChildrenCount);
+        manager.Register("GetLogicalParent", RegisterGetLogicalParent);
+        manager.Register("GetLogicalChildren", RegisterGetLogicalChildren);
+        return;
+
+        IVariant RegisterGetVisualParent()
+        {
+            var parent = VisualTreeHelper.GetParent(dependencyObject);
+            return Variants.Value(parent);
+        }
+
+        IVariant RegisterGetVisualChildrenCount()
+        {
+            var count = VisualTreeHelper.GetChildrenCount(dependencyObject);
+            return Variants.Value(count);
+        }
+
+        IVariant RegisterGetVisualChild()
+        {
+            var count = VisualTreeHelper.GetChildrenCount(dependencyObject);
+            var variants = Variants.Values<DependencyObject>(count);
+            for (var i = 0; i < count; i++)
+            {
+                variants.Add(VisualTreeHelper.GetChild(dependencyObject, i));
+            }
+
+            return variants.Consume();
+        }
+        
+        IVariant RegisterGetLogicalParent()
+        {
+            var parent = LogicalTreeHelper.GetParent(dependencyObject);
+            return Variants.Value(parent);
+        }
+
+        IVariant RegisterGetLogicalChildren()
+        {
+            var count = LogicalTreeHelper.GetChildren(dependencyObject);
+            return Variants.Value(count);
         }
     }
 }

@@ -15,7 +15,6 @@
 using System.Collections;
 using System.ComponentModel;
 using System.Windows;
-using System.Windows.Threading;
 using Autodesk.Revit.DB.Electrical;
 using Autodesk.Revit.DB.ExtensibleStorage;
 using Autodesk.Revit.DB.ExternalService;
@@ -158,13 +157,13 @@ public static class DescriptorsMap
             System.Windows.Media.Color value when type is null || type == typeof(System.Windows.Media.Color) => new ColorMediaDescriptor(value),
 
             //ComponentManager
-            UIElement => new UiElementDescriptor(),
-            DispatcherObject => new DependencyObjectDescriptor(),
-            RibbonItem value => new RibbonItemDescriptor(value),
-            RibbonPanel value => new RibbonPanelDescriptor(value),
-            Autodesk.Windows.RibbonItem value => new RibbonItemDescriptor(value),
-            Autodesk.Windows.RibbonPanel value => new RibbonPanelDescriptor(value),
-            RibbonTab value => new RibbonTabDescriptor(value),
+            UIElement value when type is null || type == typeof(UIElement) => new UiElementDescriptor(value),
+            DependencyObject value when type is null || type == typeof(DependencyObject) => new DependencyObjectDescriptor(value),
+            RibbonItem value when type is null || type == typeof(RibbonItem)=> new RibbonItemDescriptor(value),
+            RibbonPanel value when type is null || type == typeof(RibbonPanel) => new RibbonPanelDescriptor(value),
+            Autodesk.Windows.RibbonItem value when type is null || type == typeof(Autodesk.Windows.RibbonItem)=> new RibbonItemDescriptor(value),
+            Autodesk.Windows.RibbonPanel value when type is null || type == typeof(Autodesk.Windows.RibbonPanel)=> new RibbonPanelDescriptor(value),
+            RibbonTab value when type is null || type == typeof(RibbonTab)=> new RibbonTabDescriptor(value),
             INotifyPropertyChanged => new UiObjectDescriptor(),
 
             //Unknown
