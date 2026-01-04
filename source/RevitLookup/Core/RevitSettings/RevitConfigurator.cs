@@ -16,6 +16,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
 using System.Text;
+using Nice3point.Revit.Extensions.SystemExtensions;
 using RevitLookup.Abstractions.ObservableModels.Entries;
 
 namespace RevitLookup.Core.RevitSettings;
@@ -37,7 +38,10 @@ public sealed class RevitConfigurator
 
     private readonly string _defaultIniPath = Environment
         .GetFolderPath(Environment.SpecialFolder.CommonApplicationData)
-        .AppendPath("Autodesk", $"RVT {Context.Application.VersionNumber}", "UserDataCache", "Revit.ini");
+        .AppendPath("Autodesk")
+        .AppendPath($"RVT {Context.Application.VersionNumber}")
+        .AppendPath("UserDataCache")
+        .AppendPath("Revit.ini");
 
     private bool _backupDone;
 

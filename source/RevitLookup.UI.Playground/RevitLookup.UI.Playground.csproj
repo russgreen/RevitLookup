@@ -12,20 +12,14 @@
     </ItemGroup>
 
     <ItemGroup>
-        <!-- Data Generation -->
         <PackageReference Include="Bogus"/>
-
-        <!-- MVVM -->
-        <PackageReference Include="Riok.Mapperly"/>
-
-        <!--IOC-->
         <PackageReference Include="Scrutor"/>
-        <PackageReference Include="Microsoft.Extensions.Hosting"/>
-
-        <!--Logging-->
+        <PackageReference Include="Riok.Mapperly"/>
         <PackageReference Include="Serilog.Sinks.Debug"/>
         <PackageReference Include="Serilog.Sinks.Console"/>
         <PackageReference Include="Serilog.Extensions.Hosting"/>
+        <PackageReference Include="Microsoft.Extensions.Hosting"/>
+        <PackageReference Include="JetBrains.Annotations" PrivateAssets="all"/>
     </ItemGroup>
 
     <ItemGroup>

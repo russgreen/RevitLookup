@@ -6,7 +6,7 @@
 
     <ItemGroup>
         <PackageReference Include="CommunityToolkit.Mvvm"/>
-        <PackageReference Include="System.Text.Json" Condition="$(DefineConstants.Contains('NETFRAMEWORK'))"/>
+        <PackageReference Include="System.Text.Json" Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'"/>
     </ItemGroup>
 
     <ItemGroup>
@@ -15,9 +15,9 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Reference Include="PresentationCore" Condition="!$(DefineConstants.Contains('NETCOREAPP'))"/>
-        <Reference Include="PresentationFramework" Condition="!$(DefineConstants.Contains('NETCOREAPP'))"/>
-        <Reference Include="WindowsBase" Condition="!$(DefineConstants.Contains('NETCOREAPP'))"/>
+        <Reference Include="PresentationCore" Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'"/>
+        <Reference Include="PresentationFramework" Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'"/>
+        <Reference Include="WindowsBase" Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'"/>
     </ItemGroup>
 
 </Project>

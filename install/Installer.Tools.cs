@@ -12,9 +12,8 @@
 // THERE IS NO GUARANTEE THAT THE OPERATION OF THE PROGRAM WILL BE
 // UNINTERRUPTED OR ERROR FREE.
 
-using System.Diagnostics;
-using System.Runtime.InteropServices;
-using WixSharp.CommonTasks;
+using System.Diagnostics.CodeAnalysis;
+using System.Text.RegularExpressions;
 
 namespace Installer;
 
@@ -28,28 +27,52 @@ public sealed class Versions
     public int RevitVersion { get; init; }
 }
 
-public static class Tools
+public static partial class Tools
 {
     /// <summary>
     ///     Compute installer versions based on the RevitLookup.dll file.
     /// </summary>
     public static Versions ComputeVersions(string[] args)
     {
-        foreach (var directory in args)
+        if (!TryParseVersion(args[0], out var fileVersion))
         {
-            var assemblies = Directory.GetFiles(directory, "RevitLookup.dll", SearchOption.AllDirectories);
-            if (assemblies.Length == 0) continue;
-
-            var projectAssembly = FileVersionInfo.GetVersionInfo(assemblies[0]);
-            var version = new Version(projectAssembly.FileVersion).ClearRevision();
-            return new Versions
-            {
-                AssemblyVersion = version,
-                RevitVersion = version.Major,
-                InstallerVersion = version.Major > 255 ? new Version(version.Major % 100, version.Minor, version.Build) : version
-            };
+            throw new Exception($"Could not parse version from directory name: {args[0]}");
         }
 
-        throw new Exception("RevitLookup.dll file could not be found");
+        var version = new Version(fileVersion);
+        return new Versions
+        {
+            AssemblyVersion = version,
+            RevitVersion = version.Major,
+            InstallerVersion = version.Major > 255 ? new Version(version.Major % 100, version.Minor, version.Build) : version
+        };
     }
+
+    /// <summary>
+    ///     Parse a version string from the given input.
+    /// </summary>
+    public static bool TryParseVersion(string input, [NotNullWhen(true)] out string? version)
+    {
+        version = null;
+        var match = VersionRegex().Match(input);
+        if (!match.Success) return false;
+
+        switch (match.Value.Length)
+        {
+            case 4:
+                version = match.Value;
+                return true;
+            case 2:
+                version = $"20{match.Value}";
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    /// <summary>
+    ///     A regular expression to match the last sequence of numeric characters in a string.
+    /// </summary>
+    [GeneratedRegex(@"(\d+)(?!.*\d)")]
+    private static partial Regex VersionRegex();
 }

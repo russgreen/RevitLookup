@@ -59,13 +59,6 @@ public sealed class OpenSourceViewModel : ObservableObject, IOpenSourceViewModel
         },
         new()
         {
-            SoftwareName = "Nice3point.Revit.Build.Tasks",
-            SoftwareUri = "https://github.com/Nice3point/Revit.Build.Tasks",
-            LicenseName = "MIT License",
-            LicenseUri = "https://github.com/Nice3point/Revit.Build.Tasks/blob/main/License.md"
-        },
-        new()
-        {
             SoftwareName = "Nice3point.Revit.Toolkit",
             SoftwareUri = "https://github.com/Nice3point/RevitToolkit",
             LicenseName = "MIT License",

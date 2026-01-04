@@ -54,7 +54,7 @@ public sealed class SolidDescriptor : Descriptor, IDescriptorExtension, IContext
             .SetShortcut(Key.F7);
 #endif
         contextMenu.AddMenuItem("VisualizeMenuItem")
-            .SetAvailability(_solid.IsValidForTessellation())
+            .SetAvailability(_solid.IsValidForTessellation)
             .SetCommand(_solid, VisualizeSolid)
             .SetShortcut(Key.F8);
 

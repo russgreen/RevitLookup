@@ -25,7 +25,7 @@ var guidMap = new Dictionary<int, string>
 var versions = Tools.ComputeVersions(args);
 if (!guidMap.TryGetValue(versions.RevitVersion, out var guid))
 {
-    throw new Exception($"Version GUID mapping missing for the specified version: '{versions.RevitVersion}'");
+    throw new ArgumentOutOfRangeException($"Version GUID mapping missing for the specified version: {versions.RevitVersion}");
 }
 
 var project = new Project
@@ -47,7 +47,7 @@ var project = new Project
     }
 };
 
-var wixEntities = Generator.GenerateWixEntities(args, versions.AssemblyVersion);
+var wixEntities = Generator.GenerateWixEntities(args);
 project.RemoveDialogsBetween(NativeDialogs.WelcomeDlg, NativeDialogs.InstallDirDlg);
 
 BuildSingleUserMsi();
@@ -55,7 +55,7 @@ BuildMultiUserUserMsi();
 
 void BuildSingleUserMsi()
 {
-    project.InstallScope = InstallScope.perUser;
+    project.Scope = InstallScope.perUser;
     project.OutFileName = $"{outputName}-{versions.AssemblyVersion}-SingleUser";
     project.Dirs =
     [
@@ -66,7 +66,7 @@ void BuildSingleUserMsi()
 
 void BuildMultiUserUserMsi()
 {
-    project.InstallScope = InstallScope.perMachine;
+    project.Scope = InstallScope.perMachine;
     project.OutFileName = $"{outputName}-{versions.AssemblyVersion}-MultiUser";
     project.Dirs =
     [

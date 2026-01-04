@@ -1,93 +1,69 @@
-﻿// Copyright (c) Lookup Foundation and Contributors
-// 
-// Permission to use, copy, modify, and distribute this software in
-// object code form for any purpose and without fee is hereby granted,
-// provided that the above copyright notice appears in all copies and
-// that both that copyright notice and the limited warranty and
-// restricted rights notice below appear in all supporting
-// documentation.
-// 
-// THIS PROGRAM IS PROVIDED "AS IS" AND WITH ALL FAULTS.
-// NO IMPLIED WARRANTY OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR USE IS PROVIDED.
-// THERE IS NO GUARANTEE THAT THE OPERATION OF THE PROGRAM WILL BE
-// UNINTERRUPTED OR ERROR FREE.
-
-using WixSharp;
-using WixSharp.CommonTasks;
-using File = WixSharp.File;
+﻿using WixSharp;
 
 namespace Installer;
 
-public static class Generator
+public static partial class Generator
 {
     /// <summary>
-    ///     Generates Wix entities for the installer.
+    ///     Generates Wix entities, features and directories for the installer.
     /// </summary>
-    public static WixEntity[] GenerateWixEntities(IEnumerable<string> args, Version version)
+    public static WixEntity[] GenerateWixEntities(IEnumerable<string> args)
     {
-        var entities = new List<WixEntity>();
+        var versionStorages = new Dictionary<string, List<WixEntity>>();
+        var revitFeature = new Feature
+        {
+            Name = "Revit Add-in",
+            Description = "Revit add-in installation files",
+            Display = FeatureDisplay.expand
+        };
+
         foreach (var directory in args)
         {
-            Console.WriteLine($"Installer files for version '{version}':");
-            GenerateRootEntities(directory, entities);
+            var directoryInfo = new DirectoryInfo(directory);
+            if (!Tools.TryParseVersion(directoryInfo.FullName, out var fileVersion))
+            {
+                throw new Exception($"Could not parse version from directory name: {directoryInfo.FullName}");
+            }
+
+            var feature = new Feature
+            {
+                Name = fileVersion,
+                Description = $"Install add-in for Revit {fileVersion}",
+                ConfigurableDir = $"INSTALL{fileVersion}"
+            };
+
+            revitFeature.Add(feature);
+
+            var files = new Files(feature, $@"{directory}\*.*");
+            if (versionStorages.TryGetValue(fileVersion, out var storage))
+            {
+                storage.Add(files);
+            }
+            else
+            {
+                versionStorages.Add(fileVersion, [files]);
+            }
+
+            LogFeatureFiles(directory, fileVersion);
         }
 
-        return entities.ToArray();
+        return versionStorages
+            .Select(storage => new Dir(new Id($"INSTALL{storage.Key}"), storage.Key, storage.Value.ToArray()))
+            .Cast<WixEntity>()
+            .ToArray();
     }
 
     /// <summary>
-    ///     Generates root entities.
+    ///    Write a list of installer files.
     /// </summary>
-    private static void GenerateRootEntities(string directory, ICollection<WixEntity> entities)
+    private static void LogFeatureFiles(string directory, string fileVersion)
     {
-        foreach (var file in Directory.GetFiles(directory))
+        var assemblies = Directory.GetFiles(directory, "*", SearchOption.AllDirectories);
+        Console.WriteLine($"Installer files for version {fileVersion}:");
+
+        foreach (var assembly in assemblies)
         {
-            if (!FilterEntities(file)) continue;
-
-            Console.WriteLine($"'{file}'");
-            entities.Add(new File(file));
+            Console.WriteLine($"- {assembly}");
         }
-
-        foreach (var folder in Directory.GetDirectories(directory))
-        {
-            var folderName = Path.GetFileName(folder);
-            var entity = new Dir(folderName);
-            entities.Add(entity);
-
-            GenerateSubEntities(folder, entity);
-        }
-    }
-
-    /// <summary>
-    ///     Generates nested entities recursively.
-    /// </summary>
-    /// <param name="directory"></param>
-    /// <param name="parent"></param>
-    private static void GenerateSubEntities(string directory, Dir parent)
-    {
-        foreach (var file in Directory.GetFiles(directory))
-        {
-            if (!FilterEntities(file)) continue;
-
-            Console.WriteLine($"'{file}'");
-            parent.AddFile(new File(file));
-        }
-
-        foreach (var subfolder in Directory.GetDirectories(directory))
-        {
-            var folderName = Path.GetFileName(subfolder);
-            var entity = new Dir(folderName);
-            parent.AddDir(entity);
-
-            GenerateSubEntities(subfolder, entity);
-        }
-    }
-
-    /// <summary>
-    ///     Filter installer files and exclude from output. 
-    /// </summary>
-    private static bool FilterEntities(string file)
-    {
-        return !file.EndsWith(".pdb");
     }
 }

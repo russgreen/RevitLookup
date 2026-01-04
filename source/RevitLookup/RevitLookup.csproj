@@ -1,36 +1,22 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Nice3point.Revit.Sdk/6.0.0">
 
     <PropertyGroup>
         <UseWPF>true</UseWPF>
+        <DeployAddin>true</DeployAddin>
+        <LaunchRevit>true</LaunchRevit>
         <EnableDynamicLoading>true</EnableDynamicLoading>
-        <Configurations>Debug R21;Debug R22;Debug R23;Debug R24;Debug R25;Debug R26</Configurations>
-        <Configurations>$(Configurations);Release R21;Release R22;Release R23;Release R24;Release R25;Release R26</Configurations>
+        <Configurations>Debug.R21;Debug.R22;Debug.R23;Debug.R24;Debug.R25;Debug.R26</Configurations>
+        <Configurations>$(Configurations);Release.R21;Release.R22;Release.R23;Release.R24;Release.R25;Release.R26</Configurations>
     </PropertyGroup>
 
-    <!-- Launch configuration -->
+    <!-- Compability -->
     <PropertyGroup>
-        <StartAction>Program</StartAction>
-        <StartProgram>C:\Program Files\Autodesk\Revit $(RevitVersion)\Revit.exe</StartProgram>
-        <StartArguments>/language ENG</StartArguments>
-    </PropertyGroup>
-
-    <!-- Build configuration -->
-    <!-- https://github.com/Nice3point/Revit.Build.Tasks -->
-    <PropertyGroup>
-        <DeployRevitAddin>true</DeployRevitAddin>
-        <IsRepackable>true</IsRepackable>
-        <!-- Isolation is broken at the Revit level now -->
-        <!-- <IsRepackable Condition="'$(RevitVersion)' &lt; '2026'">true</IsRepackable> -->
+        <IsRepackable Condition="'$(RevitVersion)' &lt; '2026'">true</IsRepackable>
         <RepackBinariesExcludes>LookupEngine*.dll</RepackBinariesExcludes>
     </PropertyGroup>
 
-    <ItemGroup Condition="!$(DefineConstants.Contains('NET'))">
-        <Reference Include="System.Net.Http"/>
-    </ItemGroup>
-
     <ItemGroup>
-        <!--Revit references-->
-        <PackageReference Include="Nice3point.Revit.Build.Tasks"/>
+        <!-- Revit Platform -->
         <PackageReference Include="Nice3point.Revit.Toolkit"/>
         <PackageReference Include="Nice3point.Revit.Extensions"/>
         <PackageReference Include="Nice3point.Revit.Api.RevitAPI"/>
@@ -40,23 +26,28 @@
         <PackageReference Include="Nice3point.Revit.Api.UIFramework"/>
         <PackageReference Include="Nice3point.Revit.Api.UIFrameworkServices"/>
 
-        <!--MVVM-->
+        <!-- MVVM -->
         <PackageReference Include="CommunityToolkit.Mvvm"/>
-        <PackageReference Include="Riok.Mapperly"/>
 
-        <!--IOC-->
+        <!-- Application Hosting -->
         <PackageReference Include="Scrutor"/>
         <PackageReference Include="Microsoft.Extensions.Hosting"/>
         <PackageReference Include="Microsoft.Extensions.Http"/>
 
-        <!--Logging-->
+        <!-- Logging -->
         <PackageReference Include="Serilog.Sinks.Debug"/>
         <PackageReference Include="Serilog.Sinks.Console"/>
         <PackageReference Include="Serilog.Sinks.Autodesk.Revit"/>
         <PackageReference Include="Serilog.Extensions.Hosting"/>
 
-        <!-- Build -->
-        <PackageReference Include="ILRepack" ExcludeAssets="Runtime"/>
+        <!-- Data Utilities -->
+        <PackageReference Include="Riok.Mapperly"/>
+
+        <!-- Build Automation -->
+        <PackageReference Include="ILRepack" PrivateAssets="all" IncludeAssets="build"/>
+
+        <!-- Development Tools -->
+        <PackageReference Include="JetBrains.Annotations" PrivateAssets="all"/>
     </ItemGroup>
 
     <ItemGroup>
