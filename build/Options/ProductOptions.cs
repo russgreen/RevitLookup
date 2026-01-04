@@ -3,10 +3,10 @@
 namespace Build.Options;
 
 [Serializable]
-public sealed record PublishOptions
+public sealed record ProductOptions
 {
     /// <summary>
-    ///     Release version
+    ///     Product release version
     /// </summary>
     [Required] public string Version { get; init; } = null!;
 

@@ -2,12 +2,12 @@
 
 namespace Installer;
 
-public static partial class Generator
+public static class Generator
 {
     /// <summary>
     ///     Generates Wix entities, features and directories for the installer.
     /// </summary>
-    public static WixEntity[] GenerateWixEntities(IEnumerable<string> args)
+    public static WixEntity[] GenerateWixEntities(ResolveVersioningResult versioning, string directory)
     {
         var versionStorages = new Dictionary<string, List<WixEntity>>();
         var revitFeature = new Feature
@@ -17,38 +17,30 @@ public static partial class Generator
             Display = FeatureDisplay.expand
         };
 
-        foreach (var directory in args)
+        var fileVersion = versioning.VersionPrefix.Major.ToString();
+        var feature = new Feature
         {
-            var directoryInfo = new DirectoryInfo(directory);
-            if (!Tools.TryParseVersion(directoryInfo.FullName, out var fileVersion))
-            {
-                throw new Exception($"Could not parse version from directory name: {directoryInfo.FullName}");
-            }
+            Name = fileVersion,
+            Description = $"Install add-in for Revit {fileVersion}",
+            ConfigurableDir = $"INSTALL{fileVersion}"
+        };
 
-            var feature = new Feature
-            {
-                Name = fileVersion,
-                Description = $"Install add-in for Revit {fileVersion}",
-                ConfigurableDir = $"INSTALL{fileVersion}"
-            };
+        revitFeature.Add(feature);
 
-            revitFeature.Add(feature);
-
-            var files = new Files(feature, $@"{directory}\*.*");
-            if (versionStorages.TryGetValue(fileVersion, out var storage))
-            {
-                storage.Add(files);
-            }
-            else
-            {
-                versionStorages.Add(fileVersion, [files]);
-            }
-
-            LogFeatureFiles(directory, fileVersion);
+        var files = new Files(feature, $@"{directory}\*.*");
+        if (versionStorages.TryGetValue(fileVersion, out var storage))
+        {
+            storage.Add(files);
+        }
+        else
+        {
+            versionStorages.Add(fileVersion, [files]);
         }
 
+        LogFeatureFiles(directory, fileVersion);
+
         return versionStorages
-            .Select(storage => new Dir(new Id($"INSTALL{storage.Key}"), storage.Key, storage.Value.ToArray()))
+            .Select(versionPair => new Dir(new Id($"INSTALL{versionPair.Key}"), versionPair.Key, versionPair.Value.ToArray()))
             .Cast<WixEntity>()
             .ToArray();
     }

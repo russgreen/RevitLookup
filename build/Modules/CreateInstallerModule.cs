@@ -1,4 +1,6 @@
-﻿using EnumerableAsyncProcessor.Extensions;
+﻿using Build.Options;
+using EnumerableAsyncProcessor.Extensions;
+using Microsoft.Extensions.Options;
 using ModularPipelines.Attributes;
 using ModularPipelines.Context;
 using ModularPipelines.DotNet.Extensions;
@@ -17,9 +19,9 @@ namespace Build.Modules;
 /// <summary>
 ///     Create the .msi installer.
 /// </summary>
-[DependsOn<ResolveReleaseVersionModule>]
+[DependsOn<ResolveProductVersionModule>]
 [DependsOn<CompileProjectModule>]
-public sealed class CreateInstallerModule : Module
+public sealed class CreateInstallerModule(IOptions<BuildOptions> buildOptions) : Module
 {
     protected override async Task<IDictionary<string, object>?> ExecuteAsync(IPipelineContext context, CancellationToken cancellationToken)
     {
@@ -42,16 +44,19 @@ public sealed class CreateInstallerModule : Module
         var targetDirectories = wixTarget.Folder!
             .GetFolder("bin")
             .GetFolders(folder => folder.Name == "publish")
-            .Select(folder => folder.Path)
             .ToArray();
 
         targetDirectories.ShouldNotBeEmpty("No content were found to create an installer");
 
         await targetDirectories.ForEachAsync(async targetDirectory =>
             {
+                buildOptions.Value.Versions
+                    .TryGetValue(targetDirectory.Parent!.Name, out var version)
+                    .ShouldBeTrue($"Can't map version for configuration: {targetDirectory.Parent!.Path}");
+
                 await context.Command.ExecuteCommandLineTool(new CommandLineToolOptions(builderFile.Path)
                 {
-                    Arguments = [targetDirectory],
+                    Arguments = [version, targetDirectory.Path],
                     WorkingDirectory = context.Git().RootDirectory,
                     CommandLogging = CommandLogging.Default & ~CommandLogging.Input,
                     EnvironmentVariables = new Dictionary<string, string?>

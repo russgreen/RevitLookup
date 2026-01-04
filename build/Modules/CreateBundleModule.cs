@@ -18,13 +18,13 @@ namespace Build.Modules;
 /// <summary>
 ///     Create the Autodesk .bundle package.
 /// </summary>
-[DependsOn<ResolveReleaseVersionModule>]
+[DependsOn<ResolveProductVersionModule>]
 [DependsOn<CompileProjectModule>]
 public sealed partial class CreateBundleModule(IOptions<BundleOptions> bundleOptions) : Module<CommandResult>
 {
     protected override async Task<CommandResult?> ExecuteAsync(IPipelineContext context, CancellationToken cancellationToken)
     {
-        var versioningResult = await GetModule<ResolveReleaseVersionModule>();
+        var versioningResult = await GetModule<ResolveProductVersionModule>();
         var versioning = versioningResult.Value!;
 
         var bundleTarget = new File(Projects.RevitLookup.FullName);

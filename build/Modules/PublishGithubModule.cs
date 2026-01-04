@@ -19,7 +19,7 @@ namespace Build.Modules;
 ///     Publish the add-in to GitHub.
 /// </summary>
 [SkipIfNoGitHubToken]
-[DependsOn<ResolveReleaseVersionModule>]
+[DependsOn<ResolveProductVersionModule>]
 [DependsOn<GenerateGitHubChangelogModule>]
 [DependsOn<SignAssembliesModule>]
 [DependsOn<SignInstallerModule>]
@@ -27,7 +27,7 @@ public sealed class PublishGithubModule(IOptions<BuildOptions> buildOptions) : M
 {
     protected override async Task<ReleaseAsset[]?> ExecuteAsync(IPipelineContext context, CancellationToken cancellationToken)
     {
-        var versioningResult = await GetModule<ResolveReleaseVersionModule>();
+        var versioningResult = await GetModule<ResolveProductVersionModule>();
         var changelogResult = await GetModule<GenerateGitHubChangelogModule>();
         var versioning = versioningResult.Value!;
         var changelog = changelogResult.Value!;
@@ -67,7 +67,7 @@ public sealed class PublishGithubModule(IOptions<BuildOptions> buildOptions) : M
     {
         if (Status == Status.Failed)
         {
-            var versioningResult = await GetModule<ResolveReleaseVersionModule>();
+            var versioningResult = await GetModule<ResolveProductVersionModule>();
             var versioning = versioningResult.Value!;
 
             await context.Git().Commands.Push(new GitPushOptions

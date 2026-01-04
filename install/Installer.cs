@@ -22,10 +22,10 @@ var guidMap = new Dictionary<int, string>
     { 2026, "468ECD03-68D6-4D99-B04C-13D72AB47CBC" }
 };
 
-var versions = Tools.ComputeVersions(args);
-if (!guidMap.TryGetValue(versions.RevitVersion, out var guid))
+var versioning = Versioning.CreateFromVersionStringAsync(args[0]);
+if (!guidMap.TryGetValue(versioning.VersionPrefix.Major, out var guid))
 {
-    throw new ArgumentOutOfRangeException($"Version GUID mapping missing for the specified version: {versions.RevitVersion}");
+    throw new ArgumentOutOfRangeException($"Version GUID mapping missing for the specified version: {versioning.VersionPrefix.Major}");
 }
 
 var project = new Project
@@ -35,7 +35,7 @@ var project = new Project
     GUID = new Guid(guid),
     Platform = Platform.x64,
     UI = WUI.WixUI_InstallDir,
-    Version = versions.InstallerVersion,
+    Version = versioning.MsiVersion,
     MajorUpgrade = MajorUpgrade.Default,
     BackgroundImage = @"install\Resources\Icons\BackgroundImage.png",
     BannerImage = @"install\Resources\Icons\BannerImage.png",
@@ -47,7 +47,7 @@ var project = new Project
     }
 };
 
-var wixEntities = Generator.GenerateWixEntities(args);
+var wixEntities = Generator.GenerateWixEntities(versioning, args[1]);
 project.RemoveDialogsBetween(NativeDialogs.WelcomeDlg, NativeDialogs.InstallDirDlg);
 
 BuildSingleUserMsi();
@@ -56,10 +56,10 @@ BuildMultiUserUserMsi();
 void BuildSingleUserMsi()
 {
     project.Scope = InstallScope.perUser;
-    project.OutFileName = $"{outputName}-{versions.AssemblyVersion}-SingleUser";
+    project.OutFileName = $"{outputName}-{versioning.Version}-SingleUser";
     project.Dirs =
     [
-        new InstallDir($@"%AppDataFolder%\Autodesk\Revit\Addins\{versions.RevitVersion}", wixEntities)
+        new InstallDir($@"%AppDataFolder%\Autodesk\Revit\Addins\{versioning.VersionPrefix.Major}", wixEntities)
     ];
     project.BuildMsi();
 }
@@ -67,10 +67,10 @@ void BuildSingleUserMsi()
 void BuildMultiUserUserMsi()
 {
     project.Scope = InstallScope.perMachine;
-    project.OutFileName = $"{outputName}-{versions.AssemblyVersion}-MultiUser";
+    project.OutFileName = $"{outputName}-{versioning.Version}-MultiUser";
     project.Dirs =
     [
-        new InstallDir($@"%CommonAppDataFolder%\Autodesk\Revit\Addins\{versions.RevitVersion}", wixEntities)
+        new InstallDir($@"%CommonAppDataFolder%\Autodesk\Revit\Addins\{versioning.VersionPrefix.Major}", wixEntities)
     ];
     project.BuildMsi();
 }
