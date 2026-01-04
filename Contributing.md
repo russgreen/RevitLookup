@@ -65,13 +65,8 @@
 After cloning the project, run this command to update all related modules:
 
 ```shell
-git submodule update --init --force --recursive
-cd source/LookupEngine
-git sparse-checkout init --cone
-git sparse-checkout set source/
-cd ../LookupEngine.UI
-git sparse-checkout init --cone
-git sparse-checkout set source/
+git submodule sync
+git submodule update --init --force
 ```
 
 ### Compiling Source Code
