@@ -38,7 +38,7 @@ public sealed class GenerateGitHubChangelogModule : Module<string>
         if (!versioning.IsPrerelease)
         {
             changelogBuilder.AppendLine()
-                .Append("RevitLookup versions: ")
+                .Append("**RevitLookup versions**: ")
                 .Append("https://github.com/lookup-foundation/RevitLookup/wiki/Versions");
         }
 
