@@ -1,9 +1,12 @@
-﻿using ModularPipelines.Attributes;
+﻿using Build.Options;
+using Microsoft.Extensions.Options;
+using ModularPipelines.Attributes;
 using ModularPipelines.Context;
 using ModularPipelines.DotNet.Extensions;
 using ModularPipelines.DotNet.Options;
 using ModularPipelines.Models;
 using ModularPipelines.Modules;
+using Shouldly;
 using Sourcy.DotNet;
 
 namespace Build.Modules;
@@ -11,20 +14,17 @@ namespace Build.Modules;
 /// <summary>
 ///     Compile the add-in for each supported Revit configuration.
 /// </summary>
-[DependsOn<ResolveVersioningModule>]
 [DependsOn<ResolveConfigurationsModule>]
-public sealed class CompileProjectModule : Module
+public sealed class CompileProjectModule(IOptions<BuildOptions> buildOptions) : Module
 {
     protected override async Task<IDictionary<string, object>?> ExecuteAsync(IPipelineContext context, CancellationToken cancellationToken)
     {
-        var versioningResult = await GetModule<ResolveVersioningModule>();
         var configurationsResult = await GetModule<ResolveConfigurationsModule>();
-        var versioning = versioningResult.Value!;
         var configurations = configurationsResult.Value!;
 
         foreach (var configuration in configurations)
         {
-            await SubModule(configuration, async () => await CompileAsync(context, versioning, configuration, cancellationToken));
+            await SubModule(configuration, async () => await CompileAsync(context, configuration, cancellationToken));
         }
 
         return await NothingAsync();
@@ -33,21 +33,20 @@ public sealed class CompileProjectModule : Module
     /// <summary>
     ///     Compile the add-in project for the specified configuration.
     /// </summary>
-    private static async Task<CommandResult> CompileAsync(
-        IPipelineContext context,
-        ResolveVersioningResult versioning,
-        string configuration,
-        CancellationToken cancellationToken)
+    private async Task<CommandResult> CompileAsync(IPipelineContext context, string configuration, CancellationToken cancellationToken)
     {
+        buildOptions.Value.Versions
+            .TryGetValue(configuration, out var version)
+            .ShouldBeTrue($"Can't map version for configuration: {configuration}");
+
         return await context.DotNet().Build(new DotNetBuildOptions
         {
             ProjectSolution = Projects.RevitLookup.FullName,
             Configuration = configuration,
-            Properties =
-            [
-                ("VersionPrefix", versioning.VersionPrefix),
-                ("VersionSuffix", versioning.VersionSuffix!)
-            ]
+            Properties = new List<KeyValue>
+            {
+                ("Version", version)
+            }
         }, cancellationToken);
     }
 }

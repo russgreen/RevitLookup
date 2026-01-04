@@ -15,12 +15,12 @@ namespace Build.Modules;
 /// <summary>
 ///     Generate the changelog for publishing the add-in.
 /// </summary>
-[DependsOn<ResolveVersioningModule>]
+[DependsOn<ResolveReleaseVersionModule>]
 public sealed class GenerateChangelogModule(IOptions<PublishOptions> publishOptions) : Module<string>
 {
     protected override async Task<string?> ExecuteAsync(IPipelineContext context, CancellationToken cancellationToken)
     {
-        var versioningResult = await GetModule<ResolveVersioningModule>();
+        var versioningResult = await GetModule<ResolveReleaseVersionModule>();
         var versioning = versioningResult.Value!;
 
         if (string.IsNullOrEmpty(publishOptions.Value.ChangelogFile))
@@ -39,6 +39,11 @@ public sealed class GenerateChangelogModule(IOptions<PublishOptions> publishOpti
         var changelog = await ParseChangelog(changelogFile, versioning.Version);
         if (changelog.Length == 0)
         {
+            if (!versioning.IsPrerelease)
+            {
+                throw new InvalidOperationException($"No version entry exists in the changelog: {versioning.Version}");
+            }
+            
             context.Logger.LogWarning("No version entry exists in the changelog: {Version}", versioning.Version);
             return await GenerateReleaseNotesAsync(context, versioning);
         }

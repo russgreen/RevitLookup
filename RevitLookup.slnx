@@ -156,6 +156,18 @@
             <BuildType Solution="Release.R24|*" Project="Release" />
             <BuildType Solution="Release.R25|*" Project="Release" />
             <BuildType Solution="Release.R26|*" Project="Release" />
+            <Build Solution="Debug.R21|*" Project="false" />
+            <Build Solution="Debug.R22|*" Project="false" />
+            <Build Solution="Debug.R23|*" Project="false" />
+            <Build Solution="Debug.R24|*" Project="false" />
+            <Build Solution="Debug.R25|*" Project="false" />
+            <Build Solution="Debug.R26|*" Project="false" />
+            <Build Solution="Release.R21|*" Project="false" />
+            <Build Solution="Release.R22|*" Project="false" />
+            <Build Solution="Release.R23|*" Project="false" />
+            <Build Solution="Release.R24|*" Project="false" />
+            <Build Solution="Release.R25|*" Project="false" />
+            <Build Solution="Release.R26|*" Project="false" />
         </Project>
     </Folder>
     <Folder Name="/Revit/">
@@ -171,7 +183,6 @@
             <BuildType Solution="Debug.Playground|*" Project="Debug.R26" />
             <BuildType Solution="Debug.R21|*" Project="Debug.R22" />
             <BuildType Solution="Release.Playground|*" Project="Release.R26" />
-            <BuildType Solution="Release.R21|*" Project="Release.R22" />
             <Build Solution="Debug.Playground|*" Project="false" />
             <Build Solution="Release.Playground|*" Project="false" />
         </Project>

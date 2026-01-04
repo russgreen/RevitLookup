@@ -16,7 +16,6 @@ await PipelineHostBuilder.Create()
         collection.AddOptions<BuildOptions>().Bind(context.Configuration.GetSection("Build")).ValidateDataAnnotations();
 
         collection.AddModule<ResolveConfigurationsModule>();
-        collection.AddModule<ResolveVersioningModule>();
         collection.AddModule<CleanProjectModule>();
         collection.AddModule<CompileProjectModule>();
 
@@ -31,6 +30,7 @@ await PipelineHostBuilder.Create()
             collection.AddOptions<PublishOptions>().Bind(context.Configuration.GetSection("Publish")).ValidateDataAnnotations();
             collection.AddOptions<SigningOptions>().Bind(context.Configuration.GetSection("Signing")).ValidateDataAnnotations();
 
+            collection.AddModule<ResolveReleaseVersionModule>();
             collection.AddModule<SignAssembliesModule>();
             collection.AddModule<SignInstallerModule>();
             collection.AddModule<GenerateChangelogModule>();

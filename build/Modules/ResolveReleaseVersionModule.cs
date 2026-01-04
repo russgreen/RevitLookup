@@ -5,23 +5,24 @@ using ModularPipelines.Enums;
 using ModularPipelines.Git.Extensions;
 using ModularPipelines.Git.Options;
 using ModularPipelines.Modules;
+using Shouldly;
 
 namespace Build.Modules;
 
 /// <summary>
 ///     Resolve semantic versions for compiling and publishing the add-in.
 /// </summary>
-public sealed class ResolveVersioningModule(IOptions<BuildOptions> buildOptions) : Module<ResolveVersioningResult>
+public sealed class ResolveReleaseVersionModule(IOptions<PublishOptions> publishOptions) : Module<ResolveVersioningResult>
 {
     protected override async Task<ResolveVersioningResult?> ExecuteAsync(IPipelineContext context, CancellationToken cancellationToken)
     {
-        var version = buildOptions.Value.Version;
-        if (!string.IsNullOrEmpty(version))
+        var version = publishOptions.Value.Version;
+        if (context.Environment.EnvironmentName == "Production")
         {
-            return await CreateFromVersionStringAsync(context, version);
+            version.ShouldNotBeNullOrWhiteSpace();
         }
 
-        return await CreateFromGitVersioningAsync(context);
+        return await CreateFromVersionStringAsync(context, version!);
     }
 
     /// <summary>
@@ -37,23 +38,6 @@ public sealed class ResolveVersioningModule(IOptions<BuildOptions> buildOptions)
             VersionPrefix = versionParts[0],
             VersionSuffix = versionParts.Length > 1 ? versionParts[1] : null,
             IsPrerelease = versionParts.Length > 1,
-            PreviousVersion = await FetchPreviousVersionAsync(context)
-        };
-    }
-
-    /// <summary>
-    ///     Resolve versions using the GitVersion Tool.
-    /// </summary>
-    private static async Task<ResolveVersioningResult> CreateFromGitVersioningAsync(IPipelineContext context)
-    {
-        var gitVersioning = await context.Git().Versioning.GetGitVersioningInformation();
-
-        return new ResolveVersioningResult
-        {
-            Version = gitVersioning.SemVer!,
-            VersionPrefix = gitVersioning.MajorMinorPatch!,
-            VersionSuffix = gitVersioning.PreReleaseTag,
-            IsPrerelease = gitVersioning.PreReleaseNumber > 0,
             PreviousVersion = await FetchPreviousVersionAsync(context)
         };
     }

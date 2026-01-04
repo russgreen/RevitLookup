@@ -17,13 +17,13 @@ namespace Build.Modules;
 /// <summary>
 ///     Create the .msi installer.
 /// </summary>
-[DependsOn<ResolveVersioningModule>]
+[DependsOn<ResolveReleaseVersionModule>]
 [DependsOn<CompileProjectModule>]
 public sealed class CreateInstallerModule : Module
 {
     protected override async Task<IDictionary<string, object>?> ExecuteAsync(IPipelineContext context, CancellationToken cancellationToken)
     {
-        var wixTarget = new File(Projects.LookupEngine.FullName);
+        var wixTarget = new File(Projects.RevitLookup.FullName);
         var wixInstaller = new File(Projects.Installer.FullName);
         var wixToolFolder = await InstallWixAsync(context, cancellationToken);
 
