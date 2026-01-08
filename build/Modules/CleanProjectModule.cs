@@ -20,7 +20,7 @@ public sealed class CleanProjectModule(IOptions<BuildOptions> buildOptions) : Mo
         var outputDirectory = rootDirectory.GetFolder(buildOptions.Value.OutputDirectory);
         var buildOutputDirectories = rootDirectory
             .GetFolders(folder => folder.Name is "bin" or "obj")
-            .Where(folder => folder.Parent != Projects.Build.Directory);
+            .Where(folder => folder.Parent != Projects.build__Build.Directory);
 
         foreach (var buildFolder in buildOutputDirectories)
         {
