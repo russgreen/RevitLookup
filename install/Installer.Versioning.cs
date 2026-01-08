@@ -12,11 +12,9 @@
 // THERE IS NO GUARANTEE THAT THE OPERATION OF THE PROGRAM WILL BE
 // UNINTERRUPTED OR ERROR FREE.
 
-using System.Text.RegularExpressions;
-
 namespace Installer;
 
-public static partial class Versioning
+public static class Versioning
 {
     /// <summary>
     ///     Resolve versions using the specified version string.
@@ -31,15 +29,10 @@ public static partial class Versioning
             Version = version,
             VersionPrefix = semanticVersion,
             VersionSuffix = versionParts.Length > 1 ? versionParts[1] : null,
+            //Wix4 now support major version higher than 255, but we will follow the Revit versioning style
             MsiVersion = semanticVersion.Major > 255 ? new Version(semanticVersion.Major % 100, semanticVersion.Minor, semanticVersion.Build) : semanticVersion
         };
     }
-
-    /// <summary>
-    ///     A regular expression to match the last sequence of numeric characters in a string.
-    /// </summary>
-    [GeneratedRegex(@"(\d+)(?!.*\d)")]
-    private static partial Regex VersionRegex();
 }
 
 public sealed record ResolveVersioningResult
