@@ -16,7 +16,7 @@ using System.Windows;
 using System.Windows.Documents;
 using RevitLookup.Abstractions.Services.Appearance;
 using RevitLookup.Abstractions.ViewModels.AboutProgram;
-using RevitLookup.Common.Tools;
+using RevitLookup.Common.Utils;
 using Wpf.Ui;
 
 namespace RevitLookup.UI.Framework.Views.AboutProgram;

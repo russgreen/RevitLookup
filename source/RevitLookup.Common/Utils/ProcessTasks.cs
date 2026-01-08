@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Text;
 
-namespace RevitLookup.Common.Tools;
+namespace RevitLookup.Common.Utils;
 
 /// <summary>
 ///     Tasks for starting and managing processes. Supports different APIs for .NET Core and .NET Framework.

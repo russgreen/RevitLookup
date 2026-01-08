@@ -5,8 +5,4 @@
         <TargetFrameworks>net48;net8.0-windows</TargetFrameworks>
     </PropertyGroup>
 
-    <ItemGroup>
-        <Reference Include="System.Net.Http" Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'"/>
-    </ItemGroup>
-
 </Project>
