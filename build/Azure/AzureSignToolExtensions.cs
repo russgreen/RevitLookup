@@ -14,7 +14,7 @@ public static class AzureSignToolExtensions
         ModularPipelinesContextRegistry.RegisterContext(collection => collection.RegisterAzureSignToolContext());
     }
 
-    public static IServiceCollection RegisterAzureSignToolContext(this IServiceCollection services)
+    private static IServiceCollection RegisterAzureSignToolContext(this IServiceCollection services)
     {
         services.TryAddScoped<AzureSignTool>();
         return services;
