@@ -12,7 +12,7 @@ Whether you are a seasoned professional or just starting out, the RevitLookup is
 <a href="https://github.com/lookup-foundation/RevitLookup/releases/latest"><img src="https://img.shields.io/github/v/release/jeremytammik/RevitLookup?style=for-the-badge" alt="Badge"></a>
 <a href="https://github.com/lookup-foundation/RevitLookup/releases/latest"><img src="https://img.shields.io/github/downloads/jeremytammik/RevitLookup/total?style=for-the-badge" alt="Badge"></a>
 <a href="https://github.com/lookup-foundation/RevitLookup/commits/develop"><img src="https://img.shields.io/github/last-commit/jeremytammik/RevitLookup/develop?style=for-the-badge" alt="Badge"></a>
-<a href="https://actions-badge.atrox.dev/jeremytammik/RevitLookup/goto?ref=develop"><img src="https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2Fjeremytammik%2FRevitLookup%2Fbadge%3Fref%3Ddev&style=for-the-badge" alt="Badge"></a>
+<a href="https://github.com/lookup-foundation/RevitLookup/actions?query=branch%3Adevelop"><img src="https://img.shields.io/github/check-runs/lookup-foundation/RevitLookup/develop?style=for-the-badge&logo=github&label=Build" alt="Badge"></a>
 </div>
 <br/>
 <div align="center">
