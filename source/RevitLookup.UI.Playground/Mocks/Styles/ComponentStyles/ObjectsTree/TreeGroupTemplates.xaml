@@ -50,16 +50,14 @@
                 <Border.Background>
                     <SolidColorBrush
                         Opacity="0.05"
-                        Color="{DynamicResource FocusStrokeColorOuter}">
-                    </SolidColorBrush>
+                        Color="{DynamicResource FocusStrokeColorOuter}" />
                 </Border.Background>
                 <Border
                     Width="10"
                     Height="10">
                     <Border.Background>
                         <SolidColorBrush
-                            Color="{Binding RawValue, Converter={converters:ObjectColorConverter}, Mode=OneTime}">
-                        </SolidColorBrush>
+                            Color="{Binding RawValue, Converter={converters:ObjectColorConverter}, Mode=OneTime}" />
                     </Border.Background>
                 </Border>
             </Border>

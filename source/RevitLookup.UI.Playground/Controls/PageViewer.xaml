@@ -19,8 +19,7 @@
                 Title="Page preview"
                 Icon="{ui:ImageIcon 'pack://application:,,,/RevitLookup.UI.Framework;component/Resources/Images/ProductIcon.png'}" />
             <Frame
-                x:Name="Viewer">
-            </Frame>
+                x:Name="Viewer" />
         </DockPanel>
 
         <ui:SnackbarPresenter

@@ -16,8 +16,7 @@
         <controls:ColorPageExample
             Title="System"
             Background="{DynamicResource SolidBackgroundFillColorQuarternaryBrush}"
-            Description="Used for accent fills on controls">
-        </controls:ColorPageExample>
+            Description="Used for accent fills on controls" />
 
         <Border
             Style="{StaticResource ColorTilesPanelStyle}"

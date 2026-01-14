@@ -18,8 +18,7 @@
             Title="Component preview"
             Icon="{ui:ImageIcon 'pack://application:,,,/RevitLookup.UI.Framework;component/Resources/Icons/ProductIcon.png'}" />
         <ContentControl
-            x:Name="Viewer">
-        </ContentControl>
+            x:Name="Viewer" />
     </DockPanel>
 
 </ui:FluentWindow>

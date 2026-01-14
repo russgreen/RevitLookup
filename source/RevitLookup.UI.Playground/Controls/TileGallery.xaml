@@ -106,8 +106,7 @@
                         <Image
                             RenderOptions.EdgeMode="Aliased"
                             RenderOptions.BitmapScalingMode="HighQuality"
-                            Source="pack://application:,,,/RevitLookup.UI.Framework;component/Resources/Images/ProductIcon.png">
-                        </Image>
+                            Source="pack://application:,,,/RevitLookup.UI.Framework;component/Resources/Images/ProductIcon.png" />
                     </controls:HeaderTile.Source>
                 </controls:HeaderTile>
                 <controls:HeaderTile
@@ -119,8 +118,7 @@
                         <Image
                             RenderOptions.EdgeMode="Aliased"
                             RenderOptions.BitmapScalingMode="HighQuality"
-                            Source="pack://application:,,,/RevitLookup.UI.Framework;component/Resources/Images/ProductIcon.png">
-                        </Image>
+                            Source="pack://application:,,,/RevitLookup.UI.Framework;component/Resources/Images/ProductIcon.png" />
                     </controls:HeaderTile.Source>
                 </controls:HeaderTile>
                 <controls:HeaderTile
@@ -132,8 +130,7 @@
                         <Image
                             RenderOptions.EdgeMode="Aliased"
                             RenderOptions.BitmapScalingMode="HighQuality"
-                            Source="pack://application:,,,/RevitLookup.UI.Framework;component/Resources/Images/ProductIcon.png">
-                        </Image>
+                            Source="pack://application:,,,/RevitLookup.UI.Framework;component/Resources/Images/ProductIcon.png" />
                     </controls:HeaderTile.Source>
                 </controls:HeaderTile>
             </StackPanel>

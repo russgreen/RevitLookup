@@ -43,8 +43,7 @@
             <ui:NavigationView.AutoSuggestBox>
                 <ui:AutoSuggestBox
                     x:Name="AutoSuggestBox"
-                    PlaceholderText="Search">
-                </ui:AutoSuggestBox>
+                    PlaceholderText="Search" />
             </ui:NavigationView.AutoSuggestBox>
             <ui:NavigationView.ContentOverlay>
                 <Grid>
