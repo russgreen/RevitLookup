@@ -11,11 +11,7 @@ public sealed class RevitApiTests : RevitApiTest
     [TestExecutor<RevitThreadExecutor>]
     public async Task Parameters_Builtin_ShouldCreateAllCategories()
     {
-#if NET
         var builtInParameters = Enum.GetValues<BuiltInParameter>();
-#else
-        var builtInParameters = Enum.GetValues(typeof(BuiltInParameter)).Cast<BuiltInParameter>().ToArray();
-#endif
 
         foreach (var builtInParameter in builtInParameters)
         {
@@ -24,16 +20,12 @@ public sealed class RevitApiTests : RevitApiTest
             await Assert.That(parameter.Definition.Name).IsNotEmpty();
         }
     }
-    
+
     [Test]
     [TestExecutor<RevitThreadExecutor>]
     public async Task Categories_Builtin_ShouldCreateAllCategories()
     {
-#if NET
         var builtInCategories = Enum.GetValues<BuiltInCategory>();
-#else
-        var builtInCategories = Enum.GetValues(typeof(BuiltInCategory)).Cast<BuiltInCategory>().ToArray();
-#endif
 
         foreach (var builtInCategory in builtInCategories)
         {

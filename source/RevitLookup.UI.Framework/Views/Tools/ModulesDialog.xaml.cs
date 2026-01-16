@@ -75,7 +75,7 @@ public sealed partial class ModulesDialog
             .SetHeader("Module version")
             .SetCommand(module, moduleInfo => Clipboard.SetDataObject(moduleInfo.Version));
 
-#if NETCOREAPP
+#if NET
         copyMenu.AddMenuItem()
             .SetHeader("Assembly load сontext")
             .SetCommand(module, moduleInfo => Clipboard.SetDataObject(moduleInfo.Container));

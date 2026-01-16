@@ -37,12 +37,7 @@ public sealed class SoftwareUpdateService(
         var latestRelease = releases
             .Where(response => !response.Draft)
             .Where(response => !response.PreRelease)
-#if NET
             .MaxBy(release => release.PublishedDate);
-#else
-            .OrderByDescending(release => release.PublishedDate)
-            .FirstOrDefault();
-#endif
 
         if (latestRelease is null) return false;
         ReleaseNotesUrl = latestRelease.Url;

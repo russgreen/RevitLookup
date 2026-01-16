@@ -309,7 +309,7 @@ public sealed partial class ColorPickerControl
 
     private static string ColorToHex(Color color, string oldValue = "")
     {
-#if NETCOREAPP
+#if NET
         var newHexString = BitConverter.ToString([color.R, color.G, color.B]).Replace("-", string.Empty, StringComparison.InvariantCulture);
 #else
         var newHexString = BitConverter.ToString([color.R, color.G, color.B]).Replace("-", string.Empty);
@@ -317,11 +317,7 @@ public sealed partial class ColorPickerControl
         newHexString = newHexString.ToLowerInvariant();
 
         // Return only with hashtag if user typed it before
-#if NETCOREAPP
         var addHashtag = oldValue.StartsWith('#');
-#else
-        var addHashtag = oldValue.StartsWith("#");
-#endif
         return addHashtag ? "#" + newHexString : newHexString;
     }
 
@@ -339,11 +335,7 @@ public sealed partial class ColorPickerControl
         }
 
         // Hex with or without hashTag and six characters
-#if NETCOREAPP
         return hexCodeText.StartsWith('#') ? hexCodeText : "#" + hexCodeText;
-#else
-        return hexCodeText.StartsWith("#") ? hexCodeText : "#" + hexCodeText;
-#endif
     }
 
     private void OnHexCodeGotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)

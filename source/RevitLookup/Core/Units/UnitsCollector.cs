@@ -8,13 +8,9 @@ public static class UnitsCollector
 {
     public static List<UnitInfo> GetBuiltinParametersInfo()
     {
-#if NET
         var parameters = Enum.GetValues<BuiltInParameter>();
         var parameterNames = Enum.GetNames<BuiltInParameter>();
-#else
-        var parameters = Enum.GetValues(typeof(BuiltInParameter)).Cast<BuiltInParameter>().ToArray();
-        var parameterNames = Enum.GetNames(typeof(BuiltInParameter));
-#endif
+
         var result = new List<UnitInfo>(parameters.Length);
         for (var i = 0; i < parameters.Length; i++)
         {
@@ -43,13 +39,9 @@ public static class UnitsCollector
 
     public static List<UnitInfo> GetBuiltinCategoriesInfo()
     {
-#if NET
         var categories = Enum.GetValues<BuiltInCategory>();
         var categoryNames = Enum.GetNames<BuiltInCategory>();
-#else
-        var categories = Enum.GetValues(typeof(BuiltInCategory)).Cast<BuiltInCategory>().ToArray();
-        var categoryNames = Enum.GetNames(typeof(BuiltInCategory));
-#endif
+
         var result = new List<UnitInfo>(categories.Length);
         for (var i = 0; i < categories.Length; i++)
         {
@@ -99,7 +91,7 @@ public static class UnitsCollector
 #endif
         return dataTypes.Select(info =>
             {
-                var typeId = (ForgeTypeId) info.GetValue(null)!;
+                var typeId = (ForgeTypeId)info.GetValue(null)!;
                 return new UnitInfo
                 {
                     Unit = typeId.TypeId,
