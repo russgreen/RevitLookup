@@ -1,7 +1,7 @@
 ﻿using Bogus;
 using RevitLookup.Abstractions.Services.Settings;
 
-namespace RevitLookup.UI.Playground.Mockups.Services.Settings;
+namespace RevitLookup.UI.Playground.Mocks.Services.Settings;
 
 public sealed class MockSoftwareUpdateService : ISoftwareUpdateService
 {

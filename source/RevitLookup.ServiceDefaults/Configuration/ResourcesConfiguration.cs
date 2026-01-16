@@ -35,6 +35,7 @@ public static class ResourcesConfiguration
 
             //Roaming files
             options.ApplicationSettingsPath = options.SettingsDirectory.JoinPath("Application.json");
+            options.DecompositionSettingsPath = options.SettingsDirectory.JoinPath("LookupEngine.json");
             options.VisualizationSettingsPath = options.SettingsDirectory.JoinPath("Visualization.json");
         }).ValidateDataAnnotations();
 

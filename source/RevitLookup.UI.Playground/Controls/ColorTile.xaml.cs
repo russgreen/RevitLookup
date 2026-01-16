@@ -4,7 +4,7 @@ using System.Windows.Automation.Peers;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace RevitLookup.UI.Playground.Client.Controls;
+namespace RevitLookup.UI.Playground.Controls;
 
 public sealed class ColorTile : UserControl
 {

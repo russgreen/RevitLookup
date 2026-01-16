@@ -17,7 +17,7 @@ using RevitLookup.Abstractions.Services.Appearance;
 using RevitLookup.Abstractions.Services.Settings;
 using Wpf.Ui.Appearance;
 
-namespace RevitLookup.UI.Playground.Mockups.Services.Appearance;
+namespace RevitLookup.UI.Playground.Mocks.Services.Appearance;
 
 public sealed class MockThemeWatcherService(ISettingsService settingsService) : IThemeWatcherService
 {

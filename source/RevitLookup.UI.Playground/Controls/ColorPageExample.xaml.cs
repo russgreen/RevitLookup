@@ -2,7 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Markup;
 
-namespace RevitLookup.UI.Playground.Client.Controls;
+namespace RevitLookup.UI.Playground.Controls;
 
 [ContentProperty(nameof(ExampleContent))]
 public sealed class ColorPageExample : UserControl

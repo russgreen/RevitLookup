@@ -26,7 +26,7 @@ using RevitLookup.Common.Utils;
 using RevitLookup.UI.Framework.Extensions;
 using Color = System.Windows.Media.Color;
 
-namespace RevitLookup.UI.Playground.Mockups.Core.Decomposition.Descriptors;
+namespace RevitLookup.UI.Playground.Mocks.Core.Decomposition.Descriptors;
 
 public sealed class ColorMediaDescriptor : Descriptor, IDescriptorExtension, IContextMenuConnector
 {

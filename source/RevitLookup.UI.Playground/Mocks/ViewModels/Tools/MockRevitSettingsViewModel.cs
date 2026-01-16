@@ -12,7 +12,7 @@ using RevitLookup.Common.Utils;
 using RevitLookup.UI.Framework.Views.EditDialogs;
 using Wpf.Ui.Controls;
 
-namespace RevitLookup.UI.Playground.Mockups.ViewModels.Tools;
+namespace RevitLookup.UI.Playground.Mocks.ViewModels.Tools;
 
 [UsedImplicitly]
 public sealed partial class MockRevitSettingsViewModel(

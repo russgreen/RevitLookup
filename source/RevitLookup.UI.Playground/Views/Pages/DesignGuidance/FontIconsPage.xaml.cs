@@ -1,8 +1,8 @@
 ﻿using System.Windows;
 using System.Windows.Input;
-using RevitLookup.UI.Playground.Client.ViewModels.Pages.DesignGuidance;
+using RevitLookup.UI.Playground.ViewModels.Pages.DesignGuidance;
 
-namespace RevitLookup.UI.Playground.Client.Views.Pages.DesignGuidance;
+namespace RevitLookup.UI.Playground.Views.Pages.DesignGuidance;
 
 public sealed partial class FontIconsPage
 {

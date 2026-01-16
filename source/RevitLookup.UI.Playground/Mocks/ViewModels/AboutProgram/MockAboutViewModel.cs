@@ -26,7 +26,7 @@ using RevitLookup.Abstractions.States;
 using RevitLookup.Abstractions.ViewModels.AboutProgram;
 using RevitLookup.UI.Framework.Views.AboutProgram;
 
-namespace RevitLookup.UI.Playground.Mockups.ViewModels.AboutProgram;
+namespace RevitLookup.UI.Playground.Mocks.ViewModels.AboutProgram;
 
 [UsedImplicitly]
 public sealed partial class MockAboutViewModel : ObservableObject, IAboutViewModel

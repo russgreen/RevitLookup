@@ -2,12 +2,12 @@ using System.Windows;
 using System.Windows.Automation.Peers;
 using RevitLookup.Abstractions.Services.Presentation;
 using RevitLookup.UI.Framework.Controls.Automation;
-using RevitLookup.UI.Playground.Client.ViewModels;
-using RevitLookup.UI.Playground.Client.Views.Pages;
+using RevitLookup.UI.Playground.ViewModels;
+using RevitLookup.UI.Playground.Views.Pages;
 using Wpf.Ui;
 using Wpf.Ui.Controls;
 
-namespace RevitLookup.UI.Playground.Client.Views;
+namespace RevitLookup.UI.Playground.Views;
 
 public sealed partial class PlaygroundView
 {

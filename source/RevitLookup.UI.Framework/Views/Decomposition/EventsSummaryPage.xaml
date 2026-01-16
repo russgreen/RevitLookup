@@ -6,10 +6,10 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:ui="http://lookupengine.com/xaml"
     xmlns:converters="clr-namespace:RevitLookup.UI.Framework.Converters"
-    xmlns:contentPlaceholder="clr-namespace:RevitLookup.UI.Framework.Controls.ContentPlaceholder"
     xmlns:valueConverters="clr-namespace:RevitLookup.UI.Framework.Converters.ValueConverters"
     xmlns:decomposition="clr-namespace:RevitLookup.UI.Framework.Views.Decomposition"
     xmlns:viewModelsSummary="clr-namespace:RevitLookup.Abstractions.ViewModels.Decomposition;assembly=RevitLookup.Abstractions"
+    xmlns:controls="clr-namespace:RevitLookup.UI.Framework.Controls"
     mc:Ignorable="d"
     d:DesignHeight="500"
     d:DesignWidth="700"
@@ -20,9 +20,9 @@
     <Grid
         Margin="12">
 
-        <contentPlaceholder:ContentPlaceholder
+        <controls:ContentPlaceholder
             MaxHeight="300">
-            <contentPlaceholder:ContentPlaceholder.Visibility>
+            <controls:ContentPlaceholder.Visibility>
                 <MultiBinding
                     Converter="{converters:EmptyCollectionsVisibilityConverter}">
                     <Binding
@@ -30,13 +30,13 @@
                     <Binding
                         Path="ViewModel.(viewModelsSummary:IEventsSummaryViewModel.FilteredDecomposedObjects).Count" />
                 </MultiBinding>
-            </contentPlaceholder:ContentPlaceholder.Visibility>
-            <contentPlaceholder:ContentPlaceholder.Content>
+            </controls:ContentPlaceholder.Visibility>
+            <controls:ContentPlaceholder.Content>
                 <ui:TextBlock
                     FontTypography="Subtitle"
                     Text="Nothing to show" />
-            </contentPlaceholder:ContentPlaceholder.Content>
-        </contentPlaceholder:ContentPlaceholder>
+            </controls:ContentPlaceholder.Content>
+        </controls:ContentPlaceholder>
 
         <Grid
             Margin="0">
@@ -75,8 +75,7 @@
                     ItemsSource="{Binding Path=ViewModel.(viewModelsSummary:IEventsSummaryViewModel.FilteredDecomposedObjects)}"
                     ItemTemplateSelector="{StaticResource TreeViewItemTemplateSelector}"
                     VirtualizingPanel.IsVirtualizing="True"
-                    VirtualizingPanel.VirtualizationMode="Standard">
-                </ui:TreeView>
+                    VirtualizingPanel.VirtualizationMode="Standard" />
             </DockPanel>
             <!-- ReSharper disable once Xaml.StaticResourceNotResolved -->
             <ui:DataGrid

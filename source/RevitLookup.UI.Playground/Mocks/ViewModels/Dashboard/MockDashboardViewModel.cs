@@ -11,7 +11,7 @@ using RevitLookup.UI.Framework.Views.Tools;
 using Wpf.Ui;
 using Wpf.Ui.Controls;
 
-namespace RevitLookup.UI.Playground.Mockups.ViewModels.Dashboard;
+namespace RevitLookup.UI.Playground.Mocks.ViewModels.Dashboard;
 
 [UsedImplicitly]
 public sealed partial class MockDashboardViewModel : IDashboardViewModel

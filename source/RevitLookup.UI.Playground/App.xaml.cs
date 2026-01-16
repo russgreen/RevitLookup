@@ -1,6 +1,7 @@
 ﻿using System.Windows;
-using RevitLookup.Abstractions.Services.Settings;
-using RevitLookup.UI.Playground.Client.Views;
+using Microsoft.Extensions.Logging;
+using RevitLookup.Common.Extensions;
+using RevitLookup.UI.Playground.Views;
 
 namespace RevitLookup.UI.Playground;
 
@@ -8,15 +9,23 @@ public sealed partial class App
 {
     private void OnStartup(object sender, StartupEventArgs e)
     {
-        Initialize();
-
-        var view = Host.CreateScope<PlaygroundView>();
-        view.ShowDialog();
+        try
+        {
+            Host.Start();
+            var uiService = Host.GetService<IServiceProvider>();
+            var playgroundView = uiService.CreateScopedFrameworkElement<PlaygroundView>();
+            playgroundView.ShowDialog();
+        }
+        catch (Exception exception)
+        {
+            var logger = Host.GetService<ILogger<App>>();
+            logger.LogCritical(exception, "Application failed to start");
+            Shutdown();
+        }
     }
 
-    private static void Initialize()
+    protected override void OnExit(ExitEventArgs e)
     {
-        var settingsService = Host.GetService<ISettingsService>();
-        settingsService.LoadSettings();
+        Host.Stop();
     }
 }

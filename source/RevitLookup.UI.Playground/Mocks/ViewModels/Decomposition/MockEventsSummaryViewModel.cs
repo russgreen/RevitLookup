@@ -12,7 +12,7 @@ using RevitLookup.Abstractions.ViewModels.Decomposition;
 using RevitLookup.UI.Framework.Extensions;
 using RevitLookup.UI.Framework.Views.Decomposition;
 
-namespace RevitLookup.UI.Playground.Mockups.ViewModels.Decomposition;
+namespace RevitLookup.UI.Playground.Mocks.ViewModels.Decomposition;
 
 [UsedImplicitly]
 public sealed partial class MockEventsSummaryViewModel(

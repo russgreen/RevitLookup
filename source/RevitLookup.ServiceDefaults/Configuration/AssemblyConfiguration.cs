@@ -18,7 +18,7 @@ public static class AssemblyConfiguration
         var assemblyLocation = assembly.Location;
         var appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
         var fileVersion = new Version(FileVersionInfo.GetVersionInfo(assemblyLocation).FileVersion!);
-        var targetFrameworkAttribute = assembly.GetCustomAttribute<TargetFrameworkAttribute>();
+        var targetFrameworkAttribute = assembly.GetCustomAttribute<TargetFrameworkAttribute>()!;
 
         builder.Services.Configure<AssemblyOptions>(options =>
         {

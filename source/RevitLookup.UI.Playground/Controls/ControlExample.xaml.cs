@@ -8,7 +8,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Markup;
 
-namespace RevitLookup.UI.Playground.Client.Controls;
+namespace RevitLookup.UI.Playground.Controls;
 
 /// <summary>
 /// A control that displays an example of a control
@@ -48,7 +48,7 @@ public sealed class ControlExample : Control
         typeof(ControlExample),
         new PropertyMetadata(
             null,
-            static (o, args) => ((ControlExample) o).OnXamlCodeSourceChanged((Uri) args.NewValue)
+            static (o, args) => ((ControlExample)o).OnXamlCodeSourceChanged((Uri)args.NewValue)
         )
     );
 
@@ -65,13 +65,13 @@ public sealed class ControlExample : Control
         typeof(ControlExample),
         new PropertyMetadata(
             null,
-            static (o, args) => ((ControlExample) o).OnCsharpCodeSourceChanged((Uri) args.NewValue)
+            static (o, args) => ((ControlExample)o).OnCsharpCodeSourceChanged((Uri)args.NewValue)
         )
     );
 
     public string? HeaderText
     {
-        get => (string) GetValue(HeaderTextProperty);
+        get => (string)GetValue(HeaderTextProperty);
         set => SetValue(HeaderTextProperty, value);
     }
 
@@ -83,25 +83,25 @@ public sealed class ControlExample : Control
 
     public string? XamlCode
     {
-        get => (string) GetValue(XamlCodeProperty);
+        get => (string)GetValue(XamlCodeProperty);
         set => SetValue(XamlCodeProperty, value);
     }
 
     public Uri? XamlCodeSource
     {
-        get => (Uri) GetValue(XamlCodeSourceProperty);
+        get => (Uri)GetValue(XamlCodeSourceProperty);
         set => SetValue(XamlCodeSourceProperty, value);
     }
 
     public string? CsharpCode
     {
-        get => (string) GetValue(CsharpCodeProperty);
+        get => (string)GetValue(CsharpCodeProperty);
         set => SetValue(CsharpCodeProperty, value);
     }
 
     public Uri? CsharpCodeSource
     {
-        get => (Uri) GetValue(CsharpCodeSourceProperty);
+        get => (Uri)GetValue(CsharpCodeSourceProperty);
         set => SetValue(CsharpCodeSourceProperty, value);
     }
 
@@ -117,25 +117,23 @@ public sealed class ControlExample : Control
 
     private static void Copy_SourceCode(object sender, RoutedEventArgs e)
     {
-        var controlExample = (ControlExample) sender;
+        var controlExample = (ControlExample)sender;
 
         try
         {
-            switch (((ExecutedRoutedEventArgs) e).Parameter.ToString())
+            switch (((ExecutedRoutedEventArgs)e).Parameter.ToString())
             {
                 case "Copy_XamlCode":
                     if (string.IsNullOrEmpty(controlExample.XamlCode)) break;
 
                     Clipboard.SetText(controlExample.XamlCode);
-                    var peer = UIElementAutomationPeer.CreatePeerForElement((Button) e.OriginalSource);
-#if NETCOREAPP
+                    var peer = UIElementAutomationPeer.CreatePeerForElement((Button)e.OriginalSource);
                     peer.RaiseNotificationEvent(
                         AutomationNotificationKind.Other,
                         AutomationNotificationProcessing.ImportantMostRecent,
                         "Source Code Copied",
                         "ButtonClickedActivity"
                     );
-#endif
 
                     break;
                 case "Copy_CsharpCode":

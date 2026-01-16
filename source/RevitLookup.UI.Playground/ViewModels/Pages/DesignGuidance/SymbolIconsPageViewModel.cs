@@ -1,12 +1,12 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using JetBrains.Annotations;
-using RevitLookup.UI.Playground.Client.Models;
+using RevitLookup.UI.Playground.Models;
 using Wpf.Ui.Controls;
 #if NETFRAMEWORK
 using RevitLookup.UI.Framework.Extensions;
 #endif
 
-namespace RevitLookup.UI.Playground.Client.ViewModels.Pages.DesignGuidance;
+namespace RevitLookup.UI.Playground.ViewModels.Pages.DesignGuidance;
 
 [UsedImplicitly]
 public partial class SymbolIconsPageViewModel : ObservableObject

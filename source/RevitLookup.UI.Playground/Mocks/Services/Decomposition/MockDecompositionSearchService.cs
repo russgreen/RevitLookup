@@ -2,7 +2,7 @@
 using RevitLookup.Abstractions.ObservableModels.Decomposition;
 using RevitLookup.Abstractions.Services.Decomposition;
 
-namespace RevitLookup.UI.Playground.Mockups.Services.Decomposition;
+namespace RevitLookup.UI.Playground.Mocks.Services.Decomposition;
 
 [SuppressMessage("ReSharper", "LoopCanBeConvertedToQuery")]
 [SuppressMessage("ReSharper", "ForeachCanBeConvertedToQueryUsingAnotherGetEnumerator")]

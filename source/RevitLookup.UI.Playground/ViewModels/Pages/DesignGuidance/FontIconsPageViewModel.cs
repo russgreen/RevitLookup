@@ -3,12 +3,12 @@ using System.Reflection;
 using System.Text.Json;
 using CommunityToolkit.Mvvm.ComponentModel;
 using JetBrains.Annotations;
-using RevitLookup.UI.Playground.Client.Models;
+using RevitLookup.UI.Playground.Models;
 #if NETFRAMEWORK
 using RevitLookup.UI.Framework.Extensions;
 #endif
 
-namespace RevitLookup.UI.Playground.Client.ViewModels.Pages.DesignGuidance;
+namespace RevitLookup.UI.Playground.ViewModels.Pages.DesignGuidance;
 
 [UsedImplicitly]
 public partial class FontIconsPageViewModel : ObservableObject
@@ -30,7 +30,7 @@ public partial class FontIconsPageViewModel : ObservableObject
 
     private static string ReadIconData()
     {
-        const string resourceName = "RevitLookup.UI.Playground.Client.Models.FontIcons.json";
+        const string resourceName = "RevitLookup.UI.Playground.Models.FontIcons.json";
 
         var assembly = Assembly.GetExecutingAssembly();
         using var stream = assembly.GetManifestResourceStream(resourceName)!;

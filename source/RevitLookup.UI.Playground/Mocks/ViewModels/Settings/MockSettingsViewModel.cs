@@ -29,7 +29,7 @@ using Wpf.Ui.Animations;
 using Wpf.Ui.Appearance;
 using Wpf.Ui.Controls;
 
-namespace RevitLookup.UI.Playground.Mockups.ViewModels.Settings;
+namespace RevitLookup.UI.Playground.Mocks.ViewModels.Settings;
 
 [UsedImplicitly]
 public sealed partial class MockSettingsViewModel : ObservableObject, ISettingsViewModel

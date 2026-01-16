@@ -1,6 +1,6 @@
 ﻿using Wpf.Ui.Controls;
 
-namespace RevitLookup.UI.Playground.Client.Models;
+namespace RevitLookup.UI.Playground.Models;
 
 /// <summary>
 /// IconData class for icons in icon page

@@ -8,6 +8,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using RevitLookup.UI.Framework.Controls.ColorPicker;
 using RevitLookup.UI.Framework.Utils;
 using Wpf.Ui.Controls;
 using Button = System.Windows.Controls.Button;
@@ -16,7 +17,8 @@ using ColorConverter = System.Drawing.ColorConverter;
 using Point = System.Windows.Point;
 using TextBox = System.Windows.Controls.TextBox;
 
-namespace RevitLookup.UI.Framework.Controls.ColorPicker;
+// ReSharper disable once CheckNamespace
+namespace RevitLookup.UI.Framework.Controls;
 
 public sealed partial class ColorPickerControl
 {

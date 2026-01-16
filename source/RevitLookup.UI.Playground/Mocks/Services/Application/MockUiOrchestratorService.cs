@@ -11,7 +11,7 @@ using RevitLookup.Abstractions.Services.Presentation;
 using RevitLookup.UI.Framework.Views.Windows;
 using Wpf.Ui;
 
-namespace RevitLookup.UI.Playground.Mockups.Services.Application;
+namespace RevitLookup.UI.Playground.Mocks.Services.Application;
 
 public sealed class MockUiOrchestratorService : IUiOrchestratorService, IHistoryOrchestrator, IInteractionOrchestrator
 {

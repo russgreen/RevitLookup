@@ -4,10 +4,10 @@ using LookupEngine;
 using RevitLookup.Abstractions.ObservableModels.Decomposition;
 using RevitLookup.Abstractions.Services.Decomposition;
 using RevitLookup.Abstractions.Services.Settings;
-using RevitLookup.UI.Playground.Mockups.Core.Decomposition;
-using RevitLookup.UI.Playground.Mockups.Mappers;
+using RevitLookup.UI.Playground.Mocks.Core.Decomposition;
+using RevitLookup.UI.Playground.Mocks.Mappers;
 
-namespace RevitLookup.UI.Playground.Mockups.Services.Decomposition;
+namespace RevitLookup.UI.Playground.Mocks.Services.Decomposition;
 
 [SuppressMessage("ReSharper", "LoopCanBeConvertedToQuery")]
 [SuppressMessage("ReSharper", "ForeachCanBeConvertedToQueryUsingAnotherGetEnumerator")]

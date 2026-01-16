@@ -1,10 +1,10 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using JetBrains.Annotations;
-using RevitLookup.UI.Playground.Client.Views.Pages;
+using RevitLookup.UI.Playground.Views.Pages;
 using Wpf.Ui;
 
-namespace RevitLookup.UI.Playground.Client.ViewModels.Pages;
+namespace RevitLookup.UI.Playground.ViewModels.Pages;
 
 [UsedImplicitly]
 public sealed partial class DashboardViewModel(INavigationService navigationService) : ObservableObject

@@ -1,13 +1,15 @@
 ﻿using System.Windows;
 using System.Windows.Automation.Peers;
 using System.Windows.Controls;
+using JetBrains.Annotations;
 using Microsoft.Extensions.DependencyInjection;
 using RevitLookup.Abstractions.Services.Presentation;
 using RevitLookup.UI.Framework.Controls.Automation;
 using Wpf.Ui;
 
-namespace RevitLookup.UI.Playground.Client.Controls;
+namespace RevitLookup.UI.Playground.Controls;
 
+[PublicAPI]
 public sealed partial class PageViewer
 {
     private readonly IServiceProvider _serviceProvider;
@@ -26,19 +28,33 @@ public sealed partial class PageViewer
         snackbarService.SetSnackbarPresenter(RootSnackbar);
     }
 
-    public bool? ShowPage<T>() where T : Page
+    public void ShowPage<T>() where T : Page
     {
         var page = _serviceProvider.GetRequiredService<T>();
         Viewer.Navigate(page);
 
         if (WindowStartupLocation == WindowStartupLocation.CenterScreen) Viewer.SizeChanged += OnViewerFrameResized;
-        return ShowDialog();
+        Show();
     }
 
-    public void RunService<T>(Action<T> handler) where T : class
+    public void ShowPage<T>(Action<T, IServiceProvider> configuration) where T : Page
     {
-        var service = _serviceProvider.GetRequiredService<T>();
-        handler.Invoke(service);
+        var page = _serviceProvider.GetRequiredService<T>();
+        configuration.Invoke(page, _serviceProvider);
+        Viewer.Navigate(page);
+
+        if (WindowStartupLocation == WindowStartupLocation.CenterScreen) Viewer.SizeChanged += OnViewerFrameResized;
+        Show();
+    }
+
+    public void ShowPage<T>(Func<T, IServiceProvider, Task> configuration) where T : Page
+    {
+        var page = _serviceProvider.GetRequiredService<T>();
+        configuration.Invoke(page, _serviceProvider);
+        Viewer.Navigate(page);
+
+        if (WindowStartupLocation == WindowStartupLocation.CenterScreen) Viewer.SizeChanged += OnViewerFrameResized;
+        Show();
     }
 
     private void OnViewerFrameResized(object sender, SizeChangedEventArgs args)

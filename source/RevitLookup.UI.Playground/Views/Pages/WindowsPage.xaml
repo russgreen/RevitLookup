@@ -1,10 +1,10 @@
 ﻿<Page
-    x:Class="RevitLookup.UI.Playground.Client.Views.Pages.WindowsPage"
+    x:Class="RevitLookup.UI.Playground.Views.Pages.WindowsPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:pages="clr-namespace:RevitLookup.UI.Playground.Client.Views.Pages"
+    xmlns:pages="clr-namespace:RevitLookup.UI.Playground.Views.Pages"
     xmlns:ui="http://lookupengine.com/xaml"
     mc:Ignorable="d"
     d:DesignHeight="700"

@@ -6,9 +6,9 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:ui="http://lookupengine.com/xaml"
     xmlns:converters="clr-namespace:RevitLookup.UI.Framework.Converters"
-    xmlns:contentPlaceholder="clr-namespace:RevitLookup.UI.Framework.Controls.ContentPlaceholder"
     xmlns:valueConverters="clr-namespace:RevitLookup.UI.Framework.Converters.ValueConverters"
     xmlns:tools="clr-namespace:RevitLookup.UI.Framework.Views.Tools"
+    xmlns:controls="clr-namespace:RevitLookup.UI.Framework.Controls"
     mc:Ignorable="d"
     d:DesignHeight="600"
     d:DesignWidth="500"
@@ -118,24 +118,21 @@
                                 <ui:TextBox
                                     IconPlacement="Right"
                                     Icon="{ui:SymbolIcon Search24}"
-                                    Text="{Binding ViewModel.CategoryFilter, UpdateSourceTrigger=PropertyChanged}">
-                                </ui:TextBox>
+                                    Text="{Binding ViewModel.CategoryFilter, UpdateSourceTrigger=PropertyChanged}" />
                                 <Label
                                     Margin="0 8 0 0"
                                     Content="Property" />
                                 <ui:TextBox
                                     IconPlacement="Right"
                                     Icon="{ui:SymbolIcon Search24}"
-                                    Text="{Binding ViewModel.PropertyFilter, UpdateSourceTrigger=PropertyChanged}">
-                                </ui:TextBox>
+                                    Text="{Binding ViewModel.PropertyFilter, UpdateSourceTrigger=PropertyChanged}" />
                                 <Label
                                     Margin="0 8 0 0"
                                     Content="Value" />
                                 <ui:TextBox
                                     IconPlacement="Right"
                                     Icon="{ui:SymbolIcon Search24}"
-                                    Text="{Binding ViewModel.ValueFilter, UpdateSourceTrigger=PropertyChanged}">
-                                </ui:TextBox>
+                                    Text="{Binding ViewModel.ValueFilter, UpdateSourceTrigger=PropertyChanged}" />
                                 <ui:ToggleSwitch
                                     Margin="0 12 0 0"
                                     Content="Show only user settings"
@@ -244,10 +241,10 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ui:ListView>
-                <contentPlaceholder:ContentPlaceholder
+                <controls:ContentPlaceholder
                     Content="Nothing to show"
                     MaxHeight="300">
-                    <contentPlaceholder:ContentPlaceholder.Visibility>
+                    <controls:ContentPlaceholder.Visibility>
                         <MultiBinding
                             Converter="{valueConverters:SettingsEntriesEmptyAfterInitializationConverter}">
                             <Binding
@@ -256,11 +253,11 @@
                                 Path="ViewModel.InitializationTask.IsCompleted"
                                 FallbackValue="Hidden" />
                         </MultiBinding>
-                    </contentPlaceholder:ContentPlaceholder.Visibility>
-                </contentPlaceholder:ContentPlaceholder>
-                <contentPlaceholder:ContentPlaceholder
+                    </controls:ContentPlaceholder.Visibility>
+                </controls:ContentPlaceholder>
+                <controls:ContentPlaceholder
                     MaxHeight="300">
-                    <contentPlaceholder:ContentPlaceholder.Visibility>
+                    <controls:ContentPlaceholder.Visibility>
                         <MultiBinding
                             Converter="{valueConverters:SettingsEmptySearchResultsVisibilityConverter}">
                             <Binding
@@ -270,8 +267,8 @@
                             <Binding
                                 Path="ViewModel.Filtered" />
                         </MultiBinding>
-                    </contentPlaceholder:ContentPlaceholder.Visibility>
-                    <contentPlaceholder:ContentPlaceholder.Content>
+                    </controls:ContentPlaceholder.Visibility>
+                    <controls:ContentPlaceholder.Content>
                         <StackPanel>
                             <ui:TextBlock
                                 FontTypography="Subtitle"
@@ -282,8 +279,8 @@
                                 Command="{Binding ViewModel.ClearFiltersCommand}"
                                 Content="Clear filters" />
                         </StackPanel>
-                    </contentPlaceholder:ContentPlaceholder.Content>
-                </contentPlaceholder:ContentPlaceholder>
+                    </controls:ContentPlaceholder.Content>
+                </controls:ContentPlaceholder>
                 <StackPanel
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center"

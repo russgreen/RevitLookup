@@ -17,9 +17,9 @@ using System.Numerics;
 using System.Windows.Media;
 using LookupEngine.Abstractions.Decomposition;
 using LookupEngine.Descriptors;
-using RevitLookup.UI.Playground.Mockups.Core.Decomposition.Descriptors;
+using RevitLookup.UI.Playground.Mocks.Core.Decomposition.Descriptors;
 
-namespace RevitLookup.UI.Playground.Mockups.Core.Decomposition;
+namespace RevitLookup.UI.Playground.Mocks.Core.Decomposition;
 
 public static class DescriptorsMap
 {

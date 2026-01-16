@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace RevitLookup.UI.Playground.Client.Controls;
+namespace RevitLookup.UI.Playground.Controls;
 
 public sealed partial class TileGallery
 {
@@ -36,11 +36,11 @@ public sealed partial class TileGallery
 
         if (RootScrollViewer.ActualWidth < TilesPanel.ActualWidth)
         {
-            if(newOffset == 0)
+            if (newOffset == 0)
             {
                 ScrollBackButton.Visibility = Visibility.Collapsed;
             }
-            else if(newOffset >= RootScrollViewer.ScrollableWidth)
+            else if (newOffset >= RootScrollViewer.ScrollableWidth)
             {
                 ScrollForwardButton.Visibility = Visibility.Collapsed;
             }

@@ -3,7 +3,7 @@ using System.Windows.Data;
 using System.Windows.Markup;
 using System.Windows.Media;
 
-namespace RevitLookup.UI.Playground.Mockups.Styles.Converters;
+namespace RevitLookup.UI.Playground.Mocks.Styles.Converters;
 
 public sealed class ObjectColorConverter : MarkupExtension, IValueConverter
 {

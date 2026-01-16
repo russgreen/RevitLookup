@@ -4,7 +4,7 @@ using RevitLookup.Abstractions.Services.Decomposition;
 using RevitLookup.Abstractions.Services.Presentation;
 using RevitLookup.Abstractions.ViewModels.Tools;
 
-namespace RevitLookup.UI.Playground.Mockups.ViewModels.Tools;
+namespace RevitLookup.UI.Playground.Mocks.ViewModels.Tools;
 
 [UsedImplicitly]
 public sealed partial class MockSearchElementsViewModel(

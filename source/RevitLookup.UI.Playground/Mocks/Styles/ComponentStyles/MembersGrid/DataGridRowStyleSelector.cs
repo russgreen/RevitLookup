@@ -4,7 +4,7 @@ using LookupEngine.Abstractions.Configuration;
 using LookupEngine.Abstractions.Decomposition;
 using RevitLookup.Abstractions.ObservableModels.Decomposition;
 
-namespace RevitLookup.UI.Playground.Mockups.Styles.ComponentStyles.MembersGrid;
+namespace RevitLookup.UI.Playground.Mocks.Styles.ComponentStyles.MembersGrid;
 
 /// <summary>
 ///     Data grid row style selector

@@ -1,6 +1,6 @@
-﻿using RevitLookup.UI.Playground.Client.ViewModels.Pages;
+﻿using RevitLookup.UI.Playground.ViewModels.Pages;
 
-namespace RevitLookup.UI.Playground.Client.Views.Pages;
+namespace RevitLookup.UI.Playground.Views.Pages;
 
 public sealed partial class DashboardPage
 {

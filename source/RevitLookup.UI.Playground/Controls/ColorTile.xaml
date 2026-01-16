@@ -3,7 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:ui="http://lookupengine.com/xaml"
     xmlns:converters="clr-namespace:RevitLookup.UI.Framework.Converters;assembly=RevitLookup.UI.Framework"
-    xmlns:controls="clr-namespace:RevitLookup.UI.Playground.Client.Controls">
+    xmlns:controls="clr-namespace:RevitLookup.UI.Playground.Controls">
 
     <Style x:Key="ColorTilesPanelStyle" TargetType="{x:Type Border}">
         <Style.Setters>
@@ -13,7 +13,7 @@
             <Setter Property="CornerRadius" Value="8" />
         </Style.Setters>
     </Style>
-    
+
     <Style
         TargetType="{x:Type controls:ColorTile}">
         <Setter
@@ -160,8 +160,8 @@
                                     Grid.Column="0"
                                     FontTypography="Caption"
                                     Text="{TemplateBinding ColorBrushName}"
-                                    TextWrapping="Wrap"/>
-                                    <!-- x:FieldModifier="public" /> -->
+                                    TextWrapping="Wrap" />
+                                <!-- x:FieldModifier="public" /> -->
 
                                 <Grid
                                     Grid.Row="3"

@@ -1,4 +1,4 @@
-using Bogus;
+﻿using Bogus;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using JetBrains.Annotations;
@@ -9,7 +9,7 @@ using RevitLookup.UI.Framework.Views.EditDialogs;
 using RevitLookup.UI.Framework.Views.Tools;
 using RevitLookup.UI.Framework.Views.Visualization;
 
-namespace RevitLookup.UI.Playground.Client.ViewModels.Pages;
+namespace RevitLookup.UI.Playground.ViewModels.Pages;
 
 [UsedImplicitly]
 public sealed partial class DialogsViewModel(IServiceProvider serviceProvider) : ObservableObject

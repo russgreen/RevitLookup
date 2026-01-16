@@ -3,7 +3,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using RevitLookup.Abstractions.ObservableModels.Decomposition;
 
-namespace RevitLookup.UI.Playground.Mockups.Styles.ComponentStyles.MembersGrid;
+namespace RevitLookup.UI.Playground.Mocks.Styles.ComponentStyles.MembersGrid;
 
 /// <summary>
 ///     Data grid cell template selector

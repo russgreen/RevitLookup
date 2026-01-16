@@ -13,7 +13,7 @@ using RevitLookup.UI.Framework.Views.Decomposition;
 using RevitLookup.UI.Framework.Extensions;
 #endif
 
-namespace RevitLookup.UI.Playground.Mockups.ViewModels.Decomposition;
+namespace RevitLookup.UI.Playground.Mocks.ViewModels.Decomposition;
 
 [UsedImplicitly]
 public sealed partial class MockDecompositionSummaryViewModel(

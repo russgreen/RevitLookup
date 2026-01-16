@@ -3,7 +3,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using RevitLookup.Abstractions.ObservableModels.Decomposition;
 
-namespace RevitLookup.UI.Playground.Mockups.Styles.ComponentStyles.ObjectsTree;
+namespace RevitLookup.UI.Playground.Mocks.Styles.ComponentStyles.ObjectsTree;
 
 public sealed class TreeViewItemTemplateSelector : DataTemplateSelector
 {

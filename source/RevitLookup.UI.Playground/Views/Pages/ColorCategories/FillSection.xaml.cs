@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace RevitLookup.UI.Playground.Client.Views.Pages.ColorCategories;
+namespace RevitLookup.UI.Playground.Views.Pages.ColorCategories;
 
 /// <summary>
 /// Interaction logic for FillSection.xaml

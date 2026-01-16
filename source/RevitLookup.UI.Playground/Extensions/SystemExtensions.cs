@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics.Contracts;
 using System.IO;
 
-namespace RevitLookup.UI.Playground.Client.Extensions;
+namespace RevitLookup.UI.Playground.Extensions;
 
 
 /// <summary>

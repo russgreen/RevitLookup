@@ -2,7 +2,7 @@
 using RevitLookup.Abstractions.ObservableModels.Decomposition;
 using Riok.Mapperly.Abstractions;
 
-namespace RevitLookup.UI.Playground.Mockups.Mappers;
+namespace RevitLookup.UI.Playground.Mocks.Mappers;
 
 [Mapper(RequiredMappingStrategy = RequiredMappingStrategy.Source)]
 public static partial class DecompositionResultMapper

@@ -6,7 +6,7 @@
     xmlns:decomposition="clr-namespace:RevitLookup.Abstractions.ObservableModels.Decomposition;assembly=RevitLookup.Abstractions"
     xmlns:valueConverters="clr-namespace:RevitLookup.UI.Framework.Converters.ValueConverters;assembly=RevitLookup.UI.Framework"
     xmlns:ui="http://lookupengine.com/xaml"
-    xmlns:converters="clr-namespace:RevitLookup.UI.Playground.Mockups.Styles.Converters"
+    xmlns:converters="clr-namespace:RevitLookup.UI.Playground.Mocks.Styles.Converters"
     mc:Ignorable="d">
 
     <DataTemplate

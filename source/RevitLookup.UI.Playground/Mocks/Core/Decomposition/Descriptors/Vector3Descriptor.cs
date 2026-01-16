@@ -4,7 +4,7 @@ using System.Reflection;
 using LookupEngine.Abstractions.Configuration;
 using LookupEngine.Abstractions.Decomposition;
 
-namespace RevitLookup.UI.Playground.Mockups.Core.Decomposition.Descriptors;
+namespace RevitLookup.UI.Playground.Mocks.Core.Decomposition.Descriptors;
 
 public sealed class Vector3Descriptor : Descriptor, IDescriptorResolver
 {

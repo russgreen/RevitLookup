@@ -22,7 +22,7 @@ using RevitLookup.Abstractions.ViewModels.Tools;
 using RevitLookup.UI.Framework.Extensions;
 #endif
 
-namespace RevitLookup.UI.Playground.Mockups.ViewModels.Tools;
+namespace RevitLookup.UI.Playground.Mocks.ViewModels.Tools;
 
 [UsedImplicitly]
 public sealed partial class MockUnitsViewModel(IVisualDecompositionService decompositionService) : ObservableObject, IUnitsViewModel

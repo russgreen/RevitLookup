@@ -21,7 +21,7 @@ using RevitLookup.Abstractions.ViewModels.Tools;
 using RevitLookup.UI.Framework.Extensions;
 #endif
 
-namespace RevitLookup.UI.Playground.Mockups.ViewModels.Tools;
+namespace RevitLookup.UI.Playground.Mocks.ViewModels.Tools;
 
 public sealed partial class MockModulesViewModel : ObservableObject, IModulesViewModel
 {
@@ -44,7 +44,7 @@ public sealed partial class MockModulesViewModel : ObservableObject, IModulesVie
                 Path = assembly.IsDynamic ? string.Empty : assembly.Location,
                 Order = i + 1,
                 Version = assemblyName.Version is null ? string.Empty : assemblyName.Version.ToString(),
-#if NETCOREAPP
+#if NET
                 Container = AssemblyLoadContext.GetLoadContext(assembly)?.Name ?? string.Empty
 #else
                 Container = AppDomain.CurrentDomain.FriendlyName

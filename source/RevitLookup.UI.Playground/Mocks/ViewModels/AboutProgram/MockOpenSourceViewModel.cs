@@ -17,7 +17,7 @@ using JetBrains.Annotations;
 using RevitLookup.Abstractions.Models.AboutProgram;
 using RevitLookup.Abstractions.ViewModels.AboutProgram;
 
-namespace RevitLookup.UI.Playground.Mockups.ViewModels.AboutProgram;
+namespace RevitLookup.UI.Playground.Mocks.ViewModels.AboutProgram;
 
 [UsedImplicitly]
 public sealed class MockOpenSourceViewModel : ObservableObject, IOpenSourceViewModel

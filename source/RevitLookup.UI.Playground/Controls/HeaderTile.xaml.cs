@@ -1,7 +1,7 @@
-﻿using System.Diagnostics;
-using System.Windows;
+﻿using System.Windows;
+using RevitLookup.Common.Utils;
 
-namespace RevitLookup.UI.Playground.Client.Controls;
+namespace RevitLookup.UI.Playground.Controls;
 
 public sealed partial class HeaderTile
 {
@@ -9,7 +9,7 @@ public sealed partial class HeaderTile
     public static readonly DependencyProperty DescriptionProperty = DependencyProperty.Register("ColorExplanation", typeof(string), typeof(HeaderTile), new PropertyMetadata(""));
     public static readonly DependencyProperty LinkProperty = DependencyProperty.Register(nameof(Link), typeof(string), typeof(HeaderTile), new PropertyMetadata(null));
     public static readonly DependencyProperty SourceProperty = DependencyProperty.Register(nameof(Source), typeof(object), typeof(HeaderTile), new PropertyMetadata(null));
-        
+
     public HeaderTile()
     {
         InitializeComponent();
@@ -20,7 +20,7 @@ public sealed partial class HeaderTile
         get => (string)GetValue(TitleProperty);
         set => SetValue(TitleProperty, value);
     }
-        
+
     public string Description
     {
         get => (string)GetValue(DescriptionProperty);
@@ -35,13 +35,13 @@ public sealed partial class HeaderTile
 
     public object Source
     {
-        get => (object)GetValue(SourceProperty);
+        get => GetValue(SourceProperty);
         set => SetValue(SourceProperty, value);
     }
 
 
     private void OnTileClicked(object sender, RoutedEventArgs e)
     {
-        Process.Start(new ProcessStartInfo(Link) { UseShellExecute = true });
+        ProcessTasks.StartShell(Link);
     }
 }

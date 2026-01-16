@@ -9,7 +9,7 @@ using RevitLookup.Abstractions.Services.Application;
 using RevitLookup.UI.Framework.Views.Dashboard;
 using RevitLookup.UI.Framework.Views.Decomposition;
 
-namespace RevitLookup.UI.Playground.Client.ViewModels.Pages;
+namespace RevitLookup.UI.Playground.ViewModels.Pages;
 
 [UsedImplicitly]
 public sealed partial class WindowsViewModel : ObservableObject

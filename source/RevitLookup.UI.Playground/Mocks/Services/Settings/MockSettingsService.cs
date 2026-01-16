@@ -10,7 +10,7 @@ using Wpf.Ui.Animations;
 using Wpf.Ui.Appearance;
 using Wpf.Ui.Controls;
 
-namespace RevitLookup.UI.Playground.Mockups.Services.Settings;
+namespace RevitLookup.UI.Playground.Mocks.Services.Settings;
 
 public sealed class MockSettingsService(
     IOptions<ResourceLocationsOptions> foldersOptions,
@@ -67,7 +67,7 @@ public sealed class MockSettingsService(
         File.WriteAllText(path, json);
     }
 
- private void LoadApplicationSettings()
+    private void LoadApplicationSettings()
     {
         var path = foldersOptions.Value.ApplicationSettingsPath;
         if (!File.Exists(path))
@@ -85,7 +85,7 @@ public sealed class MockSettingsService(
         {
             logger.LogError(exception, "Application settings loading error");
         }
-        
+
         if (_applicationSettings is null)
         {
             ResetApplicationSettings();

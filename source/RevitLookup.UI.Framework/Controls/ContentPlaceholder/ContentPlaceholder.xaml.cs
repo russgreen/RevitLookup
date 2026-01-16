@@ -14,6 +14,7 @@
 
 using System.Windows.Controls;
 
-namespace RevitLookup.UI.Framework.Controls.ContentPlaceholder;
+// ReSharper disable once CheckNamespace
+namespace RevitLookup.UI.Framework.Controls;
 
 public sealed class ContentPlaceholder : ContentControl;

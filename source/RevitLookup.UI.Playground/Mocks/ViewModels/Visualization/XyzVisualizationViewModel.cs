@@ -4,7 +4,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using JetBrains.Annotations;
 using RevitLookup.Abstractions.ViewModels.Visualization;
 
-namespace RevitLookup.UI.Playground.Mockups.ViewModels.Visualization;
+namespace RevitLookup.UI.Playground.Mocks.ViewModels.Visualization;
 
 [UsedImplicitly]
 public sealed partial class XyzVisualizationViewModel : ObservableObject, IXyzVisualizationViewModel

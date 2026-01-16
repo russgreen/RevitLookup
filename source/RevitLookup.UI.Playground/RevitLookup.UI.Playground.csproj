@@ -8,6 +8,7 @@
 
     <ItemGroup>
         <ProjectReference Include="..\LookupEngine\source\LookupEngine\LookupEngine.csproj"/>
+        <ProjectReference Include="..\RevitLookup.ServiceDefaults\RevitLookup.ServiceDefaults.csproj" />
         <ProjectReference Include="..\RevitLookup.UI.Framework\RevitLookup.UI.Framework.csproj"/>
     </ItemGroup>
 
@@ -18,7 +19,6 @@
         <PackageReference Include="Serilog.Sinks.Debug"/>
         <PackageReference Include="Serilog.Sinks.Console"/>
         <PackageReference Include="Serilog.Extensions.Hosting"/>
-        <PackageReference Include="Microsoft.Extensions.Hosting"/>
         <PackageReference Include="JetBrains.Annotations" PrivateAssets="all"/>
     </ItemGroup>
 
