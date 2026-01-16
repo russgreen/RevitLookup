@@ -31,7 +31,6 @@
 
         <!-- Application Hosting -->
         <PackageReference Include="Scrutor"/>
-        <PackageReference Include="Microsoft.Extensions.Hosting"/>
         <PackageReference Include="Microsoft.Extensions.Http"/>
 
         <!-- Logging -->

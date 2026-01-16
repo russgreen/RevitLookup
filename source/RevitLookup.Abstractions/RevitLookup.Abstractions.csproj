@@ -1,23 +1,19 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
+        <UseWpf>true</UseWpf>
         <TargetFrameworks>net48;net8.0-windows</TargetFrameworks>
     </PropertyGroup>
 
     <ItemGroup>
         <PackageReference Include="CommunityToolkit.Mvvm"/>
+        <PackageReference Include="JetBrains.Annotations" PrivateAssets="all"/>
         <PackageReference Include="System.Text.Json" Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'"/>
     </ItemGroup>
 
     <ItemGroup>
         <ProjectReference Include="..\LookupEngine.UI\source\LookupEngine.UI\LookupEngine.UI.csproj" />
         <ProjectReference Include="..\LookupEngine\source\LookupEngine.Abstractions\LookupEngine.Abstractions.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-        <Reference Include="PresentationCore" Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'"/>
-        <Reference Include="PresentationFramework" Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'"/>
-        <Reference Include="WindowsBase" Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'"/>
     </ItemGroup>
 
 </Project>

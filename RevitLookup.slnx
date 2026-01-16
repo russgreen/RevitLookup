@@ -141,6 +141,8 @@
             <BuildType Solution="Release.R25|*" Project="Release" />
             <BuildType Solution="Release.R26|*" Project="Release" />
         </Project>
+    </Folder>
+    <Folder Name="/Playground/">
         <Project Path="source\RevitLookup.UI.Playground\RevitLookup.UI.Playground.csproj">
             <BuildType Solution="Debug.Playground|*" Project="Debug" />
             <BuildType Solution="Debug.R21|*" Project="Debug" />
@@ -187,6 +189,9 @@
             <Build Solution="Release.Playground|*" Project="false" />
         </Project>
     </Folder>
+    <Project Path="source/RevitLookup.ServiceDefaults/RevitLookup.ServiceDefaults.csproj">
+        <BuildType Project="Debug" />
+    </Project>
     <Project Path="source\RevitLookup.Abstractions\RevitLookup.Abstractions.csproj">
         <BuildType Solution="Debug.Playground|*" Project="Debug" />
         <BuildType Solution="Debug.R21|*" Project="Debug" />
