@@ -35,7 +35,7 @@ public sealed partial class UnitsDialog
         IUnitsViewModel viewModel,
         INavigationService navigationService,
         IThemeWatcherService themeWatcherService)
-        : base(dialogService.GetDialogHost())
+        : base(dialogService.GetDialogHostEx())
     {
         _viewModel = viewModel;
         _navigationService = navigationService;

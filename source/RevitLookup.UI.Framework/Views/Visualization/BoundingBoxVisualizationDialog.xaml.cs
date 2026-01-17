@@ -26,7 +26,7 @@ public sealed partial class BoundingBoxVisualizationDialog
         IContentDialogService dialogService,
         IBoundingBoxVisualizationViewModel viewModel,
         IThemeWatcherService themeWatcherService)
-        : base(dialogService.GetDialogHost())
+        : base(dialogService.GetDialogHostEx())
     {
         _viewModel = viewModel;
 

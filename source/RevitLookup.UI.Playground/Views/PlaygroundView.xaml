@@ -66,7 +66,6 @@
             </ui:NavigationView.ContentOverlay>
         </ui:NavigationView>
 
-        <ContentPresenter
-            x:Name="RootContentDialog" />
+        <ui:ContentDialogHost x:Name="DialogHost" />
     </Grid>
 </ui:FluentWindow>

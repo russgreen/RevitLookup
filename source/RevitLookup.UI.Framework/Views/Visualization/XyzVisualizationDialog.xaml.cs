@@ -26,7 +26,7 @@ public sealed partial class XyzVisualizationDialog
         IContentDialogService dialogService,
         IXyzVisualizationViewModel viewModel,
         IThemeWatcherService themeWatcherService)
-        : base(dialogService.GetDialogHost())
+        : base(dialogService.GetDialogHostEx())
     {
         _viewModel = viewModel;
 

@@ -7,12 +7,13 @@
     xmlns:ui="http://lookupengine.com/xaml"
     xmlns:local="clr-namespace:RevitLookup.UI.Framework.Views.Tools"
     xmlns:tools="clr-namespace:RevitLookup.Abstractions.ViewModels.Tools;assembly=RevitLookup.Abstractions"
-    Title="Units"
-    ScrollViewer.VerticalScrollBarVisibility="Disabled"
     mc:Ignorable="d"
     d:DesignHeight="540"
     d:DesignWidth="1000"
-    d:DataContext="{d:DesignInstance tools:IUnitsViewModel}">
+    d:DataContext="{d:DesignInstance tools:IUnitsViewModel}"
+    Title="Units"
+    DialogMaxWidth="1500"
+    ScrollViewer.VerticalScrollBarVisibility="Disabled">
 
     <ui:ContentDialog.Resources>
         <ResourceDictionary>

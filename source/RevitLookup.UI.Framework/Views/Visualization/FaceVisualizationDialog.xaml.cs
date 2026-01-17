@@ -26,7 +26,7 @@ public sealed partial class FaceVisualizationDialog
         IContentDialogService dialogService,
         IFaceVisualizationViewModel viewModel,
         IThemeWatcherService themeWatcherService)
-        : base(dialogService.GetDialogHost())
+        : base(dialogService.GetDialogHostEx())
     {
         _viewModel = viewModel;
 

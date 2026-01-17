@@ -6,14 +6,14 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:ui="http://lookupengine.com/xaml"
     xmlns:local="clr-namespace:RevitLookup.UI.Framework.Views.Settings"
+    mc:Ignorable="d"
+    d:DesignHeight="440"
+    d:DesignWidth="550"
     Title="Reset user settings"
     PrimaryButtonText="Reset"
     CloseButtonText="Cancel"
     DialogMaxWidth="400"
-    DialogMaxHeight="300"
-    mc:Ignorable="d"
-    d:DesignHeight="440"
-    d:DesignWidth="550">
+    DialogMaxHeight="300">
 
     <ui:ContentDialog.Resources>
         <ResourceDictionary>

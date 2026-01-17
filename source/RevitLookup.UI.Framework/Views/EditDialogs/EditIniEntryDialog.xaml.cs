@@ -26,7 +26,7 @@ public sealed partial class EditSettingsEntryDialog
     public EditSettingsEntryDialog(
         IContentDialogService dialogService,
         IThemeWatcherService themeWatcherService)
-        : base(dialogService.GetDialogHost())
+        : base(dialogService.GetDialogHostEx())
     {
         InitializeComponent();
         themeWatcherService.Watch(this);

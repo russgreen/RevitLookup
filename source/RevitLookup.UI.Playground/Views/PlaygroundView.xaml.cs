@@ -25,7 +25,7 @@ public sealed partial class PlaygroundView
         InitializeComponent();
 
         navigationService.SetNavigationControl(NavigationView);
-        dialogService.SetDialogHost(RootContentDialog);
+        dialogService.SetDialogHost(DialogHost);
         snackbarService.SetSnackbarPresenter(SnackbarPresenter);
         intercomService.SetHost(this);
 

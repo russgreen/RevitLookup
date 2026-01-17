@@ -36,7 +36,7 @@ public sealed partial class SearchElementsDialog
         IThemeWatcherService themeWatcherService,
         INotificationService notificationService,
         ILogger<SearchElementsDialog> logger)
-        : base(dialogService.GetDialogHost())
+        : base(dialogService.GetDialogHostEx())
     {
         _viewModel = viewModel;
         _navigationService = navigationService;

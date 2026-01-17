@@ -7,14 +7,16 @@
     xmlns:ui="http://lookupengine.com/xaml"
     xmlns:editDialogs="clr-namespace:RevitLookup.UI.Framework.Views.EditDialogs"
     xmlns:entries="clr-namespace:RevitLookup.Abstractions.ObservableModels.Entries;assembly=RevitLookup.Abstractions"
+    xmlns:converters="clr-namespace:RevitLookup.UI.Framework.Converters"
+    mc:Ignorable="d"
+    d:DesignHeight="540"
+    d:DesignWidth="600"
+    d:DataContext="{d:DesignInstance entries:ObservableIniEntry}"
     Title="Edit settings"
     CloseButtonText="Cancel"
     HorizontalContentAlignment="Center"
     VerticalContentAlignment="Center"
-    mc:Ignorable="d"
-    d:DesignHeight="540"
-    d:DesignWidth="600"
-    d:DataContext="{d:DesignInstance entries:ObservableIniEntry}">
+    IsPrimaryButtonAvailable="{Binding HasErrors, Converter={converters:InverseBooleanConverter}}">
 
     <ui:ContentDialog.Resources>
         <ResourceDictionary>

@@ -20,7 +20,7 @@ namespace RevitLookup.UI.Framework.Views.EditDialogs;
 
 public sealed partial class EditValueDialog
 {
-    public EditValueDialog(IContentDialogService dialogService, IThemeWatcherService themeWatcherService) : base(dialogService.GetDialogHost())
+    public EditValueDialog(IContentDialogService dialogService, IThemeWatcherService themeWatcherService) : base(dialogService.GetDialogHostEx())
     {
         InitializeComponent();
         themeWatcherService.Watch(this);

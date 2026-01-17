@@ -49,7 +49,7 @@ public sealed partial class RevitLookupView
 
         intercomService.SetSharedHost(this);
         navigationService.SetNavigationControl(RootNavigation);
-        dialogService.SetDialogHost(RootContentDialog);
+        dialogService.SetDialogHost(DialogHost);
         snackbarService.SetSnackbarPresenter(RootSnackbar);
 
         ApplyEffects();

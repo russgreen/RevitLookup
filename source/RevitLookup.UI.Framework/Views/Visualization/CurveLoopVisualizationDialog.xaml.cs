@@ -26,7 +26,7 @@ namespace RevitLookup.UI.Framework.Views.Visualization
             IContentDialogService dialogService,
             ICurveLoopVisualizationViewModel viewModel,
             IThemeWatcherService themeWatcherService)
-            : base(dialogService.GetDialogHost())
+            : base(dialogService.GetDialogHostEx())
         {
             _viewModel = viewModel;
 

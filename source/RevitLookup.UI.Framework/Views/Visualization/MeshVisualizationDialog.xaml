@@ -8,13 +8,13 @@
     xmlns:controls="clr-namespace:RevitLookup.UI.Framework.Controls"
     xmlns:local="clr-namespace:RevitLookup.UI.Framework.Views.Visualization"
     xmlns:visualization="clr-namespace:RevitLookup.Abstractions.ViewModels.Visualization;assembly=RevitLookup.Abstractions"
-    Title="Visualization settings"
-    DialogMaxWidth="470"
-    VerticalContentAlignment="Center"
     mc:Ignorable="d"
     d:DesignHeight="540"
     d:DesignWidth="600"
-    d:DataContext="{d:DesignInstance visualization:IMeshVisualizationViewModel}">
+    d:DataContext="{d:DesignInstance visualization:IMeshVisualizationViewModel}"
+    Title="Visualization settings"
+    HorizontalContentAlignment="Center"
+    VerticalContentAlignment="Center">
 
     <ui:ContentDialog.Resources>
         <ResourceDictionary>

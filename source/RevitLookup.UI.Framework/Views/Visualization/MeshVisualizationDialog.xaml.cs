@@ -26,7 +26,7 @@ public sealed partial class MeshVisualizationDialog
         IContentDialogService dialogService,
         IMeshVisualizationViewModel viewModel,
         IThemeWatcherService themeWatcherService)
-        : base(dialogService.GetDialogHost())
+        : base(dialogService.GetDialogHostEx())
     {
         _viewModel = viewModel;
 

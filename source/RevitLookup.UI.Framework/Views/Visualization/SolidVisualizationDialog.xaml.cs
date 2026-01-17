@@ -26,7 +26,7 @@ public sealed partial class SolidVisualizationDialog
         IContentDialogService dialogService,
         ISolidVisualizationViewModel viewModel,
         IThemeWatcherService themeWatcherService)
-        : base(dialogService.GetDialogHost())
+        : base(dialogService.GetDialogHostEx())
     {
         _viewModel = viewModel;
 

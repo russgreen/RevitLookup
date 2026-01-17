@@ -27,7 +27,7 @@ public sealed partial class OpenSourceDialog
         IContentDialogService dialogService,
         IOpenSourceViewModel viewModel,
         IThemeWatcherService themeWatcherService)
-        : base(dialogService.GetDialogHost())
+        : base(dialogService.GetDialogHostEx())
     {
         DataContext = viewModel;
         InitializeComponent();

@@ -19,7 +19,7 @@ namespace RevitLookup.UI.Framework.Views.Settings;
 
 public sealed partial class ResetSettingsDialog
 {
-    public ResetSettingsDialog(IContentDialogService dialogService, IThemeWatcherService themeWatcherService) : base(dialogService.GetDialogHost())
+    public ResetSettingsDialog(IContentDialogService dialogService, IThemeWatcherService themeWatcherService) : base(dialogService.GetDialogHostEx())
     {
         InitializeComponent();
         themeWatcherService.Watch(this);

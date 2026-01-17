@@ -26,7 +26,7 @@ public sealed partial class PolylineVisualizationDialog
         IContentDialogService dialogService,
         IPolylineVisualizationViewModel viewModel,
         IThemeWatcherService themeWatcherService)
-        : base(dialogService.GetDialogHost())
+        : base(dialogService.GetDialogHostEx())
     {
         _viewModel = viewModel;
 

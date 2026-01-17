@@ -30,7 +30,7 @@ public sealed partial class ModulesDialog
     public ModulesDialog(
         IContentDialogService dialogService,
         IModulesViewModel viewModel, IThemeWatcherService themeWatcherService)
-        : base(dialogService.GetDialogHost())
+        : base(dialogService.GetDialogHostEx())
     {
         DataContext = viewModel;
         InitializeComponent();

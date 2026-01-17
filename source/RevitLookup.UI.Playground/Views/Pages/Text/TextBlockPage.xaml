@@ -24,7 +24,7 @@
         <controls:ControlExample
             Margin="0,32,0,0"
             HeaderText="WPF UI TextBlock"
-            XamlCode="&lt;ui:TextBlock Appearance=&quot;Tertiary&quot; FontClassification=&quot;Monospaced&quot; FontTypography=&quot;Body&quot; Text=&quot;I am a styled TextBlock.&quot; /&gt;">
+            XamlCode="&lt;ui:TextBlock Appearance=&quot;Tertiary&quot; FontTypography=&quot;Body&quot; Text=&quot;I am a styled TextBlock.&quot; /&gt;">
             <ui:TextBlock
                 Appearance="Tertiary"
                 FontTypography="Body"

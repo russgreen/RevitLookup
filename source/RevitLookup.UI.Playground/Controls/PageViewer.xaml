@@ -24,10 +24,8 @@
                 x:Name="Viewer" />
         </DockPanel>
 
-        <ui:SnackbarPresenter
-            x:Name="RootSnackbar" />
-        <ContentPresenter
-            x:Name="RootContentDialog" />
+        <ui:SnackbarPresenter x:Name="RootSnackbar" />
+        <ui:ContentDialogHost x:Name="RootContentDialog" />
     </Grid>
 
 </ui:FluentWindow>

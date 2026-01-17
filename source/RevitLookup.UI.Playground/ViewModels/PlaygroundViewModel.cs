@@ -4,6 +4,7 @@ using CommunityToolkit.Mvvm.Input;
 using JetBrains.Annotations;
 using Kinship.UI.Playground.Views.Pages.ProjectControls;
 using RevitLookup.Abstractions.Services.Appearance;
+using RevitLookup.Abstractions.Services.Presentation;
 using RevitLookup.Abstractions.Services.Settings;
 using RevitLookup.UI.Playground.Views.Pages;
 using RevitLookup.UI.Playground.Views.Pages.BasicInput;
@@ -13,7 +14,6 @@ using RevitLookup.UI.Playground.Views.Pages.DialogsAndFlyouts;
 using RevitLookup.UI.Playground.Views.Pages.Layout;
 using RevitLookup.UI.Playground.Views.Pages.Navigation;
 using RevitLookup.UI.Playground.Views.Pages.Text;
-using Wpf.Ui;
 using Wpf.Ui.Appearance;
 using Wpf.Ui.Controls;
 using Button = Wpf.Ui.Controls.Button;
@@ -33,13 +33,13 @@ namespace RevitLookup.UI.Playground.ViewModels;
 public sealed class PlaygroundViewModel : ObservableObject
 {
     private readonly ISettingsService _settingsService;
-    private readonly ISnackbarService _snackbarService;
+    private readonly INotificationService _notificationService;
     private readonly IThemeWatcherService _themeService;
 
-    public PlaygroundViewModel(ISettingsService settingsService, ISnackbarService snackbarService, IThemeWatcherService themeService)
+    public PlaygroundViewModel(ISettingsService settingsService, INotificationService notificationService, IThemeWatcherService themeService)
     {
         _settingsService = settingsService;
-        _snackbarService = snackbarService;
+        _notificationService = notificationService;
         _themeService = themeService;
 
         MenuItems =
@@ -179,7 +179,7 @@ public sealed class PlaygroundViewModel : ObservableObject
         _settingsService.ApplicationSettings.Theme = newTheme;
         _themeService.ApplyTheme();
 
-        // _snackbarService.ShowSuccess("Theme changed", $"The application theme changed: {newTheme}");
+        _notificationService.ShowSuccess("Theme changed", $"The application theme changed: {newTheme}");
     }
 
     private void SwitchBackgroundEffect()
@@ -197,6 +197,6 @@ public sealed class PlaygroundViewModel : ObservableObject
         _settingsService.ApplicationSettings.Background = backdropType;
         _themeService.ApplyTheme();
 
-        // _snackbarService.ShowSuccess("The background effect changed", $"The application background effect changed: {backdropType}");
+        _notificationService.ShowSuccess("The background effect changed", $"The application background effect changed: {backdropType}");
     }
 }

@@ -7,13 +7,14 @@
     xmlns:ui="http://lookupengine.com/xaml"
     xmlns:local="clr-namespace:RevitLookup.UI.Framework.Views.AboutProgram"
     xmlns:aboutProgram="clr-namespace:RevitLookup.Abstractions.ViewModels.AboutProgram;assembly=RevitLookup.Abstractions"
-    Title="Third-Party Software"
-    DialogMaxWidth="600"
-    ScrollViewer.VerticalScrollBarVisibility="Disabled"
     mc:Ignorable="d"
     d:DesignHeight="540"
     d:DesignWidth="1000"
-    d:DataContext="{d:DesignInstance aboutProgram:IOpenSourceViewModel}">
+    d:DataContext="{d:DesignInstance aboutProgram:IOpenSourceViewModel}"
+    Title="Third-Party Software"
+    DialogMaxWidth="600"
+    DialogMaxHeight="1000"
+    ScrollViewer.VerticalScrollBarVisibility="Disabled">
 
     <ui:ContentDialog.Resources>
         <ResourceDictionary>

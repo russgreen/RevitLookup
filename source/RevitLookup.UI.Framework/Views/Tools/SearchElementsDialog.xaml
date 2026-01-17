@@ -7,15 +7,15 @@
     xmlns:ui="http://lookupengine.com/xaml"
     xmlns:local="clr-namespace:RevitLookup.UI.Framework.Views.Tools"
     xmlns:tools="clr-namespace:RevitLookup.Abstractions.ViewModels.Tools;assembly=RevitLookup.Abstractions"
-    Title="Search elements"
-    PrimaryButtonText="Search"
-    VerticalContentAlignment="Center"
-    HorizontalContentAlignment="Center"
-    ScrollViewer.VerticalScrollBarVisibility="Disabled"
     mc:Ignorable="d"
     d:DesignHeight="540"
     d:DesignWidth="800"
-    d:DataContext="{d:DesignInstance tools:ISearchElementsViewModel}">
+    d:DataContext="{d:DesignInstance tools:ISearchElementsViewModel}"
+    Title="Search elements"
+    PrimaryButtonText="Search"
+    DialogMaxWidth="500"
+    DialogMaxHeight="350"
+    ScrollViewer.VerticalScrollBarVisibility="Disabled">
 
     <ui:ContentDialog.Resources>
         <ResourceDictionary>
