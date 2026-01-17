@@ -23,13 +23,17 @@
         <ui:TitleBar
             x:Name="TitleBar"
             Title="RevitLookup"
-            Margin="42,0,0,0" />
+            Height="42"
+            Padding="13 4"/>
+
         <ui:NavigationView
             x:Name="RootNavigation"
             IsBackButtonVisible="Collapsed"
             PaneDisplayMode="Left"
             OpenPaneLength="160"
             IsPaneOpen="False"
+            IsTopSeparatorVisible="False"
+            IsFooterSeparatorVisible="False"
             BreadcrumbBar="{Binding ElementName=BreadcrumbBar}"
             TitleBar="{Binding ElementName=TitleBar, Mode=OneWay}">
             <ui:NavigationView.MenuItems>
@@ -86,8 +90,8 @@
                     x:Name="RootSnackbar" />
             </ui:NavigationView.ContentOverlay>
         </ui:NavigationView>
-        <ContentPresenter
-            x:Name="RootContentDialog" />
+
+        <ContentPresenter x:Name="RootContentDialog" />
     </Grid>
 
 </ui:FluentWindow>

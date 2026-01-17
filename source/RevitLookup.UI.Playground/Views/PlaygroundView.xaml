@@ -25,17 +25,28 @@
     </ui:FluentWindow.InputBindings>
 
     <Grid>
+
+        <ui:TitleBar
+            x:Name="TitleBar"
+            Background="Transparent"
+            Title="Playground"
+            Height="42">
+            <ui:TitleBar.Icon>
+                <ui:ImageIcon Source="pack://application:,,,/RevitLookup.UI.Framework;component/Resources/Images/ProductIcon.png" />
+            </ui:TitleBar.Icon>
+        </ui:TitleBar>
+
         <ui:NavigationView
             x:Name="NavigationView"
             Padding="24 0 24 0"
             OpenPaneLength="200"
+            IsTopSeparatorVisible="False"
             IsBackButtonVisible="Collapsed"
             MenuItemsSource="{Binding MenuItems}"
             FooterMenuItemsSource="{Binding FooterItems}"
             TitleBar="{Binding ElementName=TitleBar, Mode=OneWay}"
             BreadcrumbBar="{Binding ElementName=BreadcrumbBar}"
             SelectionChanged="OnNavigationSelectionChanged">
-            <!-- IsTopSeparatorVisible="False" -->
             <ui:NavigationView.Header>
                 <ui:BreadcrumbBar
                     Margin="24"
@@ -44,8 +55,7 @@
             <ui:NavigationView.AutoSuggestBox>
                 <ui:AutoSuggestBox
                     x:Name="AutoSuggestBox"
-                    Padding="0"
-                    Margin="0"
+                    Margin="0 5 0 0"
                     PlaceholderText="Search" />
             </ui:NavigationView.AutoSuggestBox>
             <ui:NavigationView.ContentOverlay>
@@ -55,11 +65,7 @@
                 </Grid>
             </ui:NavigationView.ContentOverlay>
         </ui:NavigationView>
-        <ui:TitleBar
-            x:Name="TitleBar"
-            Background="Transparent"
-            Title="Playground"
-            Icon="{ui:ImageIcon 'pack://application:,,,/RevitLookup.UI.Framework;component/Resources/Images/ProductIcon.png'}" />
+
         <ContentPresenter
             x:Name="RootContentDialog" />
     </Grid>
