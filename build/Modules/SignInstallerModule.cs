@@ -39,7 +39,8 @@ public sealed class SignInstallerModule(IOptions<SigningOptions> signingOptions,
             KeyVaultCertificateName = signingOptions.Value.CertificateName,
             TimestampRfc3161Url = "http://timestamp.digicert.com",
             SkipSigned = true,
-            ContinueOnError = true
+            ContinueOnError = true,
+            InputFileList = inputFile
         }, cancellationToken: cancellationToken);
     }
 }

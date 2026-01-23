@@ -45,8 +45,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DOTNET_ENVIRONMENT: ${{ (github.ref_name == 'main' || github.ref_type == 'tag') && 'Production' || 'Development' }}
           Publish__Version: ${{ inputs.version || (github.ref_type == 'tag' && github.ref_name || '') }}
-          AZURE_VAULT_URI: ${{ secrets.AZURE_VAULT_URI }}
-          AZURE_VAULT_CLIENT_ID: ${{ secrets.AZURE_VAULT_CLIENT_ID }}
-          AZURE_VAULT_CLIENT_SECRET: ${{ secrets.AZURE_VAULT_CLIENT_SECRET }}
-          AZURE_VAULT_CERTIFICATE_NAME: ${{ secrets.AZURE_VAULT_CERTIFICATE_NAME }}
-          AZURE_VAULT_TENANT_ID: ${{ secrets.AZURE_VAULT_TENANT_ID }}
+          Signing__VaultUri: ${{ secrets.AZURE_VAULT_URI }}
+          Signing__ClientId: ${{ secrets.AZURE_VAULT_CLIENT_ID }}
+          Signing__ClientSecret: ${{ secrets.AZURE_VAULT_CLIENT_SECRET }}
+          Signing__CertificateName: ${{ secrets.AZURE_VAULT_CERTIFICATE_NAME }}
+          Signing__TenantId: ${{ secrets.AZURE_VAULT_TENANT_ID }}
