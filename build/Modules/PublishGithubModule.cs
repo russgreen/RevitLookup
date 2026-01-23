@@ -41,7 +41,7 @@ public sealed class PublishGithubModule(IOptions<BuildOptions> buildOptions) : M
             Body = changelog,
             TargetCommitish = context.Git().Information.LastCommitSha,
             Prerelease = versioning.IsPrerelease,
-            DiscussionCategoryName = !versioning.IsPrerelease ? "Announcements" : string.Empty
+            DiscussionCategoryName = !versioning.IsPrerelease ? "Announcements" : null
         };
 
         var release = await context.GitHub().Client.Repository.Release.Create(repositoryInfo.Owner, repositoryInfo.RepositoryName, newRelease);
