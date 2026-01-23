@@ -12,7 +12,6 @@ public sealed class RevitApiTests : RevitApiTest
     public async Task Parameters_Builtin_ShouldCreateAllCategories()
     {
         var builtInParameters = Enum.GetValues<BuiltInParameter>();
-
         foreach (var builtInParameter in builtInParameters)
         {
             var parameter = RevitShell.GetBuiltinParameter(builtInParameter);
@@ -26,7 +25,6 @@ public sealed class RevitApiTests : RevitApiTest
     public async Task Categories_Builtin_ShouldCreateAllCategories()
     {
         var builtInCategories = Enum.GetValues<BuiltInCategory>();
-
         foreach (var builtInCategory in builtInCategories)
         {
             var category = RevitShell.GetBuiltinCategory(builtInCategory);

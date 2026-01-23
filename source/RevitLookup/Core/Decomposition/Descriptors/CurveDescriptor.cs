@@ -106,7 +106,7 @@ public sealed class CurveDescriptor : Descriptor, IDescriptorResolver, IContextM
 
         async Task VisualizeCurve(Curve curve)
         {
-            if (Context.ActiveUiDocument is null) return;
+            if (RevitContext.ActiveUiDocument is null) return;
 
             try
             {
@@ -126,15 +126,15 @@ public sealed class CurveDescriptor : Descriptor, IDescriptorResolver, IContextM
 #if REVIT2023_OR_GREATER
         void SelectCurve(Curve curve)
         {
-            if (Context.ActiveUiDocument is null) return;
+            if (RevitContext.ActiveUiDocument is null) return;
             if (curve.Reference is null) return;
 
-            RevitShell.ActionEventHandler.Raise(_ => Context.ActiveUiDocument.Selection.SetReferences([curve.Reference]));
+            RevitShell.ActionEventHandler.Raise(_ => RevitContext.ActiveUiDocument.Selection.SetReferences([curve.Reference]));
         }
 
         void ShowCurve(Curve curve)
         {
-            if (Context.ActiveUiDocument is null) return;
+            if (RevitContext.ActiveUiDocument is null) return;
             if (curve.Reference is null) return;
 
             RevitShell.ActionEventHandler.Raise(application =>

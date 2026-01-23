@@ -108,7 +108,7 @@ public sealed class DecompositionService(ISettingsService settingsService) : IDe
     {
         return new DecomposeOptions<Document>
         {
-            Context = Context.ActiveDocument!,
+            Context = RevitContext.ActiveDocument!,
             EnableRedirection = true,
             TypeResolver = DescriptorsMap.FindDescriptor
         };
@@ -118,7 +118,7 @@ public sealed class DecompositionService(ISettingsService settingsService) : IDe
     {
         return new DecomposeOptions<Document>
         {
-            Context = Context.ActiveDocument!,
+            Context = RevitContext.ActiveDocument!,
             IncludeRoot = settingsService.DecompositionSettings.IncludeRoot,
             IncludeFields = settingsService.DecompositionSettings.IncludeFields,
             IncludeEvents = settingsService.DecompositionSettings.IncludeEvents,

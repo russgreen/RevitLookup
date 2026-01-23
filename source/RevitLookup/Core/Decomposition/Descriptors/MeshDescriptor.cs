@@ -36,7 +36,7 @@ public sealed class MeshDescriptor(Mesh mesh) : Descriptor, IDescriptorCollector
 
         async Task VisualizeMesh(Mesh meshParameter)
         {
-            if (Context.ActiveUiDocument is null) return;
+            if (RevitContext.ActiveUiDocument is null) return;
 
             try
             {

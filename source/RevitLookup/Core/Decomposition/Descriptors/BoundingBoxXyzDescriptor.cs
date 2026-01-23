@@ -138,7 +138,7 @@ public sealed class BoundingBoxXyzDescriptor(BoundingBoxXYZ box) : Descriptor, I
 
         async Task VisualizeFace(BoundingBoxXYZ boundingBox)
         {
-            if (Context.ActiveUiDocument is null) return;
+            if (RevitContext.ActiveUiDocument is null) return;
 
             try
             {

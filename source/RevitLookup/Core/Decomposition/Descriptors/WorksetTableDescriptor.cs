@@ -30,7 +30,7 @@ public sealed class WorksetTableDescriptor : Descriptor, IDescriptorResolver
 
         IVariant ResolveGetWorkset()
         {
-            var worksets = new FilteredWorksetCollector(Context.ActiveDocument).ToWorksets();
+            var worksets = new FilteredWorksetCollector(RevitContext.ActiveDocument).ToWorksets();
             var variants = Variants.Values<Workset>(worksets.Count);
 
             foreach (var workset in worksets)

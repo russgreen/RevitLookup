@@ -74,11 +74,11 @@ public sealed class FamilyInstanceDescriptor(FamilyInstance familyInstance) : El
             return Variants.Values<GeometryElement>(10)
                 .Add(familyInstance.GetOriginalGeometry(new Options
                 {
-                    View = Context.ActiveView,
+                    View = RevitContext.ActiveView,
                 }), "Active view")
                 .Add(familyInstance.GetOriginalGeometry(new Options
                 {
-                    View = Context.ActiveView,
+                    View = RevitContext.ActiveView,
                     IncludeNonVisibleObjects = true,
                 }), "Active view, including non-visible objects")
                 .Add(familyInstance.GetOriginalGeometry(new Options

@@ -203,7 +203,7 @@ namespace RevitLookup.Core.Visualization
 
         public void UpdateSurfaceColor(Color value)
         {
-            var uiDocument = Context.ActiveUiDocument;
+            var uiDocument = RevitContext.ActiveUiDocument;
             if (uiDocument is null) return;
 
             lock (_renderLock)
@@ -217,7 +217,7 @@ namespace RevitLookup.Core.Visualization
 
         public void UpdateCurveColor(Color value)
         {
-            var uiDocument = Context.ActiveUiDocument;
+            var uiDocument = RevitContext.ActiveUiDocument;
             if (uiDocument is null) return;
 
             lock (_renderLock)
@@ -231,7 +231,7 @@ namespace RevitLookup.Core.Visualization
 
         public void UpdateDirectionColor(Color value)
         {
-            var uiDocument = Context.ActiveUiDocument;
+            var uiDocument = RevitContext.ActiveUiDocument;
             if (uiDocument is null) return;
 
             lock (_renderLock)
@@ -245,7 +245,7 @@ namespace RevitLookup.Core.Visualization
 
         public void UpdateDiameter(double value)
         {
-            var uiDocument = Context.ActiveUiDocument;
+            var uiDocument = RevitContext.ActiveUiDocument;
             if (uiDocument is null) return;
 
             lock (_renderLock)
@@ -259,7 +259,7 @@ namespace RevitLookup.Core.Visualization
 
         public void UpdateTransparency(double value)
         {
-            var uiDocument = Context.ActiveUiDocument;
+            var uiDocument = RevitContext.ActiveUiDocument;
             if (uiDocument is null) return;
 
             lock (_renderLock)
@@ -274,7 +274,7 @@ namespace RevitLookup.Core.Visualization
 
         public void UpdateSurfaceVisibility(bool visible)
         {
-            var uiDocument = Context.ActiveUiDocument;
+            var uiDocument = RevitContext.ActiveUiDocument;
             if (uiDocument is null) return;
 
             lock (_renderLock)
@@ -286,7 +286,7 @@ namespace RevitLookup.Core.Visualization
 
         public void UpdateCurveVisibility(bool visible)
         {
-            var uiDocument = Context.ActiveUiDocument;
+            var uiDocument = RevitContext.ActiveUiDocument;
             if (uiDocument is null) return;
 
             lock (_renderLock)
@@ -298,7 +298,7 @@ namespace RevitLookup.Core.Visualization
 
         public void UpdateDirectionVisibility(bool visible)
         {
-            var uiDocument = Context.ActiveUiDocument;
+            var uiDocument = RevitContext.ActiveUiDocument;
             if (uiDocument is null) return;
 
             lock (_renderLock)

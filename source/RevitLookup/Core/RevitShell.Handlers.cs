@@ -13,54 +13,47 @@
 // UNINTERRUPTED OR ERROR FREE.
 
 using System.Collections;
-using Nice3point.Revit.Toolkit.External.Handlers;
+using Nice3point.Revit.Toolkit.External;
 using RevitLookup.Abstractions.ObservableModels.Decomposition;
 
 namespace RevitLookup.Core;
 
 public static partial class RevitShell
 {
-    private static ActionEventHandler? _actionEventHandler;
-    private static AsyncEventHandler? _asyncEventHandler;
-    private static AsyncEventHandler<ObservableDecomposedObject>? _asyncObjectHandler;
-    private static AsyncEventHandler<List<ObservableDecomposedObject>>? _asyncObjectsHandler;
-    private static AsyncEventHandler<List<ObservableDecomposedMember>>? _asyncMembersHandler;
-    private static AsyncEventHandler<IEnumerable>? _asyncCollectionHandler;
-
     public static ActionEventHandler ActionEventHandler
     {
-        get => _actionEventHandler ?? throw new InvalidOperationException("The Handler was never set.");
-        private set => _actionEventHandler = value;
+        get => field ?? throw new InvalidOperationException("The Handler was never set.");
+        private set;
     }
 
     public static AsyncEventHandler AsyncEventHandler
     {
-        get => _asyncEventHandler ?? throw new InvalidOperationException("The Handler was never set.");
-        private set => _asyncEventHandler = value;
+        get => field ?? throw new InvalidOperationException("The Handler was never set.");
+        private set;
     }
 
     public static AsyncEventHandler<ObservableDecomposedObject> AsyncObjectHandler
     {
-        get => _asyncObjectHandler ?? throw new InvalidOperationException("The Handler was never set.");
-        private set => _asyncObjectHandler = value;
+        get => field ?? throw new InvalidOperationException("The Handler was never set.");
+        private set;
     }
 
     public static AsyncEventHandler<List<ObservableDecomposedObject>> AsyncObjectsHandler
     {
-        get => _asyncObjectsHandler ?? throw new InvalidOperationException("The Handler was never set.");
-        private set => _asyncObjectsHandler = value;
+        get => field ?? throw new InvalidOperationException("The Handler was never set.");
+        private set;
     }
 
     public static AsyncEventHandler<List<ObservableDecomposedMember>> AsyncMembersHandler
     {
-        get => _asyncMembersHandler ?? throw new InvalidOperationException("The Handler was never set.");
-        private set => _asyncMembersHandler = value;
+        get => field ?? throw new InvalidOperationException("The Handler was never set.");
+        private set;
     }
 
     public static AsyncEventHandler<IEnumerable> AsyncCollectionHandler
     {
-        get => _asyncCollectionHandler ?? throw new InvalidOperationException("The Handler was never set.");
-        private set => _asyncCollectionHandler = value;
+        get => field ?? throw new InvalidOperationException("The Handler was never set.");
+        private set;
     }
 
     public static void RegisterHandlers()

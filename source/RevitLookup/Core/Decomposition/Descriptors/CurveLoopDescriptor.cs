@@ -75,7 +75,7 @@ public sealed class CurveLoopDescriptor : Descriptor, IDescriptorResolver, ICont
 
         async Task VisualizeCurve(CurveLoop curveLoop)
         {
-            if (Context.ActiveUiDocument is null) return;
+            if (RevitContext.ActiveUiDocument is null) return;
 
             try
             {
@@ -95,18 +95,18 @@ public sealed class CurveLoopDescriptor : Descriptor, IDescriptorResolver, ICont
 #if REVIT2023_OR_GREATER
         void SelectCurve(CurveLoop curveLoop)
         {
-            if (Context.ActiveUiDocument is null) return;
+            if (RevitContext.ActiveUiDocument is null) return;
             if (curveLoop.Any(curve => curve.Reference is null)) return;
 
             foreach (var curve in curveLoop)
             {
-                RevitShell.ActionEventHandler.Raise(_ => Context.ActiveUiDocument.Selection.SetReferences([curve.Reference]));
+                RevitShell.ActionEventHandler.Raise(_ => RevitContext.ActiveUiDocument.Selection.SetReferences([curve.Reference]));
             }
         }
 
         void ShowCurve(CurveLoop curveLoop)
         {
-            if (Context.ActiveUiDocument is null) return;
+            if (RevitContext.ActiveUiDocument is null) return;
             if (curveLoop.Any(curve => curve.Reference is null)) return;
 
             RevitShell.ActionEventHandler.Raise(application =>

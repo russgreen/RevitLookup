@@ -55,7 +55,7 @@ public sealed class EdgeDescriptor : Descriptor, IDescriptorCollector, IContextM
 
         async Task VisualizeEdge(Edge edge)
         {
-            if (Context.ActiveUiDocument is null) return;
+            if (RevitContext.ActiveUiDocument is null) return;
 
             try
             {
@@ -75,15 +75,15 @@ public sealed class EdgeDescriptor : Descriptor, IDescriptorCollector, IContextM
 
         void SelectEdge(Edge edge)
         {
-            if (Context.ActiveUiDocument is null) return;
+            if (RevitContext.ActiveUiDocument is null) return;
             if (edge.Reference is null) return;
 
-            RevitShell.ActionEventHandler.Raise(_ => Context.ActiveUiDocument.Selection.SetReferences([edge.Reference]));
+            RevitShell.ActionEventHandler.Raise(_ => RevitContext.ActiveUiDocument.Selection.SetReferences([edge.Reference]));
         }
 
         void ShowEdge(Edge edge)
         {
-            if (Context.ActiveUiDocument is null) return;
+            if (RevitContext.ActiveUiDocument is null) return;
             if (edge.Reference is null) return;
 
             RevitShell.ActionEventHandler.Raise(application =>

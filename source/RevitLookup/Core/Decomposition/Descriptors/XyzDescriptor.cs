@@ -43,7 +43,7 @@ public sealed class XyzDescriptor : Descriptor, IContextMenuConnector
 
         async Task VisualizeXyz(XYZ point)
         {
-            if (Context.ActiveUiDocument is null) return;
+            if (RevitContext.ActiveUiDocument is null) return;
 
             try
             {

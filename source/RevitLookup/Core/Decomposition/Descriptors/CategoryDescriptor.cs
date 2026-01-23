@@ -66,12 +66,12 @@ public sealed class CategoryDescriptor : Descriptor, IDescriptorResolver, IDescr
 
         IVariant ResolveAllowsVisibilityControl()
         {
-            return Variants.Value(_category.get_AllowsVisibilityControl(Context.ActiveView), "Active view");
+            return Variants.Value(_category.get_AllowsVisibilityControl(RevitContext.ActiveView), "Active view");
         }
 
         IVariant ResolveVisible()
         {
-            return Variants.Value(_category.get_Visible(Context.ActiveView), "Active view");
+            return Variants.Value(_category.get_Visible(RevitContext.ActiveView), "Active view");
         }
     }
 

@@ -25,7 +25,7 @@ public sealed class SchedulableFieldDescriptor : Descriptor, IDescriptorResolver
     public SchedulableFieldDescriptor(SchedulableField field)
     {
         _field = field;
-        Name = field.GetName(Context.ActiveDocument);
+        Name = field.GetName(RevitContext.ActiveDocument);
     }
 
     public Func<Document, IVariant>? Resolve(string target, ParameterInfo[] parameters)

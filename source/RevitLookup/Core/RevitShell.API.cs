@@ -39,7 +39,7 @@ public static partial class RevitShell
         var elementIdPointer = GCHandle.ToIntPtr(handle);
         Marshal.StructureToPtr(elementId, elementIdPointer, true);
 
-        var parameter = (Parameter) parameterCtorType.Invoke([getADocumentType.Invoke(Context.ActiveDocument, null), elementIdPointer]);
+        var parameter = (Parameter) parameterCtorType.Invoke([getADocumentType.Invoke(RevitContext.ActiveDocument, null), elementIdPointer]);
         handle.Free();
 
         return parameter;
@@ -65,7 +65,7 @@ public static partial class RevitShell
         var elementIdPointer = GCHandle.ToIntPtr(handle);
         Marshal.StructureToPtr(elementId, elementIdPointer, true);
 
-        var category = (Category) categoryCtorType.Invoke([getADocumentType.Invoke(Context.ActiveDocument, null), elementIdPointer]);
+        var category = (Category) categoryCtorType.Invoke([getADocumentType.Invoke(RevitContext.ActiveDocument, null), elementIdPointer]);
         handle.Free();
 
         return category;

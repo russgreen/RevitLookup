@@ -1,5 +1,9 @@
-﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
-    <s:String x:Key="/Default/CodeStyle/FileHeader/FileHeaderText/@EntryValue">Copyright (c) Lookup Foundation and Contributors
+﻿<wpf:ResourceDictionary xml:space="preserve"
+                        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                        xmlns:s="clr-namespace:System;assembly=mscorlib"
+                        xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+    <s:String x:Key="/Default/CodeStyle/FileHeader/FileHeaderText/@EntryValue">
+Copyright (c) Lookup Foundation and Contributors
 
 Permission to use, copy, modify, and distribute this software in
 object code form for any purpose and without fee is hereby granted,
@@ -11,11 +15,14 @@ documentation.
 THIS PROGRAM IS PROVIDED "AS IS" AND WITH ALL FAULTS.
 NO IMPLIED WARRANTY OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR USE IS PROVIDED.
 THERE IS NO GUARANTEE THAT THE OPERATION OF THE PROGRAM WILL BE
-UNINTERRUPTED OR ERROR FREE.</s:String>
-	<s:Boolean x:Key="/Default/Environment/SettingsMigration/IsMigratorApplied/=JetBrains_002EReSharper_002EFeature_002EServices_002ECodeCleanup_002EFileHeader_002EFileHeaderSettingsMigrate/@EntryIndexedValue">True</s:Boolean>
-	<s:Boolean x:Key="/Default/UserDictionary/Words/=addin/@EntryIndexedValue">True</s:Boolean>
-	<s:Boolean x:Key="/Default/UserDictionary/Words/=addins/@EntryIndexedValue">True</s:Boolean>
-	<s:Boolean x:Key="/Default/UserDictionary/Words/=formaters/@EntryIndexedValue">True</s:Boolean>
-	<s:Boolean x:Key="/Default/UserDictionary/Words/=repackable/@EntryIndexedValue">True</s:Boolean>
-	<s:Boolean x:Key="/Default/UserDictionary/Words/=revitlookup/@EntryIndexedValue">True</s:Boolean>
-	<s:Boolean x:Key="/Default/UserDictionary/Words/=workset/@EntryIndexedValue">True</s:Boolean></wpf:ResourceDictionary>
+UNINTERRUPTED OR ERROR FREE.
+    </s:String>
+    <s:Boolean
+        x:Key="/Default/Environment/SettingsMigration/IsMigratorApplied/=JetBrains_002EReSharper_002EFeature_002EServices_002ECodeCleanup_002EFileHeader_002EFileHeaderSettingsMigrate/@EntryIndexedValue">True</s:Boolean>
+    <s:Boolean x:Key="/Default/UserDictionary/Words/=addin/@EntryIndexedValue">True</s:Boolean>
+    <s:Boolean x:Key="/Default/UserDictionary/Words/=addins/@EntryIndexedValue">True</s:Boolean>
+    <s:Boolean x:Key="/Default/UserDictionary/Words/=formaters/@EntryIndexedValue">True</s:Boolean>
+    <s:Boolean x:Key="/Default/UserDictionary/Words/=repackable/@EntryIndexedValue">True</s:Boolean>
+    <s:Boolean x:Key="/Default/UserDictionary/Words/=revitlookup/@EntryIndexedValue">True</s:Boolean>
+    <s:Boolean x:Key="/Default/UserDictionary/Words/=workset/@EntryIndexedValue">True</s:Boolean>\
+</wpf:ResourceDictionary>

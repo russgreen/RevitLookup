@@ -38,7 +38,7 @@ public static class LoggerConfiguration
         return new Serilog.LoggerConfiguration()
             .WriteTo.Console(LogEventLevel.Information, LogTemplate)
             .WriteTo.Debug(LogEventLevel.Debug, LogTemplate)
-            .WriteTo.RevitJournal(Context.UiApplication, restrictedToMinimumLevel: LogEventLevel.Error, outputTemplate: LogTemplate)
+            .WriteTo.RevitJournal(RevitContext.UiApplication, restrictedToMinimumLevel: LogEventLevel.Error, outputTemplate: LogTemplate)
             .MinimumLevel.Debug()
             .MinimumLevel.Override("Microsoft.Extensions.Http.DefaultHttpClientFactory", LogEventLevel.Warning)
             .CreateLogger();

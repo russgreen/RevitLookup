@@ -9,24 +9,24 @@
 
     <ItemGroup>
         <!-- Revit Platform -->
-        <PackageVersion Include="Nice3point.Revit.Toolkit" Version="$(RevitVersion).*" Condition="$(RevitVersion) != ''"/>
+        <PackageVersion Include="Nice3point.Revit.Api.RevitAPI" Version="$(RevitVersion).*-*" Condition="$(RevitVersion) != ''"/>
+        <PackageVersion Include="Nice3point.Revit.Api.RevitAPIUI" Version="$(RevitVersion).*-*" Condition="$(RevitVersion) != ''"/>
+        <PackageVersion Include="Nice3point.Revit.Api.AdWindows" Version="$(RevitVersion).*-*" Condition="$(RevitVersion) != ''"/>
+        <PackageVersion Include="Nice3point.Revit.Api.RevitAPIMacros" Version="$(RevitVersion).*-*" Condition="$(RevitVersion) != ''"/>
+        <PackageVersion Include="Nice3point.Revit.Api.UIFramework" Version="$(RevitVersion).*-*" Condition="$(RevitVersion) != ''"/>
+        <PackageVersion Include="Nice3point.Revit.Api.UIFrameworkServices" Version="$(RevitVersion).*-*" Condition="$(RevitVersion) != ''"/>
+        <PackageVersion Include="Nice3point.Revit.Toolkit" Version="$(RevitVersion).*-*" Condition="$(RevitVersion) != ''"/>
         <PackageVersion Include="Nice3point.Revit.Extensions" Version="$(RevitVersion).*-*" Condition="$(RevitVersion) != ''"/>
-        <PackageVersion Include="Nice3point.Revit.Api.RevitAPI" Version="$(RevitVersion).*" Condition="$(RevitVersion) != ''"/>
-        <PackageVersion Include="Nice3point.Revit.Api.AdWindows" Version="$(RevitVersion).*" Condition="$(RevitVersion) != ''"/>
-        <PackageVersion Include="Nice3point.Revit.Api.RevitAPIUI" Version="$(RevitVersion).*" Condition="$(RevitVersion) != ''"/>
-        <PackageVersion Include="Nice3point.Revit.Api.RevitAPIMacros" Version="$(RevitVersion).*" Condition="$(RevitVersion) != ''"/>
-        <PackageVersion Include="Nice3point.Revit.Api.UIFramework" Version="$(RevitVersion).*" Condition="$(RevitVersion) != ''"/>
-        <PackageVersion Include="Nice3point.Revit.Api.UIFrameworkServices" Version="$(RevitVersion).*" Condition="$(RevitVersion) != ''"/>
-        <PackageVersion Include="Nice3point.TUnit.Revit" Version="$(RevitVersion).*" Condition="$(RevitVersion) != ''"/>
+        <PackageVersion Include="Nice3point.TUnit.Revit" Version="$(RevitVersion).*-*" Condition="$(RevitVersion) != ''"/>
 
         <!-- MVVM -->
         <PackageVersion Include="CommunityToolkit.Mvvm" Version="8.4.0"/>
 
         <!-- Application Hosting -->
         <PackageVersion Include="Scrutor" Version="7.0.0"/>
-        <PackageVersion Include="Microsoft.Extensions.Hosting" Version="10.0.1"/>
-        <PackageVersion Include="Microsoft.Extensions.Http" Version="10.0.1"/>
-        <PackageVersion Include="Microsoft.Extensions.Options.DataAnnotations" Version="10.0.1"/>
+        <PackageVersion Include="Microsoft.Extensions.Hosting" Version="10.0.2"/>
+        <PackageVersion Include="Microsoft.Extensions.Http" Version="10.0.2"/>
+        <PackageVersion Include="Microsoft.Extensions.Options.DataAnnotations" Version="10.0.2"/>
 
         <!-- Logging -->
         <PackageVersion Include="Serilog" Version="4.3.0"/>
@@ -34,7 +34,7 @@
         <PackageVersion Include="Serilog.Sinks.Console" Version="6.1.1"/>
         <PackageVersion Include="Serilog.Extensions.Hosting" Version="10.0.0"/>
         <PackageVersion Include="Serilog.Sinks.Autodesk.Revit" Version="2.0.1"/>
-        <PackageVersion Include="Microsoft.Extensions.Logging" Version="10.0.1"/>
+        <PackageVersion Include="Microsoft.Extensions.Logging" Version="10.0.2"/>
 
         <!-- Data Utilities -->
         <PackageVersion Include="Bogus" Version="35.6.5"/>
@@ -43,24 +43,23 @@
         <!-- Build Automation -->
         <PackageVersion Include="Autodesk.PackageBuilder" Version="2.0.2"/>
         <PackageVersion Include="AzureSignTool" Version="7.0.1"/>
-        <PackageVersion Include="Sourcy.DotNet" Version="1.0.1"/>
-        <PackageVersion Include="ModularPipelines" Version="2.48.30"/>
-        <PackageVersion Include="ModularPipelines.Git" Version="2.48.30"/>
-        <PackageVersion Include="ModularPipelines.GitHub" Version="2.48.30"/>
-        <PackageVersion Include="ModularPipelines.DotNet" Version="2.48.30"/>
-        <PackageVersion Include="ModularPipelines.Slack" Version="2.48.30"/>
+        <PackageVersion Include="Sourcy.DotNet" Version="1.1.1"/>
+        <PackageVersion Include="ModularPipelines" Version="3.1.6"/>
+        <PackageVersion Include="ModularPipelines.Git" Version="3.1.6"/>
+        <PackageVersion Include="ModularPipelines.GitHub" Version="3.1.6"/>
+        <PackageVersion Include="ModularPipelines.DotNet" Version="3.1.6"/>
+        <PackageVersion Include="ModularPipelines.Slack" Version="3.1.6"/>
         <PackageVersion Include="Microsoft.VisualStudio.SolutionPersistence" Version="1.0.52"/>
         <PackageVersion Include="ILRepack" Version="2.0.44"/>
         <PackageVersion Include="WixSharp.Core" Version="2.12.0"/>
         <PackageVersion Include="WixSharp.Msi.Core" Version="2.12.0"/>
 
         <!-- Testing -->
-        <PackageVersion Include="TUnit" Version="1.11.56"/>
+        <PackageVersion Include="TUnit" Version="1.12.15"/>
         <PackageVersion Include="Shouldly" Version="4.3.0"/>
-        <PackageVersion Include="Microsoft.Extensions.Diagnostics.Testing" Version="10.1.0"/>
 
         <!-- System Libraries -->
-        <PackageVersion Include="System.Text.Json" Version="10.0.1"/>
+        <PackageVersion Include="System.Text.Json" Version="10.0.2"/>
 
         <!-- Development Tools -->
         <PackageVersion Include="JetBrains.Annotations" Version="2025.2.4"/>
@@ -68,7 +67,7 @@
 
     <!-- Development References -->
     <ItemGroup>
-        <GlobalPackageReference Include="Polyfill" Version="9.7.3"/>
+        <GlobalPackageReference Include="Polyfill" Version="9.7.5"/>
     </ItemGroup>
 
 </Project>

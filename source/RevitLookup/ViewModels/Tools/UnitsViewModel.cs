@@ -72,7 +72,7 @@ public sealed partial class UnitsViewModel(
 
     private bool ValidateContext()
     {
-        if (Context.ActiveUiDocument is null)
+        if (RevitContext.ActiveUiDocument is null)
         {
             notificationService.ShowWarning("Invalid context", "To analyse members, an open document is required");
             return false;

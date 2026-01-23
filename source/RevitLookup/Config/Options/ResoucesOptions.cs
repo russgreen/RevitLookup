@@ -16,12 +16,12 @@ public static class ResourcesOptions
             options.ApplicationDataDirectory = Environment
                 .GetFolderPath(Environment.SpecialFolder.ApplicationData)
                 .AppendPath("RevitLookup")
-                .AppendPath(Context.Application.VersionNumber);
+                .AppendPath(RevitApiContext.Application.VersionNumber);
 
             options.LocalApplicationDataDirectory = Environment
                 .GetFolderPath(Environment.SpecialFolder.LocalApplicationData)
                 .AppendPath("RevitLookup")
-                .AppendPath(Context.Application.VersionNumber);
+                .AppendPath(RevitApiContext.Application.VersionNumber);
 
             //Local directories
             options.DownloadsFolder = options.LocalApplicationDataDirectory.AppendPath("DownloadCache");

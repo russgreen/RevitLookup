@@ -21,8 +21,6 @@ namespace RevitLookup.UI.Framework.Views.EditDialogs;
 
 public sealed partial class EditSettingsEntryDialog
 {
-    private ObservableIniEntry? _entry;
-
     public EditSettingsEntryDialog(
         IContentDialogService dialogService,
         IThemeWatcherService themeWatcherService)
@@ -34,8 +32,8 @@ public sealed partial class EditSettingsEntryDialog
 
     public ObservableIniEntry Entry
     {
-        get => _entry ?? throw new InvalidOperationException("Entry was never set");
-        private set => _entry = value;
+        get => field ?? throw new InvalidOperationException("Entry was never set");
+        private set;
     }
 
     public async Task<ContentDialogResult> ShowCreateDialogAsync(ObservableIniEntry? selectedEntry)

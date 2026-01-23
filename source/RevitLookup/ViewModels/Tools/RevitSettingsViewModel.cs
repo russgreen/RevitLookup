@@ -106,14 +106,14 @@ public sealed partial class RevitSettingsViewModel(
     [RelayCommand]
     private void ShowHelp()
     {
-        var version = Context.Application.VersionNumber;
+        var version = RevitApiContext.Application.VersionNumber;
         ProcessTasks.StartShell($"https://help.autodesk.com/view/RVT/{version}/ENU/?guid=GUID-9ECD669E-81D3-43E5-9970-9FA1C38E8507");
     }
 
     [RelayCommand]
     private void OpenSettings()
     {
-        var iniFile = Context.Application.CurrentUsersDataFolderPath.AppendPath("Revit.ini");
+        var iniFile = RevitApiContext.Application.CurrentUsersDataFolderPath.AppendPath("Revit.ini");
         if (!File.Exists(iniFile))
         {
             notificationService.ShowWarning("Missing settings", "Revit.ini file does not exists");

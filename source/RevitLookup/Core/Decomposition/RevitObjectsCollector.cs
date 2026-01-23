@@ -51,27 +51,27 @@ public static class RevitObjectsCollector
 
     private static IEnumerable FindView()
     {
-        return new object?[] {Context.ActiveView};
+        return new object?[] {RevitContext.ActiveView};
     }
 
     private static IEnumerable FindDocument()
     {
-        return new object?[] {Context.ActiveDocument};
+        return new object?[] {RevitContext.ActiveDocument};
     }
 
     private static IEnumerable FindApplication()
     {
-        return new object?[] {Context.Application};
+        return new object?[] {RevitApiContext.Application};
     }
 
     private static IEnumerable FindUiApplication()
     {
-        return new object?[] {Context.UiApplication};
+        return new object?[] {RevitContext.UiApplication};
     }
 
     private static IEnumerable FindUiControlledApplication()
     {
-        return new object[] {Context.UiControlledApplication};
+        return new object[] {RevitContext.UiControlledApplication};
     }
 
     private static IEnumerable FindEdge()
@@ -101,7 +101,7 @@ public static class RevitObjectsCollector
 
     private static IEnumerable FindSelection()
     {
-        var activeUiDocument = Context.ActiveUiDocument;
+        var activeUiDocument = RevitContext.ActiveUiDocument;
         if (activeUiDocument is null)
         {
             return Array.Empty<object>();
@@ -123,7 +123,7 @@ public static class RevitObjectsCollector
 
     private static IEnumerable FindDatabase()
     {
-        var activeDocument = Context.ActiveDocument!;
+        var activeDocument = RevitContext.ActiveDocument!;
         var elementTypes = activeDocument.GetElements().WhereElementIsElementType();
         var elementInstances = activeDocument.GetElements().WhereElementIsNotElementType();
         return elementTypes
@@ -133,11 +133,11 @@ public static class RevitObjectsCollector
 
     private static IEnumerable FindDependentElements()
     {
-        var selectedIds = Context.ActiveUiDocument!.Selection.GetElementIds();
+        var selectedIds = RevitContext.ActiveUiDocument!.Selection.GetElementIds();
         if (selectedIds.Count == 0) return Array.Empty<object>();
 
         var elements = new List<ElementId>();
-        var activeDocument = Context.ActiveDocument!;
+        var activeDocument = RevitContext.ActiveDocument!;
         var selectedElements = activeDocument.GetElements(selectedIds).WhereElementIsNotElementType();
 
         foreach (var selectedElement in selectedElements)
@@ -178,7 +178,7 @@ public static class RevitObjectsCollector
 
     private static IEnumerable FindObject(ObjectType objectType)
     {
-        var activeUiDocument = Context.ActiveUiDocument;
+        var activeUiDocument = RevitContext.ActiveUiDocument;
         if (activeUiDocument is null)
         {
             return Array.Empty<object>();

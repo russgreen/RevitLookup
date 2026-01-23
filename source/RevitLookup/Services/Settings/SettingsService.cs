@@ -185,8 +185,8 @@ public sealed class SettingsService(
             FaceSettings = new FaceVisualizationSettings
             {
                 Transparency = 20,
-                Extrusion = Context.Application.VertexTolerance * 12,
-                MinExtrusion = Context.Application.VertexTolerance * 12,
+                Extrusion = RevitApiContext.Application.VertexTolerance * 12,
+                MinExtrusion = RevitApiContext.Application.VertexTolerance * 12,
                 SurfaceColor = Colors.DodgerBlue,
                 MeshColor = Color.FromArgb(255, 30, 81, 255),
                 NormalVectorColor = Color.FromArgb(255, 255, 89, 30),
@@ -197,8 +197,8 @@ public sealed class SettingsService(
             MeshSettings = new MeshVisualizationSettings
             {
                 Transparency = 20,
-                Extrusion = Context.Application.VertexTolerance * 12,
-                MinExtrusion = Context.Application.VertexTolerance * 12,
+                Extrusion = RevitApiContext.Application.VertexTolerance * 12,
+                MinExtrusion = RevitApiContext.Application.VertexTolerance * 12,
                 SurfaceColor = Colors.DodgerBlue,
                 MeshColor = Color.FromArgb(255, 30, 81, 255),
                 NormalVectorColor = Color.FromArgb(255, 255, 89, 30),

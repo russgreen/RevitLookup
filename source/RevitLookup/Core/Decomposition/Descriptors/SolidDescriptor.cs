@@ -60,7 +60,7 @@ public sealed class SolidDescriptor : Descriptor, IDescriptorExtension, IContext
 
         async Task VisualizeSolid(Solid solid)
         {
-            if (Context.ActiveUiDocument is null) return;
+            if (RevitContext.ActiveUiDocument is null) return;
 
             try
             {
@@ -82,7 +82,7 @@ public sealed class SolidDescriptor : Descriptor, IDescriptorExtension, IContext
         {
             try
             {
-                if (Context.ActiveUiDocument is null) return;
+                if (RevitContext.ActiveUiDocument is null) return;
 
                 var references = solid.Faces.Cast<Face>()
                     .Select(face => face.Reference)
@@ -91,7 +91,7 @@ public sealed class SolidDescriptor : Descriptor, IDescriptorExtension, IContext
 
                 if (references.Count == 0) return;
 
-                RevitShell.ActionEventHandler.Raise(_ => Context.ActiveUiDocument.Selection.SetReferences(references));
+                RevitShell.ActionEventHandler.Raise(_ => RevitContext.ActiveUiDocument.Selection.SetReferences(references));
             }
             catch (Exception exception)
             {
@@ -107,7 +107,7 @@ public sealed class SolidDescriptor : Descriptor, IDescriptorExtension, IContext
         {
             try
             {
-                if (Context.ActiveUiDocument is null) return;
+                if (RevitContext.ActiveUiDocument is null) return;
 
                 var references = solid.Faces.Cast<Face>()
                     .Select(face => face.Reference)

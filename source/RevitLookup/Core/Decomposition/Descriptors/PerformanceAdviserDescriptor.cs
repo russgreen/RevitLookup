@@ -43,7 +43,7 @@ public sealed class PerformanceAdviserDescriptor(PerformanceAdviser adviser) : D
         {
             var rules = adviser.GetNumberOfRules();
             var variants = Variants.Values<KeyValuePair<int, ElementFilter>>(rules);
-            for (var i = 0; i < rules; i++) variants.Add(new KeyValuePair<int, ElementFilter>(i, adviser.GetElementFilterFromRule(i, Context.ActiveDocument)));
+            for (var i = 0; i < rules; i++) variants.Add(new KeyValuePair<int, ElementFilter>(i, adviser.GetElementFilterFromRule(i, RevitContext.ActiveDocument)));
             return variants.Consume();
         }
 

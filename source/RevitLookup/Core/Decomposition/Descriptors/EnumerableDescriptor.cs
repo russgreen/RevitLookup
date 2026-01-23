@@ -50,8 +50,10 @@ public sealed class EnumerableDescriptor : Descriptor, IDescriptorEnumerator, ID
             FamilyTypeSet enumerable => enumerable.IsEmpty,
             MullionTypeSet enumerable => enumerable.IsEmpty,
             VoltageTypeSet enumerable => enumerable.IsEmpty,
+#if !REVIT2027_OR_GREATER
             InsulationTypeSet enumerable => enumerable.IsEmpty,
             TemperatureRatingTypeSet enumerable => enumerable.IsEmpty,
+#endif
             MacroManager enumerable => enumerable.Count == 0,
             _ => !Enumerator.MoveNext()
         };

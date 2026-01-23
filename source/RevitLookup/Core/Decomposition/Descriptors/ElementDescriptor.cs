@@ -123,12 +123,12 @@ public class ElementDescriptor : Descriptor, IDescriptorResolver, IDescriptorExt
             return Variants.Values<GeometryElement>(10)
                 .Add(_element.get_Geometry(new Options
                 {
-                    View = Context.ActiveView,
+                    View = RevitContext.ActiveView,
                     ComputeReferences = true
                 }), "Active view")
                 .Add(_element.get_Geometry(new Options
                 {
-                    View = Context.ActiveView,
+                    View = RevitContext.ActiveView,
                     IncludeNonVisibleObjects = true,
                     ComputeReferences = true
                 }), "Active view, including non-visible objects")
@@ -191,18 +191,18 @@ public class ElementDescriptor : Descriptor, IDescriptorResolver, IDescriptorExt
         {
             return Variants.Values<BoundingBoxXYZ>(2)
                 .Add(_element.get_BoundingBox(null), "Model")
-                .Add(_element.get_BoundingBox(Context.ActiveView), "Active view")
+                .Add(_element.get_BoundingBox(RevitContext.ActiveView), "Active view")
                 .Consume();
         }
 
         IVariant ResolveCanBeHidden()
         {
-            return Variants.Value(_element.CanBeHidden(Context.ActiveView), "Active view");
+            return Variants.Value(_element.CanBeHidden(RevitContext.ActiveView), "Active view");
         }
 
         IVariant ResolveIsHidden()
         {
-            return Variants.Value(_element.IsHidden(Context.ActiveView), "Active view");
+            return Variants.Value(_element.IsHidden(RevitContext.ActiveView), "Active view");
         }
 
         IVariant ResolveGetDependentElements()
@@ -314,27 +314,27 @@ public class ElementDescriptor : Descriptor, IDescriptorResolver, IDescriptorExt
 
         void SelectFace(Element element)
         {
-            if (Context.ActiveUiDocument is null) return;
+            if (RevitContext.ActiveUiDocument is null) return;
             if (!element.IsValidObject) return;
 
-            RevitShell.ActionEventHandler.Raise(_ => Context.ActiveUiDocument.Selection.SetElementIds([element.Id]));
+            RevitShell.ActionEventHandler.Raise(_ => RevitContext.ActiveUiDocument.Selection.SetElementIds([element.Id]));
         }
 
         void ShowFace(Element element)
         {
-            if (Context.ActiveUiDocument is null) return;
+            if (RevitContext.ActiveUiDocument is null) return;
             if (!element.IsValidObject) return;
 
             RevitShell.ActionEventHandler.Raise(_ =>
             {
-                Context.ActiveUiDocument.ShowElements(element);
-                Context.ActiveUiDocument.Selection.SetElementIds([element.Id]);
+                RevitContext.ActiveUiDocument.ShowElements(element);
+                RevitContext.ActiveUiDocument.Selection.SetElementIds([element.Id]);
             });
         }
 
         async Task DeleteElement(Element element)
         {
-            if (Context.ActiveUiDocument is null) return;
+            if (RevitContext.ActiveUiDocument is null) return;
 
             ICollection<ElementId>? removedIds = [];
             var notificationService = serviceProvider.GetRequiredService<INotificationService>();

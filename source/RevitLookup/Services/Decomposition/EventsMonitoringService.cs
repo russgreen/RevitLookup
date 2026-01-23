@@ -98,9 +98,9 @@ public sealed class EventsMonitoringService(ILogger<EventsMonitoringService> log
 
     private static object[] FindValidTargets(Type? targetType)
     {
-        if (targetType == typeof(Document)) return Context.Application.Documents.Cast<object>().ToArray();
-        if (targetType == typeof(Autodesk.Revit.ApplicationServices.Application)) return [Context.Application];
-        if (targetType == typeof(UIApplication)) return [Context.UiApplication];
+        if (targetType == typeof(Document)) return RevitApiContext.Application.Documents.Cast<object>().ToArray();
+        if (targetType == typeof(Autodesk.Revit.ApplicationServices.Application)) return [RevitApiContext.Application];
+        if (targetType == typeof(UIApplication)) return [RevitContext.UiApplication];
 
         return [];
     }

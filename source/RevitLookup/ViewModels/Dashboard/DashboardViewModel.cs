@@ -436,7 +436,7 @@ public sealed partial class DashboardViewModel : IDashboardViewModel
 
     private bool ValidateContext()
     {
-        if (Context.ActiveUiDocument is not null) return true;
+        if (RevitContext.ActiveUiDocument is not null) return true;
 
         _notificationService.ShowWarning("Invalid context", "There are no open documents");
         return false;

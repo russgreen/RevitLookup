@@ -5,7 +5,7 @@ public static class ElementsFinder
     [Pure]
     public static List<Element> SearchElements(string searchText)
     {
-        var activeDocument = Context.ActiveDocument;
+        var activeDocument = RevitContext.ActiveDocument;
         if (activeDocument is null) return [];
 
         var rows = searchText.Split([Environment.NewLine], StringSplitOptions.RemoveEmptyEntries);

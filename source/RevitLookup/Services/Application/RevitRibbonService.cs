@@ -13,7 +13,7 @@
 // UNINTERRUPTED OR ERROR FREE.
 
 using Autodesk.Revit.UI;
-using Nice3point.Revit.Toolkit.External.Handlers;
+using Nice3point.Revit.Toolkit.External;
 using RevitLookup.Abstractions.Services.Settings;
 using RevitLookup.Commands;
 using RevitLookup.Commands.Controllers;
@@ -36,7 +36,7 @@ public sealed class RevitRibbonService(ISettingsService settingsService)
 
     private void CreatePanels()
     {
-        var application = Context.UiControlledApplication;
+        var application = RevitContext.UiControlledApplication;
         var addinsPanel = application.CreatePanel("Revit Lookup");
         var pullButton = addinsPanel.AddPullDownButton("RevitLookupButton", "RevitLookup");
         pullButton.SetImage("/RevitLookup;component/Resources/Images/RibbonIcon16.png");

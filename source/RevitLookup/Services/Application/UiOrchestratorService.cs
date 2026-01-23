@@ -392,7 +392,7 @@ public sealed class UiOrchestratorService : IUiOrchestratorService, IHistoryOrch
             }
             else
             {
-                _host.Show(Context.UiApplication.MainWindowHandle);
+                _host.Show(RevitContext.UiApplication.MainWindowHandle);
             }
         }
     }

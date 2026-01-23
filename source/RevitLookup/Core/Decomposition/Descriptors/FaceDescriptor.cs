@@ -55,7 +55,7 @@ public class FaceDescriptor : Descriptor, IDescriptorCollector, IContextMenuConn
 
         async Task VisualizeFace(Face face)
         {
-            if (Context.ActiveUiDocument is null) return;
+            if (RevitContext.ActiveUiDocument is null) return;
 
             try
             {
@@ -75,15 +75,15 @@ public class FaceDescriptor : Descriptor, IDescriptorCollector, IContextMenuConn
 
         void SelectFace(Face face)
         {
-            if (Context.ActiveUiDocument is null) return;
+            if (RevitContext.ActiveUiDocument is null) return;
             if (face.Reference is null) return;
 
-            RevitShell.ActionEventHandler.Raise(_ => Context.ActiveUiDocument.Selection.SetReferences([face.Reference]));
+            RevitShell.ActionEventHandler.Raise(_ => RevitContext.ActiveUiDocument.Selection.SetReferences([face.Reference]));
         }
 
         void ShowFace(Face face)
         {
-            if (Context.ActiveUiDocument is null) return;
+            if (RevitContext.ActiveUiDocument is null) return;
             if (face.Reference is null) return;
 
             RevitShell.ActionEventHandler.Raise(application =>

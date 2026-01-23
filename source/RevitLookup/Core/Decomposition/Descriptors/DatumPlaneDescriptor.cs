@@ -66,8 +66,8 @@ public sealed class DatumPlaneDescriptor(DatumPlane datumPlane) : ElementDescrip
 
         IVariant ResolveDatumExtentTypeInView()
         {
-            var resultEnd0 = datumPlane.GetDatumExtentTypeInView(DatumEnds.End0, Context.ActiveView);
-            var resultEnd1 = datumPlane.GetDatumExtentTypeInView(DatumEnds.End1, Context.ActiveView);
+            var resultEnd0 = datumPlane.GetDatumExtentTypeInView(DatumEnds.End0, RevitContext.ActiveView);
+            var resultEnd1 = datumPlane.GetDatumExtentTypeInView(DatumEnds.End1, RevitContext.ActiveView);
 
             return Variants.Values<DatumExtentType>(2)
                 .Add(resultEnd0, $"End 0, Active view: {resultEnd0}")
@@ -77,8 +77,8 @@ public sealed class DatumPlaneDescriptor(DatumPlane datumPlane) : ElementDescrip
 
         IVariant ResolveHasBubbleInView()
         {
-            var resultEnd0 = datumPlane.HasBubbleInView(DatumEnds.End0, Context.ActiveView);
-            var resultEnd1 = datumPlane.HasBubbleInView(DatumEnds.End1, Context.ActiveView);
+            var resultEnd0 = datumPlane.HasBubbleInView(DatumEnds.End0, RevitContext.ActiveView);
+            var resultEnd1 = datumPlane.HasBubbleInView(DatumEnds.End1, RevitContext.ActiveView);
 
             return Variants.Values<bool>(2)
                 .Add(resultEnd0, $"End 0, Active view: {resultEnd0}")
@@ -88,8 +88,8 @@ public sealed class DatumPlaneDescriptor(DatumPlane datumPlane) : ElementDescrip
 
         IVariant ResolveBubbleVisibleInView()
         {
-            var resultEnd0 = datumPlane.IsBubbleVisibleInView(DatumEnds.End0, Context.ActiveView);
-            var resultEnd1 = datumPlane.IsBubbleVisibleInView(DatumEnds.End1, Context.ActiveView);
+            var resultEnd0 = datumPlane.IsBubbleVisibleInView(DatumEnds.End0, RevitContext.ActiveView);
+            var resultEnd1 = datumPlane.IsBubbleVisibleInView(DatumEnds.End1, RevitContext.ActiveView);
 
             return Variants.Values<bool>(2)
                 .Add(resultEnd0, $"End 0, Active view: {resultEnd0}")
@@ -100,16 +100,16 @@ public sealed class DatumPlaneDescriptor(DatumPlane datumPlane) : ElementDescrip
         IVariant ResolveGetCurvesInView()
         {
             return Variants.Values<IList<Curve>>(2)
-                .Add(datumPlane.GetCurvesInView(DatumExtentType.Model, Context.ActiveView), "Model, Active view")
-                .Add(datumPlane.GetCurvesInView(DatumExtentType.ViewSpecific, Context.ActiveView), "ViewSpecific, Active view")
+                .Add(datumPlane.GetCurvesInView(DatumExtentType.Model, RevitContext.ActiveView), "Model, Active view")
+                .Add(datumPlane.GetCurvesInView(DatumExtentType.ViewSpecific, RevitContext.ActiveView), "ViewSpecific, Active view")
                 .Consume();
         }
 
         IVariant ResolveGetLeader()
         {
             return Variants.Values<Leader>(2)
-                .Add(datumPlane.GetLeader(DatumEnds.End0, Context.ActiveView), "End 0, Active view")
-                .Add(datumPlane.GetLeader(DatumEnds.End1, Context.ActiveView), "End 1, Active view")
+                .Add(datumPlane.GetLeader(DatumEnds.End0, RevitContext.ActiveView), "End 0, Active view")
+                .Add(datumPlane.GetLeader(DatumEnds.End1, RevitContext.ActiveView), "End 1, Active view")
                 .Consume();
         }
     }

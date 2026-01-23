@@ -34,12 +34,12 @@ public sealed class RevitConfigurator
 
     private readonly Encoding _encoding;
     private readonly SemaphoreSlim _asyncLock = new(1, 1);
-    private readonly string _userIniPath = Context.Application.CurrentUsersDataFolderPath.AppendPath("Revit.ini");
+    private readonly string _userIniPath = RevitApiContext.Application.CurrentUsersDataFolderPath.AppendPath("Revit.ini");
 
     private readonly string _defaultIniPath = Environment
         .GetFolderPath(Environment.SpecialFolder.CommonApplicationData)
         .AppendPath("Autodesk")
-        .AppendPath($"RVT {Context.Application.VersionNumber}")
+        .AppendPath($"RVT {RevitApiContext.Application.VersionNumber}")
         .AppendPath("UserDataCache")
         .AppendPath("Revit.ini");
 
@@ -67,7 +67,7 @@ public sealed class RevitConfigurator
 
     private List<ObservableIniEntry> ParseJournalSource()
     {
-        var currentJournal = Context.Application.RecordingJournalFilename;
+        var currentJournal = RevitApiContext.Application.RecordingJournalFilename;
         var journalsPath = Directory.GetParent(currentJournal)!;
         var journals = Directory.EnumerateFiles(journalsPath.FullName, "journal*txt").Reverse();
 

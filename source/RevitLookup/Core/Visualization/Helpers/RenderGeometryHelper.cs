@@ -96,7 +96,7 @@ public static class RenderGeometryHelper
 
     public static Solid ScaleSolid(Solid solid, double scale)
     {
-        if (scale is 1) scale = EvaluateScale(solid, Context.Application.VertexTolerance * 3);
+        if (scale is 1) scale = EvaluateScale(solid, RevitApiContext.Application.VertexTolerance * 3);
 
         var centroid = solid.GetBoundingBox().Transform.Origin;
         var moveToCentroid = Transform.CreateTranslation(-centroid);
