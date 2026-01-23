@@ -23,6 +23,7 @@
         <File Path="Contributing.md" />
         <File Path="Directory.Packages.props" />
         <File Path="Directory.Build.props" />
+        <File Path="build\appsettings.json" />
     </Folder>
     <Folder Name="/Automation/">
         <Project Path="build\Build.csproj">

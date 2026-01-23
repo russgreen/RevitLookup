@@ -1,11 +1,10 @@
 mode: ContinuousDelivery
 strategies:
   - Mainline
-  - ConfiguredNextVersion
 branches:
   main:
     regex: ^main$
-    mode: ContinuousDelivery
+    mode: ContinuousDeployment
     label: ''
     increment: Patch
     track-merge-target: false
@@ -15,8 +14,8 @@ branches:
       of-merged-branch: true
   develop:
     regex: ^dev(elop)?(ment)?$
-    mode: ContinuousDeployment
-    label: beta
+    mode: ContinuousDelivery
+    label: preview
     increment: Inherit
     is-release-branch: false
     is-main-branch: false
@@ -27,7 +26,7 @@ branches:
       - main
   feature:
     regex: ^features?[/-](?<BranchName>.+)
-    mode: ContinuousDeployment
+    mode: ContinuousDelivery
     label: alpha
     increment: Inherit
     is-main-branch: false

@@ -27,6 +27,7 @@ if (args.Contains("test"))
 
 if (args.Contains("pack"))
 {
+    builder.Services.AddModule<CleanProjectsModule>();
     builder.Services.AddModule<CreateInstallerModule>();
 }
 

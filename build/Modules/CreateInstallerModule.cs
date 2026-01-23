@@ -24,6 +24,9 @@ public sealed class CreateInstallerModule(IOptions<BuildOptions> buildOptions) :
 {
     protected override async Task ExecuteModuleAsync(IModuleContext context, CancellationToken cancellationToken)
     {
+        var versioningResult = await context.GetModule<ResolveVersioningModule>();
+        var versioning = versioningResult.ValueOrDefault!;
+        
         var wixTarget = new File(Projects.RevitLookup.FullName);
         var wixInstaller = new File(Projects.Installer.FullName);
         var wixToolFolder = await InstallWixAsync(context, cancellationToken);
@@ -53,10 +56,11 @@ public sealed class CreateInstallerModule(IOptions<BuildOptions> buildOptions) :
                     .TryGetValue(targetDirectory.Parent!.Name, out var version)
                     .ShouldBeTrue($"Can't map version for configuration: {targetDirectory.Parent!.Path}");
 
+                var installerVersion = !versioning.IsPrerelease ? version.ToString() : $"{version.ToString()}-{versioning.VersionSuffix}";
                 await context.Shell.Command.ExecuteCommandLineTool(
                     new GenericCommandLineToolOptions(builderFile.Path)
                     {
-                        Arguments = [version, targetDirectory.Path],
+                        Arguments = [installerVersion, targetDirectory.Path],
                     },
                     new CommandExecutionOptions
                     {

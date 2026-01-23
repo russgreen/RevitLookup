@@ -43,7 +43,7 @@ public sealed class CompileProjectModule(IOptions<BuildOptions> buildOptions) : 
             Configuration = configuration,
             Properties = new List<KeyValue>
             {
-                ("Version", version)
+                ("Version", version.ToString())
             }
         }, cancellationToken: cancellationToken);
     }
