@@ -203,14 +203,29 @@
     <Folder Name="/Tests/">
         <Project Path="tests\RevitLookup.Tests.Unit\RevitLookup.Tests.Unit.csproj">
             <BuildType Solution="Debug.Playground|*" Project="Debug.R26" />
-            <BuildType Solution="Debug.R21|*" Project="Debug.R22" />
             <BuildType Solution="Release.Playground|*" Project="Release.R26" />
+            <BuildType Solution="Release.R21|*" Project="Release.R22" />
             <Build Solution="Debug.Playground|*" Project="false" />
             <Build Solution="Release.Playground|*" Project="false" />
         </Project>
     </Folder>
     <Project Path="source/RevitLookup.ServiceDefaults/RevitLookup.ServiceDefaults.csproj">
-        <BuildType Project="Debug" />
+        <BuildType Solution="Debug.Playground|*" Project="Debug" />
+        <BuildType Solution="Debug.R21|*" Project="Debug" />
+        <BuildType Solution="Debug.R22|*" Project="Debug" />
+        <BuildType Solution="Debug.R23|*" Project="Debug" />
+        <BuildType Solution="Debug.R24|*" Project="Debug" />
+        <BuildType Solution="Debug.R25|*" Project="Debug" />
+        <BuildType Solution="Debug.R26|*" Project="Debug" />
+        <BuildType Solution="Debug.R27|*" Project="Debug" />
+        <BuildType Solution="Release.Playground|*" Project="Release" />
+        <BuildType Solution="Release.R21|*" Project="Release" />
+        <BuildType Solution="Release.R22|*" Project="Release" />
+        <BuildType Solution="Release.R23|*" Project="Release" />
+        <BuildType Solution="Release.R24|*" Project="Release" />
+        <BuildType Solution="Release.R25|*" Project="Release" />
+        <BuildType Solution="Release.R26|*" Project="Release" />
+        <BuildType Solution="Release.R27|*" Project="Release" />
     </Project>
     <Project Path="source\RevitLookup.Abstractions\RevitLookup.Abstractions.csproj">
         <BuildType Solution="Debug.Playground|*" Project="Debug" />

@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Build.Options;
+﻿namespace Build.Options;
 
 /// <summary>
 ///     Information about the Autodesk application package.
@@ -12,7 +10,7 @@ public sealed record BundleOptions
     /// <summary>
     ///     The vendor name.
     /// </summary>
-    [Required] public string? VendorName { get; init; }
+    public string? VendorName { get; init; }
 
     /// <summary>
     ///     The vendor website URL.

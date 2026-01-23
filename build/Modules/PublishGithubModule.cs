@@ -11,7 +11,6 @@ using ModularPipelines.GitHub.Extensions;
 using ModularPipelines.Modules;
 using Octokit;
 using Shouldly;
-using Status = ModularPipelines.Enums.Status;
 
 namespace Build.Modules;
 
@@ -19,18 +18,18 @@ namespace Build.Modules;
 ///     Publish the add-in to GitHub.
 /// </summary>
 [SkipIfNoGitHubToken]
-[DependsOn<ResolveProductVersionModule>]
+[DependsOn<ResolveVersioningModule>]
 [DependsOn<GenerateGitHubChangelogModule>]
 [DependsOn<SignAssembliesModule>]
 [DependsOn<SignInstallerModule>]
 public sealed class PublishGithubModule(IOptions<BuildOptions> buildOptions) : Module<ReleaseAsset[]?>
 {
-    protected override async Task<ReleaseAsset[]?> ExecuteAsync(IPipelineContext context, CancellationToken cancellationToken)
+    protected override async Task<ReleaseAsset[]?> ExecuteAsync(IModuleContext context, CancellationToken cancellationToken)
     {
-        var versioningResult = await GetModule<ResolveProductVersionModule>();
-        var changelogResult = await GetModule<GenerateGitHubChangelogModule>();
-        var versioning = versioningResult.Value!;
-        var changelog = changelogResult.Value!;
+        var versioningResult = await context.GetModule<ResolveVersioningModule>();
+        var changelogResult = await context.GetModule<GenerateGitHubChangelogModule>();
+        var versioning = versioningResult.ValueOrDefault!;
+        var changelog = changelogResult.ValueOrDefault!;
 
         var outputFolder = context.Git().RootDirectory.GetFolder(buildOptions.Value.OutputDirectory);
         var targetFiles = outputFolder.ListFiles().ToArray();
@@ -42,7 +41,8 @@ public sealed class PublishGithubModule(IOptions<BuildOptions> buildOptions) : M
             Name = versioning.Version,
             Body = changelog,
             TargetCommitish = context.Git().Information.LastCommitSha,
-            Prerelease = versioning.IsPrerelease
+            Prerelease = versioning.IsPrerelease,
+            DiscussionCategoryName = !versioning.IsPrerelease ? "Announcements" : string.Empty
         };
 
         var release = await context.GitHub().Client.Repository.Release.Create(repositoryInfo.Owner, repositoryInfo.RepositoryName, newRelease);
@@ -63,18 +63,15 @@ public sealed class PublishGithubModule(IOptions<BuildOptions> buildOptions) : M
             .ProcessInParallel();
     }
 
-    protected override async Task OnAfterExecute(IPipelineContext context)
+    protected override async Task OnFailedAsync(IModuleContext context, Exception exception, CancellationToken cancellationToken)
     {
-        if (Status == Status.Failed)
-        {
-            var versioningResult = await GetModule<ResolveProductVersionModule>();
-            var versioning = versioningResult.Value!;
+        var versioningResult = await context.GetModule<ResolveVersioningModule>();
+        var versioning = versioningResult.ValueOrDefault!;
 
-            await context.Git().Commands.Push(new GitPushOptions
-            {
-                Delete = true,
-                Arguments = ["origin", versioning.Version]
-            });
-        }
+        await context.Git().Commands.Push(new GitPushOptions
+        {
+            Delete = true,
+            Arguments = ["origin", versioning.Version]
+        }, token: cancellationToken);
     }
 }

@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Build.Options;
+﻿namespace Build.Options;
 
 [Serializable]
 public sealed record BuildOptions
@@ -13,10 +11,10 @@ public sealed record BuildOptions
     ///     1.0.0-beta.2.250101 <br/>
     ///     1.0.0
     /// </example>
-    [Required] public Dictionary<string, string> Versions { get; init; } = null!;
+    public Dictionary<string, string> Versions { get; init; } = [];
 
     /// <summary>
     ///     Path to build output
     /// </summary>
-    [Required] public string OutputDirectory { get; init; } = null!;
+    public string OutputDirectory { get; init; } = "output";
 }

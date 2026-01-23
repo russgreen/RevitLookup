@@ -2,42 +2,37 @@
 using Build.Options;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using ModularPipelines;
 using ModularPipelines.Extensions;
-using ModularPipelines.Host;
 
-await PipelineHostBuilder.Create()
-    .ConfigureAppConfiguration((context, builder) =>
-    {
-        builder.AddJsonFile("appsettings.json")
-            .AddCommandLine(args)
-            .AddEnvironmentVariables();
-    })
-    .ConfigureServices((context, collection) =>
-    {
-        collection.AddOptions<BuildOptions>().Bind(context.Configuration.GetSection("Build")).ValidateDataAnnotations();
+var builder = Pipeline.CreateBuilder();
 
-        collection.AddModule<ResolveConfigurationsModule>();
-        collection.AddModule<CleanProjectModule>();
-        collection.AddModule<CompileProjectModule>();
+builder.Configuration.AddJsonFile("appsettings.json");
+builder.Configuration.AddUserSecrets<Program>();
+builder.Configuration.AddEnvironmentVariables();
 
-        if (args.Contains("pack"))
-        {
-            collection.AddOptions<ProductOptions>().Bind(context.Configuration.GetSection("Product")).ValidateDataAnnotations();
+builder.Services.AddOptions<BuildOptions>().Bind(builder.Configuration.GetSection("Build"));
+builder.Services.AddOptions<PublishOptions>().Bind(builder.Configuration.GetSection("Publish"));
+builder.Services.AddOptions<SigningOptions>().Bind(builder.Configuration.GetSection("Signing"));
 
-            collection.AddModule<ResolveProductVersionModule>();
-            collection.AddModule<CreateBundleModule>();
-            collection.AddModule<CreateInstallerModule>();
-        }
+if (args.Length == 0)
+{
+    builder.Services.AddModule<CompileProjectModule>();
+}
 
-        if (args.Contains("publish"))
-        {
-            collection.AddOptions<SigningOptions>().Bind(context.Configuration.GetSection("Signing")).ValidateDataAnnotations();
+if (args.Contains("test"))
+{
+    builder.Services.AddModule<TestProjectsModule>();
+}
 
-            collection.AddModule<SignAssembliesModule>();
-            collection.AddModule<SignInstallerModule>();
-            collection.AddModule<GenerateChangelogModule>();
-            collection.AddModule<GenerateGitHubChangelogModule>();
-            collection.AddModule<PublishGithubModule>();
-        }
-    })
-    .ExecutePipelineAsync();
+if (args.Contains("pack"))
+{
+    builder.Services.AddModule<CreateInstallerModule>();
+}
+
+if (args.Contains("publish"))
+{
+    builder.Services.AddModule<PublishGithubModule>();
+}
+
+await builder.Build().RunAsync();

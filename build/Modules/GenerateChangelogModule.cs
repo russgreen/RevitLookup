@@ -15,13 +15,13 @@ namespace Build.Modules;
 /// <summary>
 ///     Generate the changelog for publishing the add-in.
 /// </summary>
-[DependsOn<ResolveProductVersionModule>]
-public sealed class GenerateChangelogModule(IOptions<ProductOptions> publishOptions) : Module<string>
+[DependsOn<ResolveVersioningModule>]
+public sealed class GenerateChangelogModule(IOptions<PublishOptions> publishOptions) : Module<string>
 {
-    protected override async Task<string?> ExecuteAsync(IPipelineContext context, CancellationToken cancellationToken)
+    protected override async Task<string?> ExecuteAsync(IModuleContext context, CancellationToken cancellationToken)
     {
-        var versioningResult = await GetModule<ResolveProductVersionModule>();
-        var versioning = versioningResult.Value!;
+        var versioningResult = await context.GetModule<ResolveVersioningModule>();
+        var versioning = versioningResult.ValueOrDefault!;
 
         if (string.IsNullOrEmpty(publishOptions.Value.ChangelogFile))
         {
@@ -61,7 +61,7 @@ public sealed class GenerateChangelogModule(IOptions<ProductOptions> publishOpti
         var isChangelogEntryFound = false;
         var changelog = new StringBuilder();
 
-        foreach (var line in await changelogFile.ReadLinesAsync())
+        await foreach (var line in changelogFile.ReadLinesAsync())
         {
             if (isChangelogEntryFound)
             {
@@ -108,7 +108,7 @@ public sealed class GenerateChangelogModule(IOptions<ProductOptions> publishOpti
     /// <summary>
     ///     Call the GitHub API to generate release notes for a specific version.
     /// </summary>
-    private static async Task<string?> GenerateReleaseNotesAsync(IPipelineContext context, ResolveVersioningResult versioning)
+    private static async Task<string?> GenerateReleaseNotesAsync(IModuleContext context, ResolveVersioningResult versioning)
     {
         var repositoryId = long.Parse(context.GitHub().EnvironmentVariables.RepositoryId!);
 

@@ -19,7 +19,7 @@ namespace Build.Modules;
 [DependsOn<CompileProjectModule>]
 public sealed class SignAssembliesModule(IOptions<SigningOptions> signingOptions) : Module<CommandResult>
 {
-    protected override async Task<CommandResult?> ExecuteAsync(IPipelineContext context, CancellationToken cancellationToken)
+    protected override async Task<CommandResult?> ExecuteAsync(IModuleContext context, CancellationToken cancellationToken)
     {
         var targetProject = new File(Projects.LookupEngine.FullName);
 
@@ -38,8 +38,8 @@ public sealed class SignAssembliesModule(IOptions<SigningOptions> signingOptions
 
         targetFiles.ShouldNotBeEmpty("No files were found to sign");
 
-        var inputFile = context.FileSystem.GetNewTemporaryFilePath();
-        System.IO.File.WriteAllLines(inputFile, targetFiles);
+        var inputFile = File.GetNewTemporaryFilePath();
+        await inputFile.WriteAsync(targetFiles, cancellationToken);
 
         context.Logger.LogInformation("Signing {Count} files", targetFiles.Length);
 

@@ -5,7 +5,6 @@ using ModularPipelines.Attributes;
 using ModularPipelines.Context;
 using ModularPipelines.DotNet.Extensions;
 using ModularPipelines.DotNet.Options;
-using ModularPipelines.Enums;
 using ModularPipelines.FileSystem;
 using ModularPipelines.Git.Extensions;
 using ModularPipelines.Modules;
@@ -19,11 +18,11 @@ namespace Build.Modules;
 /// <summary>
 ///     Create the .msi installer.
 /// </summary>
-[DependsOn<ResolveProductVersionModule>]
+[DependsOn<ResolveVersioningModule>]
 [DependsOn<CompileProjectModule>]
 public sealed class CreateInstallerModule(IOptions<BuildOptions> buildOptions) : Module
 {
-    protected override async Task<IDictionary<string, object>?> ExecuteAsync(IPipelineContext context, CancellationToken cancellationToken)
+    protected override async Task ExecuteModuleAsync(IModuleContext context, CancellationToken cancellationToken)
     {
         var wixTarget = new File(Projects.RevitLookup.FullName);
         var wixInstaller = new File(Projects.Installer.FullName);
@@ -32,8 +31,8 @@ public sealed class CreateInstallerModule(IOptions<BuildOptions> buildOptions) :
         await context.DotNet().Build(new DotNetBuildOptions
         {
             ProjectSolution = wixInstaller.Path,
-            Configuration = Configuration.Release
-        }, cancellationToken);
+            Configuration = "Release"
+        }, cancellationToken: cancellationToken);
 
         var builderFile = wixInstaller.Folder!
             .GetFolder("bin")
@@ -54,44 +53,33 @@ public sealed class CreateInstallerModule(IOptions<BuildOptions> buildOptions) :
                     .TryGetValue(targetDirectory.Parent!.Name, out var version)
                     .ShouldBeTrue($"Can't map version for configuration: {targetDirectory.Parent!.Path}");
 
-                await context.Command.ExecuteCommandLineTool(new CommandLineToolOptions(builderFile.Path)
-                {
-                    Arguments = [version, targetDirectory.Path],
-                    WorkingDirectory = context.Git().RootDirectory,
-                    CommandLogging = CommandLogging.Default & ~CommandLogging.Input,
-                    EnvironmentVariables = new Dictionary<string, string?>
+                await context.Shell.Command.ExecuteCommandLineTool(
+                    new GenericCommandLineToolOptions(builderFile.Path)
                     {
-                        {"PATH", $"{Environment.GetEnvironmentVariable("PATH")};{wixToolFolder}"}
-                    }
-                }, cancellationToken);
+                        Arguments = [version, targetDirectory.Path],
+                    },
+                    new CommandExecutionOptions
+                    {
+                        WorkingDirectory = context.Git().RootDirectory,
+                        EnvironmentVariables = new Dictionary<string, string?>
+                        {
+                            {"PATH", $"{Environment.GetEnvironmentVariable("PATH")};{wixToolFolder}"}
+                        }
+                    }, cancellationToken: cancellationToken);
             }, cancellationToken)
             .ProcessInParallel();
-
-        return await NothingAsync();
     }
 
     /// <summary>
     ///     Installs the WiX toolset required for building installers.
     /// </summary>
-    private static async Task<Folder> InstallWixAsync(IPipelineContext context, CancellationToken cancellationToken)
+    private static async Task<Folder> InstallWixAsync(IModuleContext context, CancellationToken cancellationToken)
     {
-        var wixToolFolder = context.FileSystem.CreateTemporaryFolder();
-#if (_needToUpdatePipelineVersion)
-        await context.DotNet().Tool.Install(new DotNetToolInstallOptions("wix")
+        var wixToolFolder = Folder.CreateTemporaryFolder();
+        await context.DotNet().Tool.Execute(new DotNetToolOptions
         {
-            ToolPath = wixToolFolder.Path
-        }, cancellationToken);
-#endif
-        await context.Command.ExecuteCommandLineTool(new CommandLineToolOptions("dotnet")
-        {
-            Arguments =
-            [
-                "tool",
-                "install",
-                "--tool-path", wixToolFolder.Path,
-                "wix"
-            ]
-        }, cancellationToken);
+            Arguments = ["install", "wix", "--tool-path", wixToolFolder.Path]
+        }, cancellationToken: cancellationToken);
 
         return wixToolFolder;
     }

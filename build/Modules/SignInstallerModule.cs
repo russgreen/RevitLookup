@@ -9,13 +9,14 @@ using ModularPipelines.Git.Extensions;
 using ModularPipelines.Models;
 using ModularPipelines.Modules;
 using Shouldly;
+using File = ModularPipelines.FileSystem.File;
 
 namespace Build.Modules;
 
 [DependsOn<CreateInstallerModule>]
 public sealed class SignInstallerModule(IOptions<SigningOptions> signingOptions, IOptions<BuildOptions> buildOptions) : Module<CommandResult>
 {
-    protected override async Task<CommandResult?> ExecuteAsync(IPipelineContext context, CancellationToken cancellationToken)
+    protected override async Task<CommandResult?> ExecuteAsync(IModuleContext context, CancellationToken cancellationToken)
     {
         var targetFiles = context.Git().RootDirectory.GetFolder(buildOptions.Value.OutputDirectory)
             .GetFiles(file => file.Extension is ".msi" or ".exe")
@@ -24,8 +25,8 @@ public sealed class SignInstallerModule(IOptions<SigningOptions> signingOptions,
 
         targetFiles.ShouldNotBeEmpty("No files were found to sign");
 
-        var inputFile = context.FileSystem.GetNewTemporaryFilePath();
-        File.WriteAllLines(inputFile, targetFiles);
+        var inputFile = File.GetNewTemporaryFilePath();
+        await inputFile.WriteAsync(targetFiles, cancellationToken);
 
         context.Logger.LogInformation("Signing {Count} files", targetFiles.Length);
 
@@ -39,6 +40,6 @@ public sealed class SignInstallerModule(IOptions<SigningOptions> signingOptions,
             TimestampRfc3161Url = "http://timestamp.digicert.com",
             SkipSigned = true,
             ContinueOnError = true
-        }, cancellationToken);
+        }, cancellationToken: cancellationToken);
     }
 }

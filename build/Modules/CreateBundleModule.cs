@@ -7,7 +7,6 @@ using ModularPipelines.Attributes;
 using ModularPipelines.Context;
 using ModularPipelines.FileSystem;
 using ModularPipelines.Git.Extensions;
-using ModularPipelines.Models;
 using ModularPipelines.Modules;
 using Shouldly;
 using Sourcy.DotNet;
@@ -18,14 +17,14 @@ namespace Build.Modules;
 /// <summary>
 ///     Create the Autodesk .bundle package.
 /// </summary>
-[DependsOn<ResolveProductVersionModule>]
+[DependsOn<ResolveVersioningModule>]
 [DependsOn<CompileProjectModule>]
-public sealed partial class CreateBundleModule(IOptions<BundleOptions> bundleOptions) : Module<CommandResult>
+public sealed partial class CreateBundleModule(IOptions<BundleOptions> bundleOptions) : Module
 {
-    protected override async Task<CommandResult?> ExecuteAsync(IPipelineContext context, CancellationToken cancellationToken)
+    protected override async Task ExecuteModuleAsync(IModuleContext context, CancellationToken cancellationToken)
     {
-        var versioningResult = await GetModule<ResolveProductVersionModule>();
-        var versioning = versioningResult.Value!;
+        var versioningResult = await context.GetModule<ResolveVersioningModule>();
+        var versioning = versioningResult.ValueOrDefault!;
 
         var bundleTarget = new File(Projects.RevitLookup.FullName);
         var targetDirectories = bundleTarget.Folder!
@@ -43,10 +42,8 @@ public sealed partial class CreateBundleModule(IOptions<BundleOptions> bundleOpt
         PackFiles(targetDirectories, contentFolder);
         GenerateManifest(bundleTarget, targetDirectories, manifestFile, versioning);
 
-        context.Zip.ZipFolder(bundleFolder, outputFolder.GetFile($"{bundleFolder.Name}.zip").Path);
-        bundleFolder.Delete();
-
-        return await NothingAsync();
+        context.Files.Zip.ZipFolder(bundleFolder, outputFolder.GetFile($"{bundleFolder.Name}.zip").Path);
+        await bundleFolder.DeleteAsync(cancellationToken);
     }
 
     private static void PackFiles(Folder[] targetDirectories, Folder contentFolder)

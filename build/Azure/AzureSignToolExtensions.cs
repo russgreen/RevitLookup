@@ -20,5 +20,5 @@ public static class AzureSignToolExtensions
         return services;
     }
 
-    public static AzureSignTool Azure(this IPipelineHookContext context) => context.ServiceProvider.GetRequiredService<AzureSignTool>();
+    public static AzureSignTool Azure(this IPipelineContext context) => context.Services.Get<AzureSignTool>();
 }

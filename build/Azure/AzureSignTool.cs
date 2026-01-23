@@ -1,14 +1,15 @@
 ﻿using Build.Azure.Options;
 using ModularPipelines.Context;
+using ModularPipelines.DotNet.Options;
+using ModularPipelines.DotNet.Services;
 using ModularPipelines.FileSystem;
 using ModularPipelines.Models;
-using ModularPipelines.Options;
 
 namespace Build.Azure;
 
-public sealed class AzureSignTool(IFileSystemContext fileSystemContext, IPipelineContext context)
+public sealed class AzureSignTool(IDotNet dotNet, ICommand command)
 {
-    private readonly Folder _temporaryFolder = fileSystemContext.CreateTemporaryFolder();
+    private readonly Folder _temporaryFolder = Folder.CreateTemporaryFolder();
     private static readonly SemaphoreSlim SemaphoreSlim = new(1, 1);
 
     public async Task<CommandResult> Sign(AzureSignToolOptions options, CancellationToken cancellationToken = default)
@@ -17,27 +18,15 @@ public sealed class AzureSignTool(IFileSystemContext fileSystemContext, IPipelin
 
         try
         {
-#if (_needToUpdatePipelineVersion)
-            await context.DotNet().Tool.Install(new DotNetToolInstallOptions("AzureSignTool")
+            await dotNet.Tool.Execute(new DotNetToolOptions
             {
-                ToolPath = _temporaryFolder.Path
-            }, cancellationToken);
-#endif
-            await context.Command.ExecuteCommandLineTool(new CommandLineToolOptions("dotnet")
-            {
-                Arguments =
-                [
-                    "tool",
-                    "install",
-                    "--tool-path", _temporaryFolder.Path,
-                    "AzureSignTool"
-                ]
-            }, cancellationToken);
+                Arguments = ["install", "AzureSignTool", "--tool-path", _temporaryFolder.Path]
+            }, cancellationToken: cancellationToken);
 
-            return await context.Command.ExecuteCommandLineTool(options with
+            return await command.ExecuteCommandLineTool(options with
             {
-                Tool = Path.Combine(_temporaryFolder.Path, options.Tool)
-            }, cancellationToken);
+                Tool = _temporaryFolder.GetFile("AzureSignTool.exe")
+            }, cancellationToken: cancellationToken);
         }
         finally
         {

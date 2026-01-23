@@ -17,23 +17,21 @@ namespace Build.Modules;
 [DependsOn<ResolveConfigurationsModule>]
 public sealed class CompileProjectModule(IOptions<BuildOptions> buildOptions) : Module
 {
-    protected override async Task<IDictionary<string, object>?> ExecuteAsync(IPipelineContext context, CancellationToken cancellationToken)
+    protected override async Task ExecuteModuleAsync(IModuleContext context, CancellationToken cancellationToken)
     {
-        var configurationsResult = await GetModule<ResolveConfigurationsModule>();
-        var configurations = configurationsResult.Value!;
+        var configurationsResult = await context.GetModule<ResolveConfigurationsModule>();
+        var configurations = configurationsResult.ValueOrDefault!;
 
         foreach (var configuration in configurations)
         {
-            await SubModule(configuration, async () => await CompileAsync(context, configuration, cancellationToken));
+            await context.SubModule(configuration, async () => await CompileAsync(context, configuration, cancellationToken));
         }
-
-        return await NothingAsync();
     }
 
     /// <summary>
     ///     Compile the add-in project for the specified configuration.
     /// </summary>
-    private async Task<CommandResult> CompileAsync(IPipelineContext context, string configuration, CancellationToken cancellationToken)
+    private async Task<CommandResult> CompileAsync(IModuleContext context, string configuration, CancellationToken cancellationToken)
     {
         buildOptions.Value.Versions
             .TryGetValue(configuration, out var version)
@@ -47,6 +45,6 @@ public sealed class CompileProjectModule(IOptions<BuildOptions> buildOptions) : 
             {
                 ("Version", version)
             }
-        }, cancellationToken);
+        }, cancellationToken: cancellationToken);
     }
 }
