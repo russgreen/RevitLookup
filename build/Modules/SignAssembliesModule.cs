@@ -21,7 +21,7 @@ public sealed class SignAssembliesModule(IOptions<SigningOptions> signingOptions
 {
     protected override async Task<CommandResult?> ExecuteAsync(IModuleContext context, CancellationToken cancellationToken)
     {
-        var targetProject = new File(Projects.LookupEngine.FullName);
+        var targetProject = new File(Projects.RevitLookup.FullName);
 
         var targetFiles = targetProject.Folder!
             .GetFolder("bin")

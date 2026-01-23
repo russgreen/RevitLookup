@@ -20,8 +20,7 @@ namespace Build.Modules;
 [SkipIfNoGitHubToken]
 [DependsOn<ResolveVersioningModule>]
 [DependsOn<GenerateGitHubChangelogModule>]
-[DependsOn<SignAssembliesModule>]
-[DependsOn<SignInstallerModule>]
+[DependsOn<SignInstallerModule>(Optional = true)]
 public sealed class PublishGithubModule(IOptions<BuildOptions> buildOptions) : Module<ReleaseAsset[]?>
 {
     protected override async Task<ReleaseAsset[]?> ExecuteAsync(IModuleContext context, CancellationToken cancellationToken)
