@@ -27,7 +27,7 @@ public sealed class XyzVisualizationServer : IDirectContext3DServer
     private bool _hasGeometryUpdates = true;
 
     private readonly Guid _guid = Guid.NewGuid();
-    private readonly object _renderLock = new();
+    private readonly Lock _renderLock = new();
 
     private readonly RenderingBufferStorage[] _planeBuffers = Enumerable.Range(0, 3)
         .Select(_ => new RenderingBufferStorage())

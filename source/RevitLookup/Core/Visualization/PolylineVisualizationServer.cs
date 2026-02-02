@@ -27,7 +27,7 @@ public sealed class PolylineVisualizationServer : IDirectContext3DServer
     private bool _hasGeometryUpdates = true;
 
     private readonly Guid _guid = Guid.NewGuid();
-    private readonly object _renderLock = new();
+    private readonly Lock _renderLock = new();
 
     private readonly RenderingBufferStorage _surfaceBuffer = new();
     private readonly RenderingBufferStorage _curveBuffer = new();

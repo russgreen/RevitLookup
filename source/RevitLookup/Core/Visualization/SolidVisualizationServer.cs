@@ -27,7 +27,7 @@ public sealed class SolidVisualizationServer : IDirectContext3DServer
     private bool _hasGeometryUpdates = true;
 
     private readonly Guid _guid = Guid.NewGuid();
-    private readonly object _renderLock = new();
+    private readonly Lock _renderLock = new();
     private readonly List<RenderingBufferStorage> _faceBuffers = new(4);
     private readonly List<RenderingBufferStorage> _edgeBuffers = new(8);
 

@@ -27,7 +27,7 @@ public sealed class BoundingBoxVisualizationServer : IDirectContext3DServer
     private bool _hasEffectsUpdates = true;
 
     private readonly Guid _guid = Guid.NewGuid();
-    private readonly object _renderLock = new();
+    private readonly Lock _renderLock = new();
     private readonly RenderingBufferStorage _surfaceBuffer = new();
     private readonly RenderingBufferStorage _edgeBuffer = new();
 
