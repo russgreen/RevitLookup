@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using RevitLookup.Abstractions.Models.Decomposition;
+using RevitLookup.Abstractions.Enums.Decomposition;
 using RevitLookup.Abstractions.Models.UserInterface;
 using RevitLookup.Abstractions.Services.Decomposition;
 using RevitLookup.Abstractions.Services.Presentation;

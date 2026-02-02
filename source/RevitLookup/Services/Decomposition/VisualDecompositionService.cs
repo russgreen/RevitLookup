@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Diagnostics.CodeAnalysis;
 using LookupEngine.Abstractions.Configuration;
-using RevitLookup.Abstractions.Models.Decomposition;
+using RevitLookup.Abstractions.Enums.Decomposition;
 using RevitLookup.Abstractions.ObservableModels.Decomposition;
 using RevitLookup.Abstractions.Services.Decomposition;
 using RevitLookup.Abstractions.Services.Presentation;

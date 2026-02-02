@@ -8,7 +8,7 @@
     xmlns:converters="clr-namespace:RevitLookup.UI.Framework.Converters"
     xmlns:valueConverters="clr-namespace:RevitLookup.UI.Framework.Converters.ValueConverters"
     xmlns:aboutProgram="clr-namespace:RevitLookup.UI.Framework.Views.AboutProgram"
-    xmlns:states="clr-namespace:RevitLookup.Abstractions.States;assembly=RevitLookup.Abstractions"
+    xmlns:states="clr-namespace:RevitLookup.Abstractions.Enums.AboutProgram;assembly=RevitLookup.Abstractions"
     mc:Ignorable="d"
     d:DesignWidth="800"
     d:DataContext="{d:DesignInstance aboutProgram:AboutPage}"
@@ -153,8 +153,7 @@
                 IsOpen="{Binding ViewModel.State, 
                         Converter={valueConverters:SoftwareUpdateStateBooleanConverter},
                         ConverterParameter={x:Static states:SoftwareUpdateState.ReadyToInstall},
-                        FallbackValue=True}">
-            </ui:InfoBar>
+                        FallbackValue=True}" />
             <ui:InfoBar
                 Severity="Success"
                 Margin="0,4,0,0"
@@ -162,8 +161,7 @@
                 IsOpen="{Binding ViewModel.State, 
                         Converter={valueConverters:SoftwareUpdateStateBooleanConverter},
                         ConverterParameter={x:Static states:SoftwareUpdateState.UpToDate},
-                        FallbackValue=True}">
-            </ui:InfoBar>
+                        FallbackValue=True}" />
             <ui:InfoBar
                 Margin="0,4,0,0"
                 Severity="Error"
@@ -172,8 +170,7 @@
                 IsOpen="{Binding ViewModel.State, 
                         Converter={valueConverters:SoftwareUpdateStateBooleanConverter},
                         ConverterParameter={x:Static states:SoftwareUpdateState.Error},
-                        FallbackValue=True}">
-            </ui:InfoBar>
+                        FallbackValue=True}" />
             <ui:TextBlock
                 Margin="0,12,0,0"
                 FontTypography="Caption"

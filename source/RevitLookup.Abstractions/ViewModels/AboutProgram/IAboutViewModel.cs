@@ -1,5 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.Input;
-using RevitLookup.Abstractions.States;
+using RevitLookup.Abstractions.Enums.AboutProgram;
 
 namespace RevitLookup.Abstractions.ViewModels.AboutProgram;
 

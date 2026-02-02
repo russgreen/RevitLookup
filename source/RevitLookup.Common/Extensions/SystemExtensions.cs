@@ -21,7 +21,7 @@ public static class SystemExtensions
         /// </exception>
         /// <exception cref="System.ArgumentNullException">source or path is null</exception>
         [Pure]
-        public string JoinPath(string path)
+        public string AppendPath(string path)
         {
             return Path.Combine(source, path);
         }
@@ -35,7 +35,7 @@ public static class SystemExtensions
         /// </exception>
         /// <exception cref="System.ArgumentNullException">source or path is null</exception>
         [Pure]
-        public string JoinPath(params string[] paths)
+        public string AppendPath(params string[] paths)
         {
             var strings = new string[paths.Length + 1];
             strings[0] = source;

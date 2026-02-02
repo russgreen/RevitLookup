@@ -1,5 +1,5 @@
 ﻿using System.Collections;
-using RevitLookup.Abstractions.Models.Decomposition;
+using RevitLookup.Abstractions.Enums.Decomposition;
 using RevitLookup.Abstractions.ObservableModels.Decomposition;
 
 namespace RevitLookup.Abstractions.Services.Decomposition;

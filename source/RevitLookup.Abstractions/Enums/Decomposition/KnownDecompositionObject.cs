@@ -1,4 +1,4 @@
-﻿namespace RevitLookup.Abstractions.Models.Decomposition;
+﻿namespace RevitLookup.Abstractions.Enums.Decomposition;
 
 /// <summary>
 ///     Supported object types for decomposition.

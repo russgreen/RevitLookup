@@ -19,24 +19,24 @@ public static class ResourcesConfiguration
 
             options.ApplicationDataDirectory = Environment
                 .GetFolderPath(Environment.SpecialFolder.ApplicationData)
-                .JoinPath(environment.ApplicationName)
-                .JoinPath(majorVersion);
+                .AppendPath(environment.ApplicationName)
+                .AppendPath(majorVersion);
 
             options.LocalApplicationDataDirectory = Environment
                 .GetFolderPath(Environment.SpecialFolder.LocalApplicationData)
-                .JoinPath(environment.ApplicationName)
-                .JoinPath(majorVersion);
+                .AppendPath(environment.ApplicationName)
+                .AppendPath(majorVersion);
 
             //Local directories
-            options.DownloadsFolder = options.LocalApplicationDataDirectory.JoinPath("DownloadCache");
+            options.DownloadsFolder = options.LocalApplicationDataDirectory.AppendPath("DownloadCache");
 
             //Roaming directories
-            options.SettingsDirectory = options.ApplicationDataDirectory.JoinPath("Settings");
+            options.SettingsDirectory = options.ApplicationDataDirectory.AppendPath("Settings");
 
             //Roaming files
-            options.ApplicationSettingsPath = options.SettingsDirectory.JoinPath("Application.json");
-            options.DecompositionSettingsPath = options.SettingsDirectory.JoinPath("LookupEngine.json");
-            options.VisualizationSettingsPath = options.SettingsDirectory.JoinPath("Visualization.json");
+            options.ApplicationSettingsPath = options.SettingsDirectory.AppendPath("Application.json");
+            options.DecompositionSettingsPath = options.SettingsDirectory.AppendPath("LookupEngine.json");
+            options.VisualizationSettingsPath = options.SettingsDirectory.AppendPath("Visualization.json");
         }).ValidateDataAnnotations();
 
         return builder;
