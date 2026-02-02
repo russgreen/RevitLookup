@@ -11,7 +11,7 @@
 
     <!-- Compability -->
     <PropertyGroup>
-        <IsRepackable Condition="'$(RevitVersion)' &lt; '2026'">true</IsRepackable>
+        <IsRepackable Condition="'$(RevitVersion)' &lt; '2027'">true</IsRepackable>
         <RepackBinariesExcludes>LookupEngine*.dll</RepackBinariesExcludes>
     </PropertyGroup>
 
