@@ -22,12 +22,12 @@ if (args.Length == 0)
 
 if (args.Contains("test"))
 {
-    builder.Services.AddModule<TestProjectsModule>();
+    builder.Services.AddModule<TestProjectModule>();
 }
 
 if (args.Contains("pack"))
 {
-    builder.Services.AddModule<CleanProjectsModule>();
+    builder.Services.AddModule<CleanProjectModule>();
     builder.Services.AddModule<CreateInstallerModule>();
 }
 

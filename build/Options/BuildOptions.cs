@@ -11,7 +11,7 @@ public sealed record BuildOptions
     ///     1.0.0-beta.2.250101 <br/>
     ///     1.0.0
     /// </example>
-    public Dictionary<string, Version> Versions { get; init; } = [];
+    public Dictionary<string, string> Versions { get; init; } = [];
 
     /// <summary>
     ///     Path to build output

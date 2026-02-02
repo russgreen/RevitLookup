@@ -14,7 +14,9 @@ namespace Build.Modules;
 /// <summary>
 ///     Compile the add-in for each supported Revit configuration.
 /// </summary>
+[DependsOn<ResolveVersioningModule>]
 [DependsOn<ResolveConfigurationsModule>]
+[DependsOn<CleanProjectModule>(Optional = true)]
 public sealed class CompileProjectModule(IOptions<BuildOptions> buildOptions) : Module
 {
     protected override async Task ExecuteModuleAsync(IModuleContext context, CancellationToken cancellationToken)
@@ -43,7 +45,7 @@ public sealed class CompileProjectModule(IOptions<BuildOptions> buildOptions) : 
             Configuration = configuration,
             Properties = new List<KeyValue>
             {
-                ("Version", version.ToString())
+                ("Version", version)
             }
         }, cancellationToken: cancellationToken);
     }

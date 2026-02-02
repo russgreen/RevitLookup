@@ -27,7 +27,7 @@ public sealed class CreateInstallerModule(IOptions<BuildOptions> buildOptions) :
     {
         var versioningResult = await context.GetModule<ResolveVersioningModule>();
         var versioning = versioningResult.ValueOrDefault!;
-        
+
         var wixTarget = new File(Projects.RevitLookup.FullName);
         var wixInstaller = new File(Projects.Installer.FullName);
         var wixToolFolder = await InstallWixAsync(context, cancellationToken);
@@ -57,11 +57,10 @@ public sealed class CreateInstallerModule(IOptions<BuildOptions> buildOptions) :
                     .TryGetValue(targetDirectory.Parent!.Name, out var version)
                     .ShouldBeTrue($"Can't map version for configuration: {targetDirectory.Parent!.Path}");
 
-                var installerVersion = !versioning.IsPrerelease ? version.ToString() : $"{version.ToString()}-{versioning.VersionSuffix}";
                 await context.Shell.Command.ExecuteCommandLineTool(
                     new GenericCommandLineToolOptions(builderFile.Path)
                     {
-                        Arguments = [installerVersion, targetDirectory.Path],
+                        Arguments = [version, targetDirectory.Path]
                     },
                     new CommandExecutionOptions
                     {
@@ -73,6 +72,12 @@ public sealed class CreateInstallerModule(IOptions<BuildOptions> buildOptions) :
                     }, cancellationToken: cancellationToken);
             }, cancellationToken)
             .ProcessInParallel();
+        
+        var outputFolder = context.Git().RootDirectory.GetFolder(buildOptions.Value.OutputDirectory);
+        foreach (var outputFile in outputFolder.GetFiles(file => file.Extension == ".msi"))
+        {
+            context.Summary.KeyValue("Artifacts", "Installer", outputFile.Path);
+        }
     }
 
     /// <summary>

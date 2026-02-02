@@ -1,4 +1,5 @@
 using Build.Options;
+using JetBrains.Annotations;
 using Microsoft.Extensions.Options;
 using ModularPipelines.Context;
 using ModularPipelines.Git.Extensions;
@@ -16,12 +17,14 @@ public sealed class ResolveVersioningModule(IOptions<PublishOptions> publishOpti
     protected override async Task<ResolveVersioningResult?> ExecuteAsync(IModuleContext context, CancellationToken cancellationToken)
     {
         var version = publishOptions.Value.Version;
-        if (!string.IsNullOrEmpty(version))
+        var versioning = string.IsNullOrEmpty(version) switch
         {
-            return await CreateFromVersionStringAsync(context, version);
-        }
+            true => await CreateFromGitVersioningAsync(context),
+            false => await CreateFromVersionStringAsync(context, version)
+        };
 
-        return await CreateFromGitVersioningAsync(context);
+        context.Summary.KeyValue("Build", "Version", versioning.Version);
+        return versioning;
     }
 
     /// <summary>
@@ -53,7 +56,7 @@ public sealed class ResolveVersioningModule(IOptions<PublishOptions> publishOpti
             Version = gitVersioning.SemVer!,
             VersionPrefix = gitVersioning.MajorMinorPatch!,
             VersionSuffix = gitVersioning.PreReleaseTag,
-            IsPrerelease = gitVersioning.PreReleaseNumber > 0,
+            IsPrerelease = !string.IsNullOrEmpty(gitVersioning.PreReleaseLabel),
             PreviousVersion = await FetchPreviousVersionAsync(context)
         };
     }
@@ -68,7 +71,7 @@ public sealed class ResolveVersioningModule(IOptions<PublishOptions> publishOpti
             {
                 Tags = true,
                 Abbrev = "0",
-                Arguments = ["HEAD^"],
+                Arguments = ["HEAD^"]
             },
             new CommandExecutionOptions
             {
@@ -86,7 +89,7 @@ public sealed class ResolveVersioningModule(IOptions<PublishOptions> publishOpti
                 MaxCount = "1",
                 Pretty = "format:%H",
                 Arguments = ["HEAD"],
-                NoCommitHeader = true,
+                NoCommitHeader = true
             },
             new CommandExecutionOptions
             {
@@ -97,6 +100,7 @@ public sealed class ResolveVersioningModule(IOptions<PublishOptions> publishOpti
     }
 }
 
+[PublicAPI]
 public sealed record ResolveVersioningResult
 {
     /// <summary>
@@ -104,9 +108,9 @@ public sealed record ResolveVersioningResult
     /// </summary>
     /// <remarks>Version format: <c>version-environment.n.date</c>.</remarks>
     /// <example>
-    ///     1.0.0-alpha.1.250101 <br/>
-    ///     1.0.0-beta.2.250101 <br/>
-    ///     1.0.0
+    ///     1.0.0-alpha.1 <br/>
+    ///     12.3.6-rc.2.250101 <br/>
+    ///     2026.4.0
     /// </example>
     public required string Version { get; init; }
 

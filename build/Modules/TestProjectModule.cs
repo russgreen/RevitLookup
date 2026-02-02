@@ -15,7 +15,7 @@ namespace Build.Modules;
 [SkipIf<IsCI>]
 [DependsOn<ResolveConfigurationsModule>]
 [DependsOn<CompileProjectModule>(Optional = true)]
-public sealed class TestProjectsModule : Module
+public sealed class TestProjectModule : Module
 {
     protected override async Task ExecuteModuleAsync(IModuleContext context, CancellationToken cancellationToken)
     {

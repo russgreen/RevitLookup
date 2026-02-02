@@ -8,6 +8,7 @@ using ModularPipelines.Git.Extensions;
 using ModularPipelines.GitHub.Extensions;
 using ModularPipelines.Modules;
 using Octokit;
+using Shouldly;
 using File = ModularPipelines.FileSystem.File;
 
 namespace Build.Modules;
@@ -39,10 +40,7 @@ public sealed class GenerateChangelogModule(IOptions<PublishOptions> publishOpti
         var changelog = await ParseChangelog(changelogFile, versioning.Version);
         if (changelog.Length == 0)
         {
-            if (!versioning.IsPrerelease)
-            {
-                throw new InvalidOperationException($"No version entry exists in the changelog: {versioning.Version}");
-            }
+            versioning.IsPrerelease.ShouldBeTrue($"No version entry exists in the changelog: {versioning.Version}");
             
             context.Logger.LogWarning("No version entry exists in the changelog: {Version}", versioning.Version);
             return await GenerateReleaseNotesAsync(context, versioning);

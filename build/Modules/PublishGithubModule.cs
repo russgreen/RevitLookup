@@ -20,10 +20,12 @@ namespace Build.Modules;
 [SkipIfNoGitHubToken]
 [DependsOn<ResolveVersioningModule>]
 [DependsOn<GenerateGitHubChangelogModule>]
+[DependsOn<CreateBundleModule>(Optional = true)]
+[DependsOn<CreateInstallerModule>(Optional = true)]
 [DependsOn<SignInstallerModule>(Optional = true)]
-public sealed class PublishGithubModule(IOptions<BuildOptions> buildOptions) : Module<ReleaseAsset[]?>
+public sealed class PublishGithubModule(IOptions<BuildOptions> buildOptions) : Module
 {
-    protected override async Task<ReleaseAsset[]?> ExecuteAsync(IModuleContext context, CancellationToken cancellationToken)
+    protected override async Task ExecuteModuleAsync(IModuleContext context, CancellationToken cancellationToken)
     {
         var versioningResult = await context.GetModule<ResolveVersioningModule>();
         var changelogResult = await context.GetModule<GenerateGitHubChangelogModule>();
@@ -45,8 +47,8 @@ public sealed class PublishGithubModule(IOptions<BuildOptions> buildOptions) : M
         };
 
         var release = await context.GitHub().Client.Repository.Release.Create(repositoryInfo.Owner, repositoryInfo.RepositoryName, newRelease);
-        return await targetFiles
-            .SelectAsync(async file =>
+        await targetFiles
+            .ForEachAsync(async file =>
             {
                 var asset = new ReleaseAssetUpload
                 {
@@ -57,9 +59,11 @@ public sealed class PublishGithubModule(IOptions<BuildOptions> buildOptions) : M
 
                 context.Logger.LogInformation("Uploading asset: {Asset}", asset.FileName);
 
-                return await context.GitHub().Client.Repository.Release.UploadAsset(release, asset, cancellationToken);
+                await context.GitHub().Client.Repository.Release.UploadAsset(release, asset, cancellationToken);
             }, cancellationToken)
             .ProcessInParallel();
+        
+        context.Summary.KeyValue("Deployment", "GitHub", release.HtmlUrl);
     }
 
     protected override async Task OnFailedAsync(IModuleContext context, Exception exception, CancellationToken cancellationToken)
