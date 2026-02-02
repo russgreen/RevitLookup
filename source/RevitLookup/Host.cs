@@ -8,9 +8,8 @@ using RevitLookup.Abstractions.Services.Application;
 using RevitLookup.Abstractions.Services.Decomposition;
 using RevitLookup.Abstractions.Services.Presentation;
 using RevitLookup.Abstractions.Services.Settings;
-using RevitLookup.Config.Http;
-using RevitLookup.Config.Logging;
-using RevitLookup.Config.Options;
+using RevitLookup.Configuration;
+using RevitLookup.ServiceDefaults;
 using RevitLookup.Services;
 using RevitLookup.Services.Appearance;
 using RevitLookup.Services.Application;
@@ -49,12 +48,11 @@ public static class Host
 
         //Logging
         builder.Logging.ClearProviders();
-        builder.Logging.AddSerilogConfiguration();
+        builder.AddSerilogLoggingProvider();
 
         //Configuration
-        builder.Services.AddApplicationOptions();
-        builder.Services.AddResourceLocationsOptions();
-        builder.Services.AddSerializerOptions();
+        builder.AddServiceDefaults();
+        builder.ConfigureHttpClients();
 
         //Frontend services
         builder.Services.AddScoped<INavigationViewPageProvider, DependencyInjectionNavigationViewPageProvider>();
@@ -69,7 +67,6 @@ public static class Host
         builder.Services.RegisterViewModels();
 
         //Application services
-        builder.Services.AddHttpApiClients();
         builder.Services.AddSingleton<ISettingsService, SettingsService>();
         builder.Services.AddSingleton<ISoftwareUpdateService, SoftwareUpdateService>();
         builder.Services.AddSingleton<IThemeWatcherService, ThemeWatcherService>();
