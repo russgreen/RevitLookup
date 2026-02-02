@@ -64,11 +64,11 @@ public sealed class SoftwareUpdateService(
         var fileName = Path.Combine(_folderOptions.DownloadsFolder, Path.GetFileName(_downloadUrl)!);
 
         var httpClient = httpFactory.CreateClient();
-        using var response = await httpClient.GetStreamAsync(_downloadUrl);
-
 #if NET
+        await using var response = await httpClient.GetStreamAsync(_downloadUrl);
         await using var fileStream = new FileStream(fileName, FileMode.Create);
 #else
+        using var response = await httpClient.GetStreamAsync(_downloadUrl);
         using var fileStream = new FileStream(fileName, FileMode.Create);
 #endif
         await response.CopyToAsync(fileStream);
