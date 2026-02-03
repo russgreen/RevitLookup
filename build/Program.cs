@@ -10,6 +10,7 @@ var builder = Pipeline.CreateBuilder();
 builder.Configuration.AddJsonFile("appsettings.json");
 builder.Configuration.AddUserSecrets<Program>();
 builder.Configuration.AddEnvironmentVariables();
+builder.Configuration.AddCommandLine(args);
 
 builder.Services.AddOptions<BuildOptions>().Bind(builder.Configuration.GetSection("Build"));
 builder.Services.AddOptions<PublishOptions>().Bind(builder.Configuration.GetSection("Publish"));
