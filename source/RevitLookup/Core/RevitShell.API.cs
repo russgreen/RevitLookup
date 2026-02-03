@@ -19,7 +19,7 @@ namespace RevitLookup.Core;
 
 public static partial class RevitShell
 {
-    public static Parameter GetBuiltinParameter(BuiltInParameter builtInParameter)
+    public static Parameter GetBuiltinParameter(Document document, BuiltInParameter builtInParameter)
     {
         const BindingFlags bindingFlags = BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly;
 
@@ -39,13 +39,13 @@ public static partial class RevitShell
         var elementIdPointer = GCHandle.ToIntPtr(handle);
         Marshal.StructureToPtr(elementId, elementIdPointer, true);
 
-        var parameter = (Parameter) parameterCtorType.Invoke([getADocumentType.Invoke(RevitContext.ActiveDocument, null), elementIdPointer]);
+        var parameter = (Parameter) parameterCtorType.Invoke([getADocumentType.Invoke(document, null), elementIdPointer]);
         handle.Free();
 
         return parameter;
     }
 
-    public static Category GetBuiltinCategory(BuiltInCategory builtInCategory)
+    public static Category GetBuiltinCategory(Document document, BuiltInCategory builtInCategory)
     {
         const BindingFlags bindingFlags = BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly;
 
@@ -65,7 +65,7 @@ public static partial class RevitShell
         var elementIdPointer = GCHandle.ToIntPtr(handle);
         Marshal.StructureToPtr(elementId, elementIdPointer, true);
 
-        var category = (Category) categoryCtorType.Invoke([getADocumentType.Invoke(RevitContext.ActiveDocument, null), elementIdPointer]);
+        var category = (Category) categoryCtorType.Invoke([getADocumentType.Invoke(document, null), elementIdPointer]);
         handle.Free();
 
         return category;

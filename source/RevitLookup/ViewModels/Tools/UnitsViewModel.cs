@@ -55,12 +55,12 @@ public sealed partial class UnitsViewModel(
             case BuiltInParameter parameter:
                 if (!ValidateContext()) return;
 
-                obj = RevitShell.GetBuiltinParameter(parameter);
+                obj = RevitShell.GetBuiltinParameter(RevitContext.ActiveDocument!, parameter);
                 break;
             case BuiltInCategory category:
                 if (!ValidateContext()) return;
 
-                obj = RevitShell.GetBuiltinCategory(category);
+                obj = RevitShell.GetBuiltinCategory(RevitContext.ActiveDocument!, category);
                 break;
             default:
                 obj = unitInfo.Value;
